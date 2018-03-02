@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.mahmon.visual_timetable_app.AddEventActivity">
 
+    <!-- Text View: txt_add_events  -->
     <TextView
         android:id="@+id/txt_add_events"
         android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Button: btn_save_added_event -->
     <Button
         android:id="@+id/btn_save_added_event"
         android:layout_width="158dp"
@@ -32,4 +34,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

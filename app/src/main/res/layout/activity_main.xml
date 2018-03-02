@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.mahmon.visual_timetable_app.MainActivity">
 
-    <!-- Text view to display the name of this activity -->
+    <!-- Text View: txt_app_start  -->
     <TextView
         android:id="@+id/txt_app_start"
         android:layout_width="0dp"

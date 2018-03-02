@@ -6,8 +6,21 @@
     android:layout_height="match_parent"
     tools:context="com.mahmon.visual_timetable_app.DisplayEventsActivity">
 
-    <!-- Text view to display the name of this activity -->
+    <!-- Button: btn_exit_app -->
+    <Button
+        android:id="@+id/btn_exit_app"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:onClick="exitApp"
+        android:text="@string/btn_exit_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Text View: txt_display_events  -->
     <TextView
         android:id="@+id/txt_display_events"
         android:layout_width="wrap_content"
@@ -22,6 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Button: btn_goto_add_event -->
     <Button
         android:id="@+id/btn_goto_add_event"
         android:layout_width="151dp"

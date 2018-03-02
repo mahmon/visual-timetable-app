@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Animation parameters for screen animating 'back out' -->
+    <translate
+        android:duration="700"
+        android:fromYDelta="0%"
+        android:toYDelta="100%"/>
+
+</set>

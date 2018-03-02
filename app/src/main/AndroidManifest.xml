@@ -12,7 +12,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -21,22 +20,20 @@
         <activity
             android:name=".DisplayEventsActivity"
             android:parentActivityName=".MainActivity">
-
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
 
-        <!-- Added up navigation back to MainActivity -->
+        <!-- Added up navigation back to DisplayEventsActivity -->
         <activity
             android:name=".AddEventActivity"
             android:parentActivityName=".DisplayEventsActivity">
-
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".DisplayEventsActivity" />
         </activity>
 
     </application>
