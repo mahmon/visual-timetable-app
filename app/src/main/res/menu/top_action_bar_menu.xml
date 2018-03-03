@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Create menu item, add light bulb icon -->
+    <item
+        android:id="@+id/btn_toggle_theme"
+        android:icon="@drawable/ic_lightbulb_outline_36dp"
+        android:title="@string/btn_toggle_theme"
+        app:showAsAction="ifRoom" />
+
+</menu>
