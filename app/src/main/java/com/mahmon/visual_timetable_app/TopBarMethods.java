@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-// Class to manage top bar method calls, avoid duplication
+// Class to manage top bar method calls, avoids code duplication
 public class TopBarMethods {
 
     // Method called when user clicks light bulb icon

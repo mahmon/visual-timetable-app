@@ -3,12 +3,10 @@ package com.mahmon.visual_timetable_app;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class EditEventActivity extends AppCompatActivity {
 
@@ -19,7 +17,7 @@ public class EditEventActivity extends AppCompatActivity {
         // Animation override:
         // Go_in for this activity, go_out for previous activity
         overridePendingTransition(R.anim.go_in, R.anim.go_out);
-        // Implement top_action_bar as default action bar
+        // Implement top_action_bar as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
     }
