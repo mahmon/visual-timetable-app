@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Animation override, go_in for this activity, go_out for previous activity
+        // Animation override:
+        // Go_in for this activity, go_out for previous activity
         overridePendingTransition(R.anim.go_in, R.anim.go_out);
     }
 

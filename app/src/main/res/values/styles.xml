@@ -1,6 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
+
     <!-- Changed AppTheme to dark theme with no action bar -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->

@@ -53,6 +53,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Button: btn_goto_edit_event -->
     <Button
         android:id="@+id/btn_goto_edit_event"
         android:layout_width="0dp"
