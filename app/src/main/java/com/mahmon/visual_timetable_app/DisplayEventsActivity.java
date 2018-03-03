@@ -23,6 +23,14 @@ public class DisplayEventsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
+    // Method called onClick for button: btn_goto_edit_event
+    public void editEvent(View view) {
+        // Create new intent to start a new activity (AddEventActivity)
+        Intent intent = new Intent(this, EditEventActivity.class);
+        // Start activity
+        startActivity(intent);
+    }
+
     // Method called onClick for button: btn_goto_add_event
     public void addEvent(View view) {
         // Create new intent to start a new activity (AddEventActivity)

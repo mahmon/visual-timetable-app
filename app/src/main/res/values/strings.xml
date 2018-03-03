@@ -4,22 +4,17 @@
     <string name="app_name">Visual Timetable App</string>
 
     <!-- Button IDs and Strings -->
-    <string name="btn_enter_app">Enter App</string>
-    <string name="btn_goto_add_event">Add Visual Event</string>
-    <string name="btn_save_added_event">Save Visual Event</string>
-    <string name="btn_exit_app">Exit App</string>
-
-
-    <string name="btn_goto_edit_event">Edit Visual Event</string>
-    <string name="btn_save_edited_event">Save Visual Event</string>
+    <string name="btn_enter_app">Enter</string>
+    <string name="btn_goto_add_event">Add New Event</string>
+    <string name="btn_save_added_event">Save New Event</string>
+    <string name="btn_exit_app">Exit</string>
+    <string name="btn_goto_edit_event">Edit An Event</string>
+    <string name="btn_save_edited_event">Save Edited Event</string>
 
     <!-- Text View IDs and Strings -->
-    <string name="txt_app_start">Application Start Screen</string>
-    <string name="txt_display_events">Display Visual Events Here</string>
-    <string name="txt_add_events">Add Visual Events Here</string>
-
-
-    <string name="txt_edit_events">Edit Visual Events Here</string>
-
+    <string name="txt_app_start">Start Screen</string>
+    <string name="txt_display_events">Events Displayed Here</string>
+    <string name="txt_add_events">Add Event</string>
+    <string name="txt_edit_events">Edit Event</string>
 
 </resources>
