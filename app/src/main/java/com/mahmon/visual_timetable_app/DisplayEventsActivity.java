@@ -41,8 +41,8 @@ public class DisplayEventsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.btn_toggle_theme:
                 // User clicked toggle_theme_button
-                String toastText = "Toggle Theme Clicked";
                 // Show confirmation message on click
+                String toastText = "Toggle Theme Clicked";
                 Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
