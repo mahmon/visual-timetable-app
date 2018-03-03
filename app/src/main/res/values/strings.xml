@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- App name shown in default action bar -->
+    <!-- Changed app name shown in default action bar -->
     <string name="app_name">Visual Timetable App</string>
 
     <!-- Button IDs and Strings -->
