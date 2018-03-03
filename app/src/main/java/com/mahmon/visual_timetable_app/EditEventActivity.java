@@ -32,18 +32,15 @@ public class EditEventActivity extends AppCompatActivity {
         return true;
     }
 
-    // Set listeners and actions for items in top_action_bar_menu
+    // Set method calls for items clicked in top_action_bar_menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Switch statement to manage menu user clicks
         switch (item.getItemId()) {
+            // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // User clicked toggle_theme_button
-                // Show confirmation message on click
-                String toastText = "Toggle Theme Clicked";
-                Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                // Method call from TopBarMethods
+                TopBarMethods.lightBulbClicked(this);
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
