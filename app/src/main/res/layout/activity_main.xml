@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.mahmon.visual_timetable_app.MainActivity">
 
-    <!-- Text View: txt_app_start  -->
-
+    <!-- Toolbar: top_action_bar  -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/top_action_bar"
         android:layout_width="0dp"
@@ -19,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Text View: txt_app_start  -->
     <TextView
         android:id="@+id/txt_app_start"
         android:layout_width="0dp"
