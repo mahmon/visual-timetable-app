@@ -1,5 +1,6 @@
 package com.mahmon.visual_timetable_app;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,10 @@ public class EditEventActivity extends AppCompatActivity {
         // Implement top_action_bar as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar actionBar = getSupportActionBar();
+        // Enable the Up button
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
     // Implement the default options menu
     @Override
@@ -35,6 +40,12 @@ public class EditEventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Switch statement to manage menu user clicks
         switch (item.getItemId()) {
+            // User clicked home button
+            case android.R.id.home:
+                // Call homeClicked method from AppMethods
+                AppMethods.homeClicked(this);
+                overridePendingTransition(R.anim.back_in, R.anim.back_out);
+                return true;
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
                 // Call toggleTheme method from AppMethods
@@ -44,6 +55,14 @@ public class EditEventActivity extends AppCompatActivity {
                 // Invoke the superclass to handle unrecognised user action.
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // Animation override for the default back button:
+    // Back_in for this activity, back_out for previous activity
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
     // onClick listener for button: btn_save_edited_event

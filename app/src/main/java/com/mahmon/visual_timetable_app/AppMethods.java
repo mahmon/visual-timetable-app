@@ -15,6 +15,11 @@ public class AppMethods extends AppCompatActivity {
     public static void toggleTheme(Context mContext){
         makeToast(mContext, "Toggle Theme Clicked");
     }
+    // Method called when user clicks home button
+    public static void homeClicked(Activity activity) {
+        // Destroy activity calling method, return to previous activity
+        activity.finish();
+    }
     /* END */
 
     /* Methods for bottom_action_bar_menu */
