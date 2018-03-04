@@ -24,6 +24,21 @@ public class DisplayEventsActivity extends AppCompatActivity {
         // Add the bottom action bar and inflate the menu
         Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
         bottomActionBar.inflateMenu(R.menu.bottom_action_bar_menu);
+        // Create listeners for bottom_action_bar_menu
+        bottomActionBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.btn_goto_add_event:
+                        // User clicked btn_goto_add_event
+                        // Method called from ActionBarMethods
+                        ActionBarMethods.addEventClicked(getBaseContext());
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     // Implement the default options menu
@@ -69,11 +84,4 @@ public class DisplayEventsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Method called onClick for button: btn_goto_add_event
-    public void addEvent(View view) {
-        // Create new intent to start a new activity (AddEventActivity)
-        Intent intent = new Intent(this, AddEventActivity.class);
-        // Start activity
-        startActivity(intent);
-    }
 }

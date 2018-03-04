@@ -1,6 +1,7 @@
 package com.mahmon.visual_timetable_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -15,4 +16,10 @@ public class ActionBarMethods {
         toast.show();
     }
 
+    public static void addEventClicked(Context mContext) {
+        // Create new intent to start a new activity (AddEventActivity)
+        Intent intent = new Intent(mContext, AddEventActivity.class);
+        // Start activity
+        mContext.startActivity(intent);
+    }
 }

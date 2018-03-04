@@ -41,22 +41,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Button: btn_goto_add_event -->
-    <Button
-        android:id="@+id/btn_goto_add_event"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:onClick="addEvent"
-        android:text="@string/btn_goto_add_event"
-        app:layout_constraintBottom_toTopOf="@+id/btn_goto_edit_event"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    
     <!-- Button: btn_goto_edit_event -->
     <Button
         android:id="@+id/btn_goto_edit_event"
