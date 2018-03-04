@@ -33,7 +33,7 @@
         android:id="@+id/btn_enter_app"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="96dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:onClick="enterApp"
