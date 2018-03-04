@@ -21,6 +21,9 @@ public class DisplayEventsActivity extends AppCompatActivity {
         // Implement top_action_bar as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
+        // Add the bottom action bar and inflate the menu
+        Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
+        bottomActionBar.inflateMenu(R.menu.bottom_action_bar_menu);
     }
 
     // Implement the default options menu
