@@ -28,6 +28,16 @@ public class DisplayEventsActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    // User clicked btn_zoom_out
+                    case R.id.btn_zoom_out:
+                        // Call zoomOut method from AppMethods
+                        AppMethods.zoomOut(getBaseContext());
+                        return true;
+                        // User clicked btn_zoom_in
+                    case R.id.btn_zoom_in:
+                        // Call zoomIn method from AppMethods
+                        AppMethods.zoomIn(getBaseContext());
+                        return true;
                     // User clicked btn_goto_add_event
                     case R.id.btn_goto_add_event:
                         // Call addEvent method from AppMethods

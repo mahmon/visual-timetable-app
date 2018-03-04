@@ -57,7 +57,9 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DisplayEventsActivity" />
+        <!-- Added AppMethods to manifest -->
         </activity>
+        <activity android:name=".AppMethods" />
 
     </application>
 

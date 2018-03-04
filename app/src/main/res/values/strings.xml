@@ -5,12 +5,14 @@
 
     <!-- Button IDs and Strings -->
     <string name="btn_enter_app">Enter</string>
-    <string name="btn_goto_add_event">Add New Event</string>
-    <string name="btn_save_added_event">Save New Event</string>
     <string name="btn_exit_app">Exit</string>
+    <string name="btn_goto_add_event">Add New Event</string>
     <string name="btn_goto_edit_event">Edit An Event</string>
+    <string name="btn_save_added_event">Save New Event</string>
     <string name="btn_save_edited_event">Save Edited Event</string>
     <string name="btn_toggle_theme">Toggle Theme</string>
+    <string name="btn_zoom_in">Zoom In</string>
+    <string name="btn_zoom_out">Zoom Out</string>
 
     <!-- Text View IDs and Strings -->
     <string name="txt_app_start">Start Screen</string>
