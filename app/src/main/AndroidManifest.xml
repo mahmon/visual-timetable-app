@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!-- Added forced portrait only mode -->
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +21,12 @@
         </activity>
 
         <!-- Added up navigation back to MainActivity -->
+        <!-- Added forced portrait only mode -->
         <activity
             android:name=".DisplayEventsActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -28,9 +34,12 @@
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
+        <!-- Added forced portrait only mode -->
         <activity
             android:name=".AddEventActivity"
-            android:parentActivityName=".DisplayEventsActivity">
+            android:parentActivityName=".DisplayEventsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -38,9 +47,12 @@
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
+        <!-- Added forced portrait only mode -->
         <activity
             android:name=".EditEventActivity"
-            android:parentActivityName=".DisplayEventsActivity">
+            android:parentActivityName=".DisplayEventsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
