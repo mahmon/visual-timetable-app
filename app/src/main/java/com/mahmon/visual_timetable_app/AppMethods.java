@@ -6,7 +6,15 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 // Class to manage top bar method calls, avoids code duplication
-public class ActionBarMethods {
+public class AppMethods {
+
+    // Method called when user clicks btn_enter_app
+    public static void enterApp(Context mContext) {
+        // Create new intent to start a new activity (AddEventActivity)
+        Intent intent = new Intent(mContext, DisplayEventsActivity.class);
+        // Start activity
+        mContext.startActivity(intent);
+    }
 
     // Method called when user clicks light bulb icon
     public static void lightBulbClicked(Context mContext){

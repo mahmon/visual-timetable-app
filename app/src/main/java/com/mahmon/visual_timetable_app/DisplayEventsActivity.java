@@ -31,8 +31,8 @@ public class DisplayEventsActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.btn_goto_add_event:
                         // User clicked btn_goto_add_event
-                        // Method called from ActionBarMethods
-                        ActionBarMethods.addEventClicked(getBaseContext());
+                        // Method called from AppMethods
+                        AppMethods.addEventClicked(getBaseContext());
                         return true;
                     default:
                         return false;
@@ -57,8 +57,8 @@ public class DisplayEventsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Method call from ActionBarMethods
-                ActionBarMethods.lightBulbClicked(this);
+                // Method call from AppMethods
+                AppMethods.lightBulbClicked(this);
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.

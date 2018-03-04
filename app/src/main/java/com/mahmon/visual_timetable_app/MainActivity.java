@@ -1,7 +1,6 @@
 package com.mahmon.visual_timetable_app;
 
 import android.os.Bundle;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -16,12 +15,10 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.go_in, R.anim.go_out);
     }
 
-    // Method called onClick for button: btn_enter_app
-    public void enterApp(View view) {
-        // Create new intent to start a new activity (DisplayEventActivity)
-        Intent intent = new Intent(this, DisplayEventsActivity.class);
-        // Start activity
-        startActivity(intent);
+    // onClick listener for button: btn_enter_app
+    public void enterAppClicked(View view) {
+        // Method called from AppMethods
+        AppMethods.enterApp(getBaseContext());
     }
 
 }
