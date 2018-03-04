@@ -10,7 +10,6 @@
     <string name="btn_exit_app">Exit</string>
     <string name="btn_goto_edit_event">Edit An Event</string>
     <string name="btn_save_edited_event">Save Edited Event</string>
-
     <string name="btn_toggle_theme">Toggle Theme</string>
 
     <!-- Text View IDs and Strings -->
