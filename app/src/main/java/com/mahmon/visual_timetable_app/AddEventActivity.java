@@ -38,8 +38,8 @@ public class AddEventActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Method call from AppMethods
-                AppMethods.lightBulbClicked(this);
+                // Call toggleTheme method from AppMethods
+                AppMethods.toggleTheme(this);
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -47,11 +47,10 @@ public class AddEventActivity extends AppCompatActivity {
         }
     }
 
-    // Method called onClick for button: btn_save_added_event
+    // onClick listener for button: btn_save_added_event
     public void saveAddedEvent(View view) {
-        // Destroy this activity
-        // Return to previous activity (DisplayEventsActivity)
-        finish();
+        // Call editEvent method from AppMethods
+        AppMethods.saveAddedEvent(this);
         // Animation override:
         // Back_out for this activity, back_in for previous activity
         overridePendingTransition(R.anim.back_in, R.anim.back_out);

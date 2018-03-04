@@ -1,6 +1,5 @@
 package com.mahmon.visual_timetable_app;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,10 +28,10 @@ public class DisplayEventsActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    // User clicked btn_goto_add_event
                     case R.id.btn_goto_add_event:
-                        // User clicked btn_goto_add_event
-                        // Method called from AppMethods
-                        AppMethods.addEventClicked(getBaseContext());
+                        // Call addEvent method from AppMethods
+                        AppMethods.addEvent(getBaseContext());
                         return true;
                     default:
                         return false;
@@ -57,8 +56,8 @@ public class DisplayEventsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Method call from AppMethods
-                AppMethods.lightBulbClicked(this);
+                // Call toggleTheme method from AppMethods
+                AppMethods.toggleTheme(getBaseContext());
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -66,22 +65,19 @@ public class DisplayEventsActivity extends AppCompatActivity {
         }
     }
 
-    // Method called onClick for button: btn_exit_app
+    // onClick listener for button: btn_exit_app
     public void exitApp(View view) {
-        // Destroy this activity
-        // Return to previous activity (MainActivity)
-        finish();
+        // Call exitApp method from AppMethods
+        AppMethods.exitApp(this);
         // Animation override:
         // Back_out for this activity, back_in for previous activity
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
-    // Method called onClick for button: btn_goto_edit_event
+    // onClick listener for button: btn_goto_edit_event
     public void editEvent(View view) {
-        // Create new intent to start a new activity (AddEventActivity)
-        Intent intent = new Intent(this, EditEventActivity.class);
-        // Start activity
-        startActivity(intent);
+        // Call editEvent method from AppMethods
+        AppMethods.editEvent(getBaseContext());
     }
 
 }

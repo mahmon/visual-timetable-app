@@ -37,8 +37,8 @@ public class EditEventActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Method call from AppMethods
-                AppMethods.lightBulbClicked(this);
+                // Call toggleTheme method from AppMethods
+                AppMethods.toggleTheme(getBaseContext());
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -46,11 +46,10 @@ public class EditEventActivity extends AppCompatActivity {
         }
     }
 
-    // Method called onClick for button: btn_save_edited_event
+    // onClick listener for button: btn_save_edited_event
     public void saveEditedEvent(View view) {
-        // Destroy this activity
-        // Return to previous activity (DisplayEventsActivity)
-        finish();
+        // Call editEvent method from AppMethods
+        AppMethods.saveEditedEvent(this);
         // Animation override:
         // Back_out for this activity, back_in for previous activity
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
