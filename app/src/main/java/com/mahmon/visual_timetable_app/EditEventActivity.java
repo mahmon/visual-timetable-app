@@ -37,8 +37,8 @@ public class EditEventActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Method call from TopBarMethods
-                TopBarMethods.lightBulbClicked(this);
+                // Method call from ActionBarMethods
+                ActionBarMethods.lightBulbClicked(this);
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
