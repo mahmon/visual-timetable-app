@@ -2,21 +2,21 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Added btn_zoom_out -->
+    <!-- Added btn_zoom_out with icon -->
     <item
         android:id="@+id/btn_zoom_out"
         android:icon="@drawable/ic_zoom_out_36dp"
         android:title="@string/btn_zoom_out"
         app:showAsAction="ifRoom" />
 
-    <!-- Added btn_zoom_in -->
+    <!-- Added btn_zoom_in with icon -->
     <item
         android:id="@+id/btn_zoom_in"
         android:icon="@drawable/ic_zoom_in_36dp"
         android:title="@string/btn_zoom_in"
         app:showAsAction="ifRoom" />
 
-    <!-- Added btn_goto_add_event -->
+    <!-- Added btn_goto_add_event with icon -->
     <item
         android:id="@+id/btn_goto_add_event"
         android:icon="@drawable/ic_add_box_36dp"

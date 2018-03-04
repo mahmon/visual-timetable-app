@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Create menu item, add light bulb icon -->
+    <!-- Added btn_toggle_theme with icon -->
     <item
         android:id="@+id/btn_toggle_theme"
         android:icon="@drawable/ic_lightbulb_outline_36dp"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.mahmon.visual_timetable_app.EditEventActivity">
 
-    <!-- Include top and bottom action bars in this layout -->
+    <!-- Include top action bar in this layout -->
     <include layout="@layout/top_action_bar"/>
 
     <!-- Text View: txt_edit_events  -->
