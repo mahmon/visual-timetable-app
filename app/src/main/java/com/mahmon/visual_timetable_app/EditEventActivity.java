@@ -4,10 +4,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class EditEventActivity extends AppCompatActivity {
 
@@ -42,14 +44,22 @@ public class EditEventActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked home button
             case android.R.id.home:
-                // Call homeClicked method from AppMethods
-                AppMethods.homeClicked(this);
+                // Destroy activity calling method, return to previous activity
+                finish();
+                // Animation override:
+                // Back_out for this activity, back_in for previous activity
                 overridePendingTransition(R.anim.back_in, R.anim.back_out);
                 return true;
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Call toggleTheme method from AppMethods
-                AppMethods.toggleTheme(getBaseContext());
+                // Display toast message to confirm click
+                Toast toast = Toast
+                        .makeText(
+                                this,
+                                "You Clicked Toggle Theme",
+                                Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -67,8 +77,8 @@ public class EditEventActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_save_edited_event
     public void saveEditedEvent(View view) {
-        // Call editEvent method from AppMethods
-        AppMethods.saveEditedEvent(this);
+        // Destroy activity calling method, return to previous activity
+        finish();
         // Animation override:
         // Back_out for this activity, back_in for previous activity
         overridePendingTransition(R.anim.back_in, R.anim.back_out);

@@ -1,27 +1,19 @@
 package com.mahmon.visual_timetable_app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.widget.Toast;
 
 public class DisplayEventsActivity extends AppCompatActivity {
-
-    // Create database instance and reference
-    public FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    public DatabaseReference mDatabaseReference =
-            mDatabase.getReference().child("Visual Events").child("Heading");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +39,29 @@ public class DisplayEventsActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     // User clicked btn_zoom_out
                     case R.id.btn_zoom_out:
-                        // Call zoomOut method from AppMethods
-                        AppMethods.zoomOut(getBaseContext());
+                        // Display toast message to confirm click
+                        Toast toastOut = Toast.makeText(
+                                DisplayEventsActivity.this,
+                                "You Clicked Zoom Out", Toast.LENGTH_SHORT);
+                        toastOut.setGravity(Gravity.CENTER, 0, 0);
+                        toastOut.show();
                         return true;
-                        // User clicked btn_zoom_in
+                    // User clicked btn_zoom_in
                     case R.id.btn_zoom_in:
-                        // Call zoomIn method from AppMethods
-                        AppMethods.zoomIn(getBaseContext());
+                        // Display toast message to confirm click
+                        Toast toastIn = Toast.makeText(
+                                DisplayEventsActivity.this,
+                                "You Clicked Zoom In", Toast.LENGTH_SHORT);
+                        toastIn.setGravity(Gravity.CENTER, 0, 0);
+                        toastIn.show();
                         return true;
                     // User clicked btn_goto_add_event
                     case R.id.btn_goto_add_event:
-                        // Call addEvent method from AppMethods
-                        AppMethods.addEvent(getBaseContext());
+                        // Create new intent to start a new activity (AddEventActivity)
+                        Intent intent = new Intent(DisplayEventsActivity.this,
+                                        AddEventActivity.class);
+                        // Start activity
+                        startActivity(intent);
                         return true;
                     default:
                         return false;
@@ -70,23 +73,13 @@ public class DisplayEventsActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        /* Test READ from database */
-        // Attach listener to database reference
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            // Method called whenever data at this location changes
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Capture the value in a String
-                String heading = dataSnapshot.getValue(String.class);
-                // Use string to change valye of txt_display_events
-                TextView textView = findViewById(R.id.txt_display_events);
-                textView.setText(heading);
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
+        // Get Intent from AddEventActivity and extract EVENT_HEADING String
+        Intent intent = getIntent();
+        String heading = intent.getStringExtra(AddEventActivity.EVENT_HEADING);
+        // Capture the layout's TextView and set the string as its text
+        TextView textView = findViewById(R.id.txt_display_events);
+        textView.setText(heading);
+
     }
 
     // Implement the default options menu
@@ -105,14 +98,20 @@ public class DisplayEventsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked home button
             case android.R.id.home:
-                // Call homeClicked method from AppMethods
-                AppMethods.homeClicked(this);
+                // Destroy activity calling method, return to previous activity
+                finish();
                 overridePendingTransition(R.anim.back_in, R.anim.back_out);
                 return true;
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Call toggleTheme method from AppMethods
-                AppMethods.toggleTheme(getBaseContext());
+                // Display toast message to confirm click
+                Toast toast = Toast
+                        .makeText(
+                                this,
+                                "You Clicked Toggle Theme",
+                                Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -130,8 +129,8 @@ public class DisplayEventsActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_exit_app
     public void exitApp(View view) {
-        // Call exitApp method from AppMethods
-        AppMethods.exitApp(this);
+        // Destroy activity calling method, return to previous activity
+        finish();
         // Animation override:
         // Back_out for this activity, back_in for previous activity
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
@@ -139,8 +138,10 @@ public class DisplayEventsActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_goto_edit_event
     public void editEvent(View view) {
-        // Call editEvent method from AppMethods
-        AppMethods.editEvent(getBaseContext());
+        // Create new intent to start a new activity (EditEventActivity)
+        Intent intent = new Intent(this, EditEventActivity.class);
+        // Start activity
+        this.startActivity(intent);
     }
 
 }
