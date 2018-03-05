@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Implement top_action_bar as default action bar for this activity
+        // Implement top_action_bar, as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
     }
