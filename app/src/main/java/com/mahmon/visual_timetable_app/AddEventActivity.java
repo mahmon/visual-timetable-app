@@ -1,5 +1,6 @@
 package com.mahmon.visual_timetable_app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +9,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 public class AddEventActivity extends AppCompatActivity {
+
+    // Declare string to store test event heading value
+    public static final String HEADING = "com.mahmon.visual_timetable_app.HEADING";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,10 @@ public class AddEventActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_save_added_event
     public void saveAddedEvent(View view) {
+        Intent intent = new Intent(String.valueOf(this));
+        EditText editText = findViewById(R.id.txt_add_events);
+        String message = editText.getText().toString();
+        intent.putExtra(HEADING, message);
         // Call editEvent method from AppMethods
         AppMethods.saveAddedEvent(this);
         // Animation override:

@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.mahmon.visual_timetable_app.AddEventActivity.HEADING;
+
 // Class to manage top bar method calls, avoids code duplication
 public class AppMethods extends AppCompatActivity {
 
@@ -81,7 +83,8 @@ public class AppMethods extends AppCompatActivity {
         DatabaseReference mDatabaseReference =
                 mDatabase.getReference().child("Visual Events").child("Heading");
         // Write value to database
-        mDatabaseReference.setValue("Playtime");
+        String heading = HEADING;
+        mDatabaseReference.setValue(heading);
         // Destroy activity calling method, return to previous activity
         activity.finish();
     }
