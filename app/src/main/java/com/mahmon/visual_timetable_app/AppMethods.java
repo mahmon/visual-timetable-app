@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -76,14 +75,12 @@ public class AppMethods extends AppCompatActivity {
 
     // Method called when user clicks btn_save_added_event
     public static void saveAddedEvent(Activity activity) {
-        // Test write to Firebase database
-        // Create database instance
+        /*  Test WRITE to Firebase database */
+        // Create database instance and reference
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        // Create database reference, set a child with value 'Visual Events'
         DatabaseReference mDatabaseReference =
                 mDatabase.getReference().child("Visual Events").child("Heading");
-        //getReference("Visual Events");
-        // Add another
+        // Write value to database
         mDatabaseReference.setValue("Playtime");
         // Destroy activity calling method, return to previous activity
         activity.finish();

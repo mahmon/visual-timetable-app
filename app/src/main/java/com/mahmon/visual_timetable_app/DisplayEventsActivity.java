@@ -8,8 +8,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DisplayEventsActivity extends AppCompatActivity {
+
+    // Create database instance and reference
+    public FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    public DatabaseReference mDatabaseReference =
+            mDatabase.getReference().child("Visual Events").child("Heading");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +63,28 @@ public class DisplayEventsActivity extends AppCompatActivity {
                     default:
                         return false;
                 }
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        /* Test READ from database */
+        // Attach listener to database reference
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            // Method called whenever data at this location changes
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Capture the value in a String
+                String heading = dataSnapshot.getValue(String.class);
+                // Use string to change valye of txt_display_events
+                TextView textView = findViewById(R.id.txt_display_events);
+                textView.setText(heading);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
             }
         });
     }

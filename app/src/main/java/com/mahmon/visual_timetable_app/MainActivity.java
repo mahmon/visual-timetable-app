@@ -8,9 +8,6 @@ import android.view.MenuItem;
 import android.view.Menu;
 import android.view.View;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
