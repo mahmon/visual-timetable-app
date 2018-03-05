@@ -16,6 +16,7 @@
 
     <!-- Text View IDs and Strings -->
     <string name="txt_app_start">Start Screen</string>
+    <string name="txt_event_heading_label">Event Heading</string>
     <string name="txt_display_events"></string>
     <string name="txt_add_event_heading_text_box">Enter Event Heading</string>
     <string name="txt_enter_event_heading">Enter Event Heading</string>

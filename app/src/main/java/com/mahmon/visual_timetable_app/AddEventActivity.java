@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class AddEventActivity extends AppCompatActivity {
@@ -85,15 +88,21 @@ public class AddEventActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_save_added_event
     public void saveAddedEvent(View view) {
+        // Create instance and reference to database
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        // Set reference to two child levels
+        DatabaseReference mDatabaseReference =
+                mDatabase.getReference("Visual Events").child("Event Heading");
+        // Declare intent to link to DisplayEventsActivity
         Intent intent = new Intent(this, DisplayEventsActivity.class);
+        // Attach variable to txt_add_events
         EditText editText = findViewById(R.id.txt_add_events);
+        // Store input from editText test in String eventHeading
         String eventHeading = editText.getText().toString();
-        intent.putExtra(EVENT_HEADING, eventHeading);
+        // Write string to the database
+        mDatabaseReference.setValue(eventHeading);
+        // Goto next activity
         startActivity(intent);
-        //finish();
-        // Animation override:
-        // Back_out for this activity, back_in for previous activity
-        //overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
 }

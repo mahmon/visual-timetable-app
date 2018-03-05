@@ -13,6 +13,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class DisplayEventsActivity extends AppCompatActivity {
 
     @Override
@@ -73,13 +79,27 @@ public class DisplayEventsActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Get Intent from AddEventActivity and extract EVENT_HEADING String
-        Intent intent = getIntent();
-        String heading = intent.getStringExtra(AddEventActivity.EVENT_HEADING);
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.txt_display_events);
-        textView.setText(heading);
-
+        // Create instance and reference to database
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        // Set reference to two child levels
+        DatabaseReference mDatabaseReference =
+                mDatabase.getReference("Visual Events").child("Event Heading");
+        // Set listener to read from the database reference
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            // This method is called whenever data ais updated.
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Store the value returned in String event_heading
+                String event_heading = dataSnapshot.getValue(String.class);
+                // Capture the layout's TextView and set the string as its text
+                TextView textView = findViewById(R.id.txt_display_events);
+                textView.setText(event_heading);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
     }
 
     // Implement the default options menu
