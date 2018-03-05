@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "957040602749",
+    "firebase_url": "https://visualtimetableapp.firebaseio.com",
+    "project_id": "visualtimetableapp",
+    "storage_bucket": "visualtimetableapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957040602749:android:98ab6eaf244bdc1f",
+        "android_client_info": {
+          "package_name": "com.mahmon.visual_timetable_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957040602749-3d17hblipk3s30fm2j381s87uj7sdied.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mahmon.visual_timetable_app",
+            "certificate_hash": "2d34bf6e3282550ca1d74a3985a89d8358be9959"
+          }
+        },
+        {
+          "client_id": "957040602749-3gjioipicjb7c1kdcvb4n98oskd4uh8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlZuE4yOhOhrXbz-CHcQYi0kZTSFJizIM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957040602749-3gjioipicjb7c1kdcvb4n98oskd4uh8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
