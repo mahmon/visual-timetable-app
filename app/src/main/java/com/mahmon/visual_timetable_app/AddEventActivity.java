@@ -20,6 +20,8 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class AddEventActivity extends AppCompatActivity {
 
+    // New branch - dev-firebase-CRUD
+
     // Declare a constant to store a value for event heading
     public static final String EVENT_HEADING = "com.mahmon.visual_timetable.EVENT_HEADING";
 
