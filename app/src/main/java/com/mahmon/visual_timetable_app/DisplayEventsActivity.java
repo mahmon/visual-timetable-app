@@ -147,15 +147,6 @@ public class DisplayEventsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
-    // onClick listener for button: btn_exit_app
-    public void exitApp(View view) {
-        // Destroy activity calling method, return to previous activity
-        finish();
-        // Animation override:
-        // Back_out for this activity, back_in for previous activity
-        overridePendingTransition(R.anim.back_in, R.anim.back_out);
-    }
-
     // onClick listener for button: btn_goto_edit_event
     public void editEvent(View view) {
         // Create new intent to start a new activity (EditEventActivity)

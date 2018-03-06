@@ -10,24 +10,37 @@
     <include layout="@layout/top_action_bar"/>
     <include layout="@layout/bottom_action_bar"/>
 
-    <!-- Button: btn_exit_app -->
-    <Button
-        android:id="@+id/btn_exit_app"
+    <!-- Top bar to display screen relevant content -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/screen_name_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="96dp"
-        android:onClick="exitApp"
-        android:text="@string/btn_exit_app"
+        android:layout_marginTop="56dp"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Text View: txt_display_events  -->
+    <!-- Text View: txt_start_screen_heading  -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_display_screen_heading"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/screen_name_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/screen_name_bar" />
 
-    <!-- Button: btn_goto_edit_event -->
-
+    <!-- Text View: txt_event_heading_label  -->
     <TextView
         android:id="@+id/txt_event_heading_label"
         android:layout_width="0dp"
@@ -35,7 +48,7 @@
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/txt_event_heading_label"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -46,13 +59,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:textAlignment="center" />
 
+    <!-- Text View: txt_display_events -->
     <TextView
         android:id="@+id/txt_display_events"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:text="@string/txt_display_events"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -62,6 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_event_heading_label" />
 
+    <!-- Button: btn_goto_edit_event -->
     <Button
         android:id="@+id/btn_goto_edit_event"
         android:layout_width="0dp"
