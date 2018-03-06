@@ -60,14 +60,6 @@
         </activity>
 
         <!-- Added AppMethods to manifest -->
-        <activity
-            android:name=".AppMethods"
-            android:parentActivityName=".MainActivity">
-        <!-- Meta-data tag required to support API level 15 and lower -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
-        </activity>
 
     </application>
 

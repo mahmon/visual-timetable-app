@@ -1,15 +1,27 @@
 package com.mahmon.visual_timetable_app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class AddEventActivity extends AppCompatActivity {
+
+    // Declare a constant to store a value for event heading
+    public static final String EVENT_HEADING = "com.mahmon.visual_timetable.EVENT_HEADING";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +55,22 @@ public class AddEventActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked home button
             case android.R.id.home:
-                // Call homeClicked method from AppMethods
-                AppMethods.homeClicked(this);
+                // Destroy activity calling method, return to previous activity
+                finish();
+                // Animation override:
+                // Back_out for this activity, back_in for previous activity
                 overridePendingTransition(R.anim.back_in, R.anim.back_out);
                 return true;
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Call toggleTheme method from AppMethods
-                AppMethods.toggleTheme(this);
+                // Display toast message to confirm click
+                Toast toast = Toast
+                        .makeText(
+                                this,
+                                "You Clicked Toggle Theme",
+                                Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -68,11 +88,21 @@ public class AddEventActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_save_added_event
     public void saveAddedEvent(View view) {
-        // Call editEvent method from AppMethods
-        AppMethods.saveAddedEvent(this);
-        // Animation override:
-        // Back_out for this activity, back_in for previous activity
-        overridePendingTransition(R.anim.back_in, R.anim.back_out);
+        // Create instance and reference to database
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        // Set reference to two child levels
+        DatabaseReference mDatabaseReference =
+                mDatabase.getReference("Visual Events").child("Event Heading");
+        // Declare intent to link to DisplayEventsActivity
+        Intent intent = new Intent(this, DisplayEventsActivity.class);
+        // Attach variable to txt_add_events
+        EditText editText = findViewById(R.id.txt_add_events);
+        // Store input from editText test in String eventHeading
+        String eventHeading = editText.getText().toString();
+        // Write string to the database
+        mDatabaseReference.setValue(eventHeading);
+        // Goto next activity
+        startActivity(intent);
     }
 
 }

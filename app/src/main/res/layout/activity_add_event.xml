@@ -7,10 +7,14 @@
     tools:context="com.mahmon.visual_timetable_app.AddEventActivity">
 
     <!-- Include top action bar in this layout -->
-    <include layout="@layout/top_action_bar"/>
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_action_bar" />
 
     <!-- Text View: txt_add_events  -->
-    <TextView
+
+    <!-- Button: btn_save_added_event -->
+    <EditText
         android:id="@+id/txt_add_events"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,15 +22,15 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="@string/txt_add_events"
+        android:ems="10"
+        android:hint="@string/txt_enter_event_heading"
+        android:inputType="text"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/include"
+        app:layout_constraintTop_toTopOf="@+id/include" />
 
-    <!-- Button: btn_save_added_event -->
     <Button
         android:id="@+id/btn_save_added_event"
         android:layout_width="0dp"

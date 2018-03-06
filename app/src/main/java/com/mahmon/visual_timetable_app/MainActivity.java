@@ -1,12 +1,15 @@
 package com.mahmon.visual_timetable_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,8 +38,14 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // Call toggleTheme method from AppMethods
-                AppMethods.toggleTheme(getBaseContext());
+                // Display toast message to confirm click
+                Toast toast = Toast
+                        .makeText(
+                                this,
+                                "You Clicked Toggle Theme",
+                                Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
@@ -46,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
     // onClick listener for button: btn_enter_app
     public void enterApp(View view) {
-        // Call enterApp method from AppMethods
-        AppMethods.enterApp(getBaseContext());
+        // Create new intent to start a new activity (DisplayEventsActivity)
+        Intent intent = new Intent(this, DisplayEventsActivity.class);
+        // Start activity
+        startActivity(intent);
     }
 
 }
