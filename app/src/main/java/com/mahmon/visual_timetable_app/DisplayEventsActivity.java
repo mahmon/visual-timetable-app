@@ -12,7 +12,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,18 +41,11 @@ public class DisplayEventsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Initialise event list
         eventList = new ArrayList<>();
-
-        // Add some dummy data for now
-        for (int i=0; i<20; i++) {
-            String title = "Title" + (i+1);
-            eventList.add(new Event(title));
-        }
-
         // Instantiate the EventAdapter
         EventAdapter adapter = new EventAdapter(this, eventList);
         // Set adapter to RecyclerView
         recyclerView.setAdapter(adapter);
-        /* Manage Tooolbar : topActionBar */
+        /* Manage ToolBar : topActionBar */
         // Implement top_action_bar as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
@@ -56,7 +53,7 @@ public class DisplayEventsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         // Disable the Up button
         actionBar.setDisplayHomeAsUpEnabled(false);
-        /* Manage Tooolbar : bottomActionBar */
+        /* Manage ToolBar : bottomActionBar */
         // Add the bottom action bar and inflate the menu
         Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
         bottomActionBar.inflateMenu(R.menu.bottom_action_bar_menu);
@@ -106,9 +103,33 @@ public class DisplayEventsActivity extends AppCompatActivity {
         });
     }
 
+    /* Database listener */
+    // On start read the data from the database
     @Override
     public void onStart() {
         super.onStart();
+        // Create instance and reference to database
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        // Set reference to two child levels
+        DatabaseReference mDatabaseReference =
+                mDatabase.getReference("Visual Events").child("Event Heading");
+        // Set listener to read from the database reference
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            // This method is called whenever data ais updated.
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Store the value returned in String eventTitle
+                String eventTitle = dataSnapshot.getValue(String.class);
+                // Pass value into a new Event object and add to list 10x
+                for (int i=0; i<10; i++) {
+                    eventList.add(new Event(eventTitle + (" ") + (i+1)));
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
     }
 
     // Implement the default options menu
