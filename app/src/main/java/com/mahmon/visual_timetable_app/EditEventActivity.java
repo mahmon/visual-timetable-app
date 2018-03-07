@@ -26,8 +26,8 @@ public class EditEventActivity extends AppCompatActivity {
         setSupportActionBar(topActionBar);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar actionBar = getSupportActionBar();
-        // Enable the Up button
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        // Disable the Up button
+        actionBar.setDisplayHomeAsUpEnabled(false);
         // Add the bottom action bar and inflate the menu
         Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
         bottomActionBar.inflateMenu(R.menu.bottom_edit_bar_menu);

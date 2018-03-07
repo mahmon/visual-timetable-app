@@ -2,6 +2,7 @@ package com.mahmon.visual_timetable_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -20,6 +21,31 @@ public class MainActivity extends AppCompatActivity {
         // Implement top_action_bar as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar actionBar = getSupportActionBar();
+        // Disable the Up button
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        // Add the bottom action bar and inflate the menu
+        Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
+        bottomActionBar.inflateMenu(R.menu.bottom_enter_bar_menu);
+        // Create listeners for bottom_action_bar_menu
+        bottomActionBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    // User clicked btn_enter_app
+                    case R.id.btn_enter_app:
+                        // Create new intent to start a new activity (AddEventActivity)
+                        Intent intentAdd = new Intent(MainActivity.this,
+                                DisplayEventsActivity.class);
+                        // Start activity
+                        startActivity(intentAdd);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     // Implement the default options menu

@@ -1,5 +1,6 @@
 package com.mahmon.visual_timetable_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,6 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class AddEventActivity extends AppCompatActivity {
 
-    // New branch - dev-firebase-CRUD
-
-    // Declare a constant to store a value for event heading
-    public static final String EVENT_HEADING = "com.mahmon.visual_timetable.EVENT_HEADING";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +33,40 @@ public class AddEventActivity extends AppCompatActivity {
         setSupportActionBar(topActionBar);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar actionBar = getSupportActionBar();
-        // Enable the Up button
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        // Disable the Up button
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        // Add the bottom action bar and inflate the menu
+        Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
+        bottomActionBar.inflateMenu(R.menu.bottom_save_bar_menu);
+        // Create listeners for bottom_action_bar_menu
+        bottomActionBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    // User clicked btn_save_added_event
+                    case R.id.btn_save_added_event:
+                        // Create instance and reference to database
+                        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+                        // Set reference to two child levels
+                        DatabaseReference mDatabaseReference =
+                                mDatabase.getReference("Visual Events").child("Event Heading");
+                        // Attach variable to txt_add_events
+                        EditText editText = findViewById(R.id.txt_add_events);
+                        // Store input from editText test in String eventHeading
+                        String eventHeading = editText.getText().toString();
+                        // Write string to the database
+                        mDatabaseReference.setValue(eventHeading);
+                        // Create new intent to start a new activity (AddEventActivity)
+                        Intent intentAdd = new Intent(AddEventActivity.this,
+                                DisplayEventsActivity.class);
+                        // Start activity
+                        startActivity(intentAdd);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     // Implement the default options menu
@@ -86,25 +114,6 @@ public class AddEventActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
-    }
-
-    // onClick listener for button: btn_save_added_event
-    public void saveAddedEvent(View view) {
-        // Create instance and reference to database
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        // Set reference to two child levels
-        DatabaseReference mDatabaseReference =
-                mDatabase.getReference("Visual Events").child("Event Heading");
-        // Declare intent to link to DisplayEventsActivity
-        Intent intent = new Intent(this, DisplayEventsActivity.class);
-        // Attach variable to txt_add_events
-        EditText editText = findViewById(R.id.txt_add_events);
-        // Store input from editText test in String eventHeading
-        String eventHeading = editText.getText().toString();
-        // Write string to the database
-        mDatabaseReference.setValue(eventHeading);
-        // Goto next activity
-        startActivity(intent);
     }
 
 }
