@@ -64,10 +64,18 @@ public class DisplayEventsActivity extends AppCompatActivity {
                     // User clicked btn_goto_add_event
                     case R.id.btn_goto_add_event:
                         // Create new intent to start a new activity (AddEventActivity)
-                        Intent intent = new Intent(DisplayEventsActivity.this,
+                        Intent intentAdd = new Intent(DisplayEventsActivity.this,
                                         AddEventActivity.class);
                         // Start activity
-                        startActivity(intent);
+                        startActivity(intentAdd);
+                        return true;
+                    // User clicked btn_goto_edit_event
+                    case R.id.btn_goto_edit_event:
+                        // Create new intent to start a new activity (EditEventActivity)
+                        Intent intentEdit = new Intent(DisplayEventsActivity.this,
+                                EditEventActivity.class);
+                        // Start activity
+                        startActivity(intentEdit);
                         return true;
                     default:
                         return false;
@@ -79,27 +87,6 @@ public class DisplayEventsActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Create instance and reference to database
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        // Set reference to two child levels
-        DatabaseReference mDatabaseReference =
-                mDatabase.getReference("Visual Events").child("Event Heading");
-        // Set listener to read from the database reference
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            // This method is called whenever data ais updated.
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Store the value returned in String event_heading
-                String event_heading = dataSnapshot.getValue(String.class);
-                // Capture the layout's TextView and set the string as its text
-                TextView textView = findViewById(R.id.txt_display_events);
-                textView.setText(event_heading);
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
     }
 
     // Implement the default options menu
@@ -145,14 +132,6 @@ public class DisplayEventsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
-    }
-
-    // onClick listener for button: btn_goto_edit_event
-    public void editEvent(View view) {
-        // Create new intent to start a new activity (EditEventActivity)
-        Intent intent = new Intent(this, EditEventActivity.class);
-        // Start activity
-        this.startActivity(intent);
     }
 
 }

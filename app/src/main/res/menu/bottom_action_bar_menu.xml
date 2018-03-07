@@ -7,19 +7,24 @@
         android:id="@+id/btn_zoom_out"
         android:icon="@drawable/ic_zoom_out_36dp"
         android:title="@string/btn_zoom_out"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <!-- Added btn_zoom_in with icon -->
     <item
         android:id="@+id/btn_zoom_in"
         android:icon="@drawable/ic_zoom_in_36dp"
         android:title="@string/btn_zoom_in"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <!-- Added btn_goto_add_event with icon -->
     <item
         android:id="@+id/btn_goto_add_event"
         android:icon="@drawable/ic_add_box_36dp"
         android:title="@string/btn_goto_add_event"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/btn_goto_edit_event"
+        android:icon="@drawable/ic_lock_closed_36dp"
+        android:title="@string/btn_goto_edit_event"
+        app:showAsAction="always" />
 </menu>

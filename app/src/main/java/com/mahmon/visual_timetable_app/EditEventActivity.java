@@ -1,5 +1,6 @@
 package com.mahmon.visual_timetable_app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,29 @@ public class EditEventActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         // Enable the Up button
         actionBar.setDisplayHomeAsUpEnabled(true);
+        // Add the bottom action bar and inflate the menu
+        Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
+        bottomActionBar.inflateMenu(R.menu.bottom_edit_bar_menu);
+        // Create listeners for bottom_action_bar_menu
+        bottomActionBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    // User clicked btn_save_edit_event
+                    case R.id.btn_save_edited_event:
+                        // Destroy activity calling method, return to previous activity
+                        finish();
+                        // Animation override:
+                        // Back_out for this activity, back_in for previous activity
+                        overridePendingTransition(R.anim.back_in, R.anim.back_out);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
+
     // Implement the default options menu
     @Override
     public boolean onCreateOptionsMenu(Menu topMenu) {
@@ -72,15 +95,6 @@ public class EditEventActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.back_in, R.anim.back_out);
-    }
-
-    // onClick listener for button: btn_save_edited_event
-    public void saveEditedEvent(View view) {
-        // Destroy activity calling method, return to previous activity
-        finish();
-        // Animation override:
-        // Back_out for this activity, back_in for previous activity
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
