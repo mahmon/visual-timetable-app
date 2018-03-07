@@ -1,6 +1,5 @@
 package com.mahmon.visual_timetable_app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +9,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -45,6 +42,7 @@ public class AddEventActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     // User clicked btn_save_added_event
                     case R.id.btn_save_added_event:
+                        /* Write to database */
                         // Create instance and reference to database
                         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
                         // Set reference to two child levels

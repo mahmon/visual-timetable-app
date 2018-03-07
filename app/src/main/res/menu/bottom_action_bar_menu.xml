@@ -22,9 +22,12 @@
         android:icon="@drawable/ic_add_box_36dp"
         android:title="@string/btn_goto_add_event"
         app:showAsAction="always" />
+
+    <!-- Added btn_goto_edit_event with icon -->
     <item
         android:id="@+id/btn_goto_edit_event"
         android:icon="@drawable/ic_lock_closed_36dp"
         android:title="@string/btn_goto_edit_event"
         app:showAsAction="always" />
+
 </menu>

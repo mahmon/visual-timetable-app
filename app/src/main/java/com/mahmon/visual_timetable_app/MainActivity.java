@@ -79,12 +79,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // onClick listener for button: btn_enter_app
-    public void enterApp(View view) {
-        // Create new intent to start a new activity (DisplayEventsActivity)
-        Intent intent = new Intent(this, DisplayEventsActivity.class);
-        // Start activity
-        startActivity(intent);
-    }
-
 }

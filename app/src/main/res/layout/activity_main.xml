@@ -40,6 +40,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/screen_name_bar" />
 
-    <!-- Button to enter app -->
-
 </android.support.constraint.ConstraintLayout>
