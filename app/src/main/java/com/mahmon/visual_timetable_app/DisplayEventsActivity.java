@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -11,7 +13,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DisplayEventsActivity extends AppCompatActivity {
+
+    // Variable to store RecyclerView
+    private RecyclerView recyclerView;
+    // List to store all Event objects
+    private List<Event> eventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +30,25 @@ public class DisplayEventsActivity extends AppCompatActivity {
         // Animation override:
         // Go_in for this activity, go_out for previous activity
         overridePendingTransition(R.anim.go_in, R.anim.go_out);
+        /* Manage RecyclerView */
+        // Get recycler_view_events
+        recyclerView = findViewById(R.id.recycler_view_events);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Initialise event list
+        eventList = new ArrayList<>();
+
+        // Add some dummy data for now
+        for (int i=0; i<20; i++) {
+            String title = "Title" + (i+1);
+            eventList.add(new Event(title));
+        }
+
+        // Instantiate the EventAdapter
+        EventAdapter adapter = new EventAdapter(this, eventList);
+        // Set adapter to RecyclerView
+        recyclerView.setAdapter(adapter);
+        /* Manage Tooolbar : topActionBar */
         // Implement top_action_bar as default action bar for this activity
         Toolbar topActionBar = findViewById(R.id.top_action_bar);
         setSupportActionBar(topActionBar);
@@ -27,6 +56,7 @@ public class DisplayEventsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         // Disable the Up button
         actionBar.setDisplayHomeAsUpEnabled(false);
+        /* Manage Tooolbar : bottomActionBar */
         // Add the bottom action bar and inflate the menu
         Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
         bottomActionBar.inflateMenu(R.menu.bottom_action_bar_menu);
