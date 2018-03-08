@@ -21,6 +21,7 @@ import com.mahmon.visual_timetable_app.Events.Event;
 import com.mahmon.visual_timetable_app.Events.EventAdapter;
 import com.mahmon.visual_timetable_app.R;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DisplayEventsActivity extends AppCompatActivity {
@@ -73,16 +74,21 @@ public class DisplayEventsActivity extends AppCompatActivity {
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         // Set reference to two child levels
         DatabaseReference mDatabaseReference =
-                mDatabase.getReference().child("Visual Events").child("Event Heading");
+                mDatabase.getReference().child("Visual Events");
         // Set listener to read from the database reference
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             // This method is called whenever data ais updated.
             public void onDataChange(DataSnapshot dataSnapshot) {
+                // Iterate through the data
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
+                while((iterator.hasNext())){
+                    Event event = iterator.next().getValue(Event.class);
+                    // Add each Event to the eventList
+                    eventList.add(new Event(event.getTitle()));
+                }
                 // Refresh the RecyclerView
-                // Store the value returned in String eventTitle
-                String title = dataSnapshot.getValue(String.class);
-                eventList.add(new Event(title));
                 adapter.notifyDataSetChanged();
             }
             @Override

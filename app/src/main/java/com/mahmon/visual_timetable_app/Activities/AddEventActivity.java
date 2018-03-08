@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mahmon.visual_timetable_app.Events.Event;
 import com.mahmon.visual_timetable_app.R;
 
 public class AddEventActivity extends AppCompatActivity {
@@ -111,13 +112,17 @@ public class AddEventActivity extends AppCompatActivity {
                         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
                         // Set reference to two child levels
                         DatabaseReference mDatabaseReference =
-                                mDatabase.getReference("Visual Events").child("Event Heading");
+                                mDatabase.getReference("Visual Events");
+                        // Get ID value and store in eventID
+                        String eventID = mDatabaseReference.push().getKey();
                         // Attach variable to txt_add_events
                         EditText editText = findViewById(R.id.txt_add_events);
                         // Store input from editText test in String eventHeading
                         String eventHeading = editText.getText().toString();
-                        // Write string to the database
-                        mDatabaseReference.setValue(eventHeading);
+                        // Create new Event object and pass in value of eventHeading
+                        Event event = new Event(eventHeading);
+                        // Write Event object to the database
+                        mDatabaseReference.child(eventID).setValue(event);
                         // Create new intent to start a new activity (DisplayEventsActivity)
                         Intent intentAdd = new Intent(AddEventActivity.this,
                                 DisplayEventsActivity.class);
