@@ -29,6 +29,8 @@ public class DisplayEventsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     // List to store all Event objects
     private List<Event> eventList;
+    // Declare adapter
+    private EventAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +79,11 @@ public class DisplayEventsActivity extends AppCompatActivity {
             @Override
             // This method is called whenever data ais updated.
             public void onDataChange(DataSnapshot dataSnapshot) {
+                // Refresh the RecyclerView
                 // Store the value returned in String eventTitle
                 String title = dataSnapshot.getValue(String.class);
                 eventList.add(new Event(title));
+                adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -96,7 +100,7 @@ public class DisplayEventsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         eventList = new ArrayList<>();
-        EventAdapter adapter = new EventAdapter(this, eventList);
+        adapter = new EventAdapter(this, eventList);
         // Set adapter to RecyclerView
         recyclerView.setAdapter(adapter);
     }

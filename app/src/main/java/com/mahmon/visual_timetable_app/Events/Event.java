@@ -6,6 +6,10 @@ public class Event {
     // String for event title (more attributes to be added later)
     private String title;
 
+    // Default constructor
+    public Event() {
+    }
+
     // Constructor to make sure a value is set
     public Event(String title) {
         this.title = title;
@@ -15,4 +19,5 @@ public class Event {
     public String getTitle() {
         return title;
     }
+
 }
