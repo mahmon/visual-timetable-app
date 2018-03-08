@@ -23,7 +23,7 @@
         <!-- Added up navigation back to MainActivity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".DisplayEventsActivity"
+            android:name=".Activities.DisplayEventsActivity"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
@@ -36,27 +36,27 @@
         <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".AddEventActivity"
-            android:parentActivityName=".DisplayEventsActivity"
+            android:name=".Activities.AddEventActivity"
+            android:parentActivityName=".Activities.DisplayEventsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DisplayEventsActivity" />
+                android:value=".Activities.DisplayEventsActivity" />
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".EditEventActivity"
-            android:parentActivityName=".DisplayEventsActivity"
+            android:name=".Activities.EditEventActivity"
+            android:parentActivityName=".Activities.DisplayEventsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DisplayEventsActivity" />
+                android:value=".Activities.DisplayEventsActivity" />
         </activity>
 
         <!-- Added AppMethods to manifest -->

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mahmon.visual_timetable_app.EditEventActivity">
+    tools:context="com.mahmon.visual_timetable_app.Activities.EditEventActivity">
 
     <!-- Include top action bar in this layout -->
     <include layout="@layout/top_action_bar"/>

@@ -1,28 +1,31 @@
-package com.mahmon.visual_timetable_app;
+package com.mahmon.visual_timetable_app.Activities;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Menu;
 import android.widget.Toast;
-import com.mahmon.visual_timetable_app.Activities.DisplayEventsActivity;
+import com.mahmon.visual_timetable_app.R;
 
-public class MainActivity extends AppCompatActivity {
+public class EditEventActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_edit_event);
+        // Animation override:
+        // Go_in for this activity, go_out for previous activity
+        overridePendingTransition(R.anim.go_in, R.anim.go_out);
         // Setup action bars
         showTopActionBar();
         showBottomActionBar();
     }
 
+    // Implement the default options menu
     @Override
     public boolean onCreateOptionsMenu(Menu topMenu) {
         // Inflate the top_action_bar_menu onto top_action_bar
@@ -32,12 +35,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Set method calls for items clicked in top_action_bar_menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Set method calls for items clicked in top_action_bar_menu
         topActionBarMethods(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
+    }
+
+    // Animation override for the default back button:
+    // Back_in for this activity, back_out for previous activity
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
     /* Action Bars Set Up*/
@@ -55,9 +67,10 @@ public class MainActivity extends AppCompatActivity {
     public void showBottomActionBar() {
         // Add the bottom action bar and inflate the menu
         Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
-        bottomActionBar.inflateMenu(R.menu.bottom_enter_bar_menu);
+        bottomActionBar.inflateMenu(R.menu.bottom_edit_bar_menu);
         bottomActionBarMethods(bottomActionBar);
     }
+
     /* Action Bars Methods*/
     // Set method calls for topActionBar
     public boolean topActionBarMethods(MenuItem item) {
@@ -76,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 // Invoke the superclass to handle unrecognised user action.
-                return false;
+                return super.onOptionsItemSelected(item);
         }
     }
+
     // Set method calls for bottomActionBar
     public void bottomActionBarMethods(Toolbar bottomActionBar) {
         // Create listeners for bottom_action_bar_menu
@@ -86,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    // User clicked btn_enter_app
-                    case R.id.btn_enter_app:
-                        // Create new intent to start a new activity (AddEventActivity)
-                        Intent intentAdd = new Intent(MainActivity.this,
-                                DisplayEventsActivity.class);
-                        // Start activity
-                        startActivity(intentAdd);
+                    // User clicked btn_save_edit_event
+                    case R.id.btn_save_edited_event:
+                        // Destroy activity calling method, return to previous activity
+                        finish();
+                        // Animation override:
+                        // Back_out for this activity, back_in for previous activity
+                        overridePendingTransition(R.anim.back_in, R.anim.back_out);
                         return true;
                     default:
                         return false;

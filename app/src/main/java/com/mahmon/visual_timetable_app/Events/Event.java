@@ -1,4 +1,4 @@
-package com.mahmon.visual_timetable_app;
+package com.mahmon.visual_timetable_app.Events;
 
 // Class for generating Event objects
 public class Event {

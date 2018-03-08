@@ -1,4 +1,4 @@
-package com.mahmon.visual_timetable_app;
+package com.mahmon.visual_timetable_app.Events;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.mahmon.visual_timetable_app.R;
 
 import java.util.List;
 
@@ -19,9 +21,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     private List<Event> eventList;
 
     // Constructor
-    public EventAdapter(Context context, List<Event> eventlist) {
+    public EventAdapter(Context context, List<Event> eventList) {
         this.context = context;
-        this.eventList = eventlist;
+        this.eventList = eventList;
     }
 
     @NonNull
