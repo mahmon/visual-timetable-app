@@ -1,4 +1,4 @@
-package com.mahmon.visual_timetable_app.View;
+package com.mahmon.visual_timetable_app.view;
 
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -13,6 +13,21 @@ public class StartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visual_timetable);
+        // Animation override:
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        // Set bottom menu icons for this context
+        getBottomToolbar().getMenu().removeItem(R.id.btn_exit_app);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_out);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_in);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_add_event);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_save_event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Animation override:
+        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
     }
 
     // Implement the default options menu

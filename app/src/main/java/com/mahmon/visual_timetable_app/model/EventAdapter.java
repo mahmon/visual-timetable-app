@@ -1,4 +1,4 @@
-package com.mahmon.visual_timetable_app.Model;
+package com.mahmon.visual_timetable_app.model;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

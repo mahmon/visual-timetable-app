@@ -12,7 +12,7 @@
 
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".View.StartActivity"
+            android:name=".view.StartActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -25,42 +25,31 @@
         <!-- Added up navigation backVisualTimetablevity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".View.DisplayEventsActivity"
+            android:name=".view.DisplayEventsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".View.StartActivity"
+            android:parentActivityName=".view.StartActivity"
             android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".View.StartActivity" />
+                android:value=".view.StartActivity" />
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".View.AddEventActivity"
+            android:name=".view.AddEventActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".View.DisplayEventsActivity"
+            android:parentActivityName=".view.DisplayEventsActivity"
             android:screenOrientation="portrait">
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".View.DisplayEventsActivity" />
+                android:value=".view.DisplayEventsActivity" />
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
-        <activity
-            android:name=".View.EditEventActivity"
-            android:configChanges="orientation"
-            android:parentActivityName=".View.DisplayEventsActivity"
-            android:screenOrientation="portrait">
-
-            <!-- Meta-data tag required to support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".View.DisplayEventsActivity" />
-        </activity>
 
         <!-- Added AppMethods to manifest -->
 

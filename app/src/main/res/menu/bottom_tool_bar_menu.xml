@@ -9,6 +9,13 @@
         android:title="@string/btn_enter_app"
         app:showAsAction="always" />
 
+    <!-- Added btn_exit_app with icon -->
+    <item
+        android:id="@+id/btn_exit_app"
+        android:icon="@drawable/ic_eject_36dp"
+        android:title="@string/btn_exit_app"
+        app:showAsAction="always" />
+
     <!-- Added btn_zoom_out with icon -->
     <item
         android:id="@+id/btn_zoom_out"
@@ -23,18 +30,18 @@
         android:title="@string/btn_zoom_in"
         app:showAsAction="always" />
 
-    <!-- Added btn_goto_add_event with icon -->
+    <!-- Added btn_add_event with icon -->
     <item
-        android:id="@+id/btn_goto_add_event"
+        android:id="@+id/btn_add_event"
         android:icon="@drawable/ic_add_box_36dp"
-        android:title="@string/btn_goto_add_event"
+        android:title="@string/btn_add_event"
         app:showAsAction="always" />
 
     <!-- Added btn_save_event with icon -->
     <item
-        android:id="@+id/btn_save_added_event"
+        android:id="@+id/btn_save_event"
         android:icon="@drawable/ic_save_36dp"
-        android:title="@string/btn_save_added_event"
+        android:title="@string/btn_save_event"
         app:showAsAction="always" />
 
 </menu>

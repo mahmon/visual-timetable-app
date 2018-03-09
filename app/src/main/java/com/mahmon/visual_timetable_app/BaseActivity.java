@@ -10,14 +10,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mahmon.visual_timetable_app.Model.Event;
-import com.mahmon.visual_timetable_app.View.*;
+import com.mahmon.visual_timetable_app.model.Event;
+import com.mahmon.visual_timetable_app.view.*;
 
 // Class to manage Tool Bars for all activities
 public class BaseActivity extends AppCompatActivity {
 
     private Toolbar topToolbar;
     private Toolbar bottomToolbar;
+
+    // Getter method for passing toolbar
+    public Toolbar getBottomToolbar() {
+        return bottomToolbar;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,12 @@ public class BaseActivity extends AppCompatActivity {
                         // Start activity
                         startActivity(intentEnter);
                         return true;
+                    // User clicked btn_exit_app
+                    case R.id.btn_exit_app:
+                        Intent openMainActivity = new Intent(getBaseContext(), StartActivity.class);
+                        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        startActivityIfNeeded(openMainActivity, 0);
+                        return true;
                     // User clicked btn_zoom_out
                     case R.id.btn_zoom_out:
                         // Display toast message to confirm click
@@ -84,15 +95,15 @@ public class BaseActivity extends AppCompatActivity {
                         // Display toast message to confirm click
                         Toast.makeText(getBaseContext(), "Zoom In", Toast.LENGTH_SHORT).show();
                         return true;
-                    // User clicked btn_goto_add_event
-                    case R.id.btn_goto_add_event:
+                    // User clicked btn_add_event
+                    case R.id.btn_add_event:
                         // Create new intent to start a new activity (AddEventActivity)
                         Intent intentAdd = new Intent(getBaseContext(), AddEventActivity.class);
                         // Start activity
                         startActivity(intentAdd);
                         return true;
-                    // User clicked btn_save_added_event
-                    case R.id.btn_save_added_event:
+                    // User clicked btn_save_event
+                    case R.id.btn_save_event:
                         /* Write to database */
                         // Create instance and reference to database
                         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();

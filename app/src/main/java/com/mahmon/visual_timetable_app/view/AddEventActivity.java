@@ -1,4 +1,5 @@
-package com.mahmon.visual_timetable_app.View;
+package com.mahmon.visual_timetable_app.view;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,9 +13,14 @@ public class AddEventActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        // Set bottom menu icons for this context
+        getBottomToolbar().getMenu().removeItem(R.id.btn_enter_app);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_out);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_in);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_add_event);
         // Animation override:
-        // Go_in for this activity, go_out for previous activity
-        overridePendingTransition(R.anim.go_in, R.anim.go_out);
+        // Go_in for this activity, slide_out for previous activity
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     // Implement the default options menu
@@ -37,11 +43,10 @@ public class AddEventActivity extends BaseActivity {
     }
 
     // Animation override for the default back button:
-    // Back_in for this activity, back_out for previous activity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.back_in, R.anim.back_out);
+        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
     }
 
 }

@@ -6,15 +6,15 @@
     <!-- Button IDs and Strings -->
     <string name="btn_enter_app">Enter</string>
     <string name="btn_exit_app">Exit</string>
-    <string name="btn_goto_add_event">Add New Event</string>
-    <string name="btn_goto_edit_event">Edit An Event</string>
-    <string name="btn_save_added_event">Save New Event</string>
-    <string name="btn_save_edited_event">Save Edited Event</string>
+    <string name="btn_add_event">Add Event</string>
+    <string name="btn_edit_event">Edit Event</string>
+    <string name="btn_save_event">Save Event</string>
+    <string name="btn_save_edited_event">Save Edits</string>
     <string name="btn_toggle_theme">Toggle Theme</string>
     <string name="btn_zoom_in">Zoom In</string>
     <string name="btn_zoom_out">Zoom Out</string>
 
-    <!-- Text View IDs and Strings -->
+    <!-- TextView IDs and Strings -->
     <string name="txt_event_heading_label">Events</string>
     <string name="txt_display_events"></string>
     <string name="txt_add_event_heading_text_box">Enter Event Heading</string>

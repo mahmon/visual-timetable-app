@@ -1,4 +1,4 @@
-package com.mahmon.visual_timetable_app.View;
+package com.mahmon.visual_timetable_app.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mahmon.visual_timetable_app.BaseActivity;
-import com.mahmon.visual_timetable_app.Model.Event;
-import com.mahmon.visual_timetable_app.Model.EventAdapter;
+import com.mahmon.visual_timetable_app.model.Event;
+import com.mahmon.visual_timetable_app.model.EventAdapter;
 import com.mahmon.visual_timetable_app.R;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,13 +32,31 @@ public class DisplayEventsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_events);
+        // Set bottom menu icons for this context
+        getBottomToolbar().getMenu().removeItem(R.id.btn_enter_app);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_save_event);
         // Animation override:
-        // Go_in for this activity, go_out for previous activity
-        overridePendingTransition(R.anim.go_in, R.anim.go_out);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         // Start Listener and RecyclerView
         startListener();
         startRecyclerView();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Animation override:
+        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Animation override:
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+
 
     // Implement the default options menu
     @Override
@@ -104,11 +122,10 @@ public class DisplayEventsActivity extends BaseActivity {
     }
 
     // Animation override for the default back button:
-    // Back_in for this activity, back_out for previous activity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.back_in, R.anim.back_out);
+        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
     }
 
 }
