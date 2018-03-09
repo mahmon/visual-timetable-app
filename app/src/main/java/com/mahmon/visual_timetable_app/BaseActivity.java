@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -16,10 +17,18 @@ import com.mahmon.visual_timetable_app.view.*;
 // Class to manage Tool Bars for all activities
 public class BaseActivity extends AppCompatActivity {
 
+    // Used to set database node
+    public static final String VISUAL_EVENTS = "Visual Events";
+
+    // Database link and reference object
+    FirebaseDatabase mDatabase;
+    DatabaseReference mDatabaseRef;
+
+    // Toolbars
     private Toolbar topToolbar;
     private Toolbar bottomToolbar;
 
-    // Getter method for passing toolbar
+    // Getter method for passing bottom toolbar
     public Toolbar getBottomToolbar() {
         return bottomToolbar;
     }
@@ -27,6 +36,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Get Visual Events reference
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseRef = mDatabase.getReference(VISUAL_EVENTS);
     }
 
     @Override
@@ -74,16 +86,15 @@ public class BaseActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     // User clicked btn_enter_app
                     case R.id.btn_enter_app:
-                        // Create new intent to start a new activity (DisplayEventsActivity)
+                        // Create new intent to start DisplayEventsActivity
                         Intent intentEnter = new Intent(getBaseContext(), DisplayEventsActivity.class);
-                        // Start activity
                         startActivity(intentEnter);
                         return true;
                     // User clicked btn_exit_app
                     case R.id.btn_exit_app:
-                        Intent openMainActivity = new Intent(getBaseContext(), StartActivity.class);
-                        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivityIfNeeded(openMainActivity, 0);
+                        // Create new intent to start StartActivity
+                        Intent intentExit = new Intent(getBaseContext(), StartActivity.class);
+                        startActivity(intentExit);
                         return true;
                     // User clicked btn_zoom_out
                     case R.id.btn_zoom_out:
@@ -97,39 +108,47 @@ public class BaseActivity extends AppCompatActivity {
                         return true;
                     // User clicked btn_add_event
                     case R.id.btn_add_event:
-                        // Create new intent to start a new activity (AddEventActivity)
+                        // Create new intent to start AddEventActivity
                         Intent intentAdd = new Intent(getBaseContext(), AddEventActivity.class);
-                        // Start activity
                         startActivity(intentAdd);
                         return true;
                     // User clicked btn_save_event
                     case R.id.btn_save_event:
-                        /* Write to database */
-                        // Create instance and reference to database
-                        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-                        // Set reference to two child levels
-                        DatabaseReference mDatabaseReference =
-                                mDatabase.getReference("Visual Events");
-                        // Get ID value and store in eventID
-                        String eventID = mDatabaseReference.push().getKey();
-                        // Attach variable to txt_add_events
-                        EditText editText = findViewById(R.id.txt_add_events);
-                        // Store input from editText test in String eventHeading
-                        String eventHeading = editText.getText().toString();
-                        // Create new Event object and pass in value of eventHeading
-                        Event event = new Event(eventHeading);
-                        // Write Event object to the database
-                        mDatabaseReference.child(eventID).setValue(event);
-                        // Create new intent to start a new activity (DisplayEventsActivity)
-                        Intent intentSave = new Intent(getBaseContext(), DisplayEventsActivity.class);
-                        // Start activity
-                        startActivity(intentSave);
+                        // Call add event method
+                        addEvent();
                         return true;
                     default:
                         return false;
                 }
             }
         });
+    }
+
+    /* Write to database */
+    // Add event to database
+    private void addEvent() {
+        // Link to txt_add_events
+        EditText editText = findViewById(R.id.txt_add_events);
+        // Store input from editText test in String eventHeading
+        String eventHeading = editText.getText().toString().trim();
+        // Check box is not blank
+        if (!TextUtils.isEmpty(eventHeading)) {
+            // Get unique ID from Firebase
+            String eventID = mDatabaseRef.push().getKey();
+            // Create Event Object
+            Event event = new Event(eventID, eventHeading);
+            // Save Event
+            mDatabaseRef.child(eventID).setValue(event);
+            // Toast to confirm event saved
+            Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
+            // Create new intent to start a new activity (DisplayEventsActivity)
+            Intent intentSave = new Intent(getBaseContext(), DisplayEventsActivity.class);
+            // Start activity
+            startActivity(intentSave);
+        } else {
+            // Prompt
+            Toast.makeText(this, "Please enter a heading", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

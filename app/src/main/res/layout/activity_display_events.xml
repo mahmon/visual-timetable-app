@@ -8,7 +8,10 @@
 
     <!-- Include top and bottom action bars in this layout -->
     <include layout="@layout/top_tool_bar"/>
-    <include layout="@layout/bottom_tool_bar"/>
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/bottom_tool_bar" />
 
     <!-- Top bar to display screen relevant content -->
     <android.support.v7.widget.Toolbar
@@ -40,17 +43,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/screen_name_bar" />
 
-    <!-- A RecyclerView with some commonly used attributes -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_events"
+    <!-- A ListView for events -->
+    <ListView
+        android:id="@+id/listViewEvents"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="56dp"
-        android:layout_marginTop="112dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/include2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/screen_name_bar" />
 
 </android.support.constraint.ConstraintLayout>

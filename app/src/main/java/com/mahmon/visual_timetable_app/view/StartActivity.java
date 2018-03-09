@@ -12,7 +12,7 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visual_timetable);
+        setContentView(R.layout.activity_start_activity);
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         // Set bottom menu icons for this context
@@ -21,13 +21,6 @@ public class StartActivity extends BaseActivity {
         getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_in);
         getBottomToolbar().getMenu().removeItem(R.id.btn_add_event);
         getBottomToolbar().getMenu().removeItem(R.id.btn_save_event);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Animation override:
-        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
     }
 
     // Implement the default options menu

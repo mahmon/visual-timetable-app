@@ -15,11 +15,11 @@ public class AddEventActivity extends BaseActivity {
         setContentView(R.layout.activity_add_event);
         // Set bottom menu icons for this context
         getBottomToolbar().getMenu().removeItem(R.id.btn_enter_app);
+        getBottomToolbar().getMenu().removeItem(R.id.btn_exit_app);
         getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_out);
         getBottomToolbar().getMenu().removeItem(R.id.btn_zoom_in);
         getBottomToolbar().getMenu().removeItem(R.id.btn_add_event);
         // Animation override:
-        // Go_in for this activity, slide_out for previous activity
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 

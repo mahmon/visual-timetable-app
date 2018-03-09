@@ -1,32 +1,45 @@
 package com.mahmon.visual_timetable_app.view;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mahmon.visual_timetable_app.BaseActivity;
-import com.mahmon.visual_timetable_app.model.Event;
-import com.mahmon.visual_timetable_app.model.EventAdapter;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.model.Event;
+import com.mahmon.visual_timetable_app.model.EventList;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DisplayEventsActivity extends BaseActivity {
 
-    // Variable to store RecyclerView
-    private RecyclerView recyclerView;
-    // List to store all Event objects
-    private List<Event> eventList;
-    // Declare adapter
-    private EventAdapter adapter;
+    //we will use these constants later to pass the artist name and id to another activity
+    public static final String ARTIST_NAME = "net.simplifiedcoding.firebasedatabaseexample.artistname";
+    public static final String ARTIST_ID = "net.simplifiedcoding.firebasedatabaseexample.artistid";
+
+    // Declare ListView object
+    ListView listViewEvents;
+    //a list to store all the artist from firebase database
+    List<Event> eventList;
+    // Database reference object
+    DatabaseReference databaseEvents;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,26 +50,54 @@ public class DisplayEventsActivity extends BaseActivity {
         getBottomToolbar().getMenu().removeItem(R.id.btn_save_event);
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        // Start Listener and RecyclerView
-        startListener();
-        startRecyclerView();
+        // Get reference of Visual Events node
+        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
+        // Get views
+        listViewEvents = findViewById(R.id.listViewEvents);
+        //list to store events
+        eventList = new ArrayList<>();
+        // Listen for long click on event and launch showUpdateDeleteDialog method
+        listViewEvents.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Event event = eventList.get(i);
+                showUpdateDeleteDialog(event.getEventID(), event.getEventHeading());
+                return true;
+            }
+        });
+
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        // Animation override:
-        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
+    protected void onStart() {
+        super.onStart();
+        /* Read from database */
+        // Attach value event listener
+        databaseEvents.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Clear previous artist list
+                eventList.clear();
+                // Iterate through all the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //getting artist
+                    Event event = postSnapshot.getValue(Event.class);
+                    //adding artist to the list
+                    eventList.add(event);
+                }
+                // Create adapter
+                EventList eventListAdapter = new EventList(DisplayEventsActivity.this, eventList);
+                // Attach adapter to ListView
+                listViewEvents.setAdapter(eventListAdapter);
+                // Refresh the RecyclerView
+                eventListAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //
+            }
+        });
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // Animation override:
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
-
-
 
     // Implement the default options menu
     @Override
@@ -77,55 +118,68 @@ public class DisplayEventsActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /* Database Listener */
-    // Methods call to implement database Listener
-    public void startListener() {
-        // Create instance and reference to database
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        // Set reference to two child levels
-        DatabaseReference mDatabaseReference =
-                mDatabase.getReference().child("Visual Events");
-        // Set listener to read from the database reference
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            // This method is called whenever data ais updated.
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Iterate through the data
-                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
-                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
-                while((iterator.hasNext())){
-                    Event event = iterator.next().getValue(Event.class);
-                    // Add each Event to the eventList
-                    eventList.add(new Event(event.getTitle()));
-                }
-                // Refresh the RecyclerView
-                adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-    }
-
-    /* RecyclerView */
-    // Method call to implement the RecyclerView
-    public void startRecyclerView() {
-        // Get recycler_view_events
-        recyclerView = findViewById(R.id.recycler_view_events);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        eventList = new ArrayList<>();
-        adapter = new EventAdapter(this, eventList);
-        // Set adapter to RecyclerView
-        recyclerView.setAdapter(adapter);
-    }
-
     // Animation override for the default back button:
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
+    }
+
+    // Method to Update Events
+    private boolean updateEvent(String eventID, String eventHeading) {
+        // Get the event ID
+        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
+        // Update Event
+        Event event = new Event(eventID, eventHeading);
+        databaseEvents.setValue(event);
+        Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    // Method to Inflate dialog box for editing events
+    private void showUpdateDeleteDialog(final String eventID, String eventHeading) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.update_delete_event, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextName = dialogView.findViewById(R.id.txt_edit_events);
+        final Button buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
+        final Button buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
+
+        dialogBuilder.setTitle(eventHeading);
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = editTextName.getText().toString().trim();
+                if (!TextUtils.isEmpty(name)) {
+                    updateEvent(eventID, name);
+                    b.dismiss();
+                }
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteEvent(eventID);
+                b.dismiss();
+            }
+        });
+    }
+
+    // Method to delete Event
+    private boolean deleteEvent(String eventID) {
+        // Get the event ID
+        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
+        // Remove the event
+        databaseEvents.removeValue();
+        // Confirm the deletion
+        Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
+        return true;
     }
 
 }

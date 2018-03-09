@@ -19,7 +19,7 @@
     <string name="txt_display_events"></string>
     <string name="txt_add_event_heading_text_box">Enter Event Heading</string>
     <string name="txt_enter_event_heading">Enter Event Heading</string>
-    <string name="txt_edit_events">Edit Event</string>
+    <string name="txt_edit_events">Enter New Heading</string>
     <string name="txt_start_screen_heading">Start Screen</string>>
     <string name="txt_display_screen_heading">Display Events</string>>
     <string name="txt_edit_screen_heading">Edit Events</string>>
