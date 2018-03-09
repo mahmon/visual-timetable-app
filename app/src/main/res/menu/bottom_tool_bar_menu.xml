@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Added btn_enter_app with icon -->
+    <item
+        android:id="@+id/btn_enter_app"
+        android:icon="@drawable/ic_play_arrow_36dp"
+        android:title="@string/btn_enter_app"
+        app:showAsAction="always" />
 
     <!-- Added btn_zoom_out with icon -->
     <item
@@ -23,11 +30,11 @@
         android:title="@string/btn_goto_add_event"
         app:showAsAction="always" />
 
-    <!-- Added btn_goto_edit_event with icon -->
+    <!-- Added btn_save_event with icon -->
     <item
-        android:id="@+id/btn_goto_edit_event"
-        android:icon="@drawable/ic_lock_closed_36dp"
-        android:title="@string/btn_goto_edit_event"
+        android:id="@+id/btn_save_added_event"
+        android:icon="@drawable/ic_save_36dp"
+        android:title="@string/btn_save_added_event"
         app:showAsAction="always" />
 
 </menu>

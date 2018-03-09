@@ -12,7 +12,7 @@
 
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".View.VisualTimetable"
+            android:name=".View.StartActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -27,13 +27,12 @@
         <activity
             android:name=".View.DisplayEventsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".View.VisualTimetable"
+            android:parentActivityName=".View.StartActivity"
             android:screenOrientation="portrait">
-
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".View.VisualTimetable" />
+                android:value=".View.StartActivity" />
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
@@ -43,7 +42,6 @@
             android:configChanges="orientation"
             android:parentActivityName=".View.DisplayEventsActivity"
             android:screenOrientation="portrait">
-
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -66,7 +64,7 @@
 
         <!-- Added AppMethods to manifest -->
 
-        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".BaseActivity" />
     </application>
 
 </manifest>

@@ -1,15 +1,11 @@
 package com.mahmon.visual_timetable_app.View;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,8 +35,6 @@ public class DisplayEventsActivity extends BaseActivity {
         // Animation override:
         // Go_in for this activity, go_out for previous activity
         overridePendingTransition(R.anim.go_in, R.anim.go_out);
-        // Setup action bars
-        showBottomActionBar();
         // Start Listener and RecyclerView
         startListener();
         startRecyclerView();
@@ -115,64 +109,6 @@ public class DisplayEventsActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.back_in, R.anim.back_out);
-    }
-
-    /* Action Bars Set Up*/
-    // Initiate bottomActionBar
-    public void showBottomActionBar() {
-        // Add the bottom action bar and inflate the menu
-        Toolbar bottomActionBar = findViewById(R.id.bottom_action_bar);
-        bottomActionBar.inflateMenu(R.menu.bottom_action_bar_menu);
-        bottomActionBarMethods(bottomActionBar);
-    }
-
-    /* Action Bars Methods*/
-    // Set method calls for bottomActionBar
-    public void bottomActionBarMethods(Toolbar bottomActionBar) {
-        // Create listeners for bottom_action_bar_menu
-        bottomActionBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    // User clicked btn_zoom_out
-                    case R.id.btn_zoom_out:
-                        // Display toast message to confirm click
-                        Toast toastOut = Toast.makeText(
-                                DisplayEventsActivity.this,
-                                "You Clicked Zoom Out", Toast.LENGTH_SHORT);
-                        toastOut.setGravity(Gravity.CENTER, 0, 0);
-                        toastOut.show();
-                        return true;
-                    // User clicked btn_zoom_in
-                    case R.id.btn_zoom_in:
-                        // Display toast message to confirm click
-                        Toast toastIn = Toast.makeText(
-                                DisplayEventsActivity.this,
-                                "You Clicked Zoom In", Toast.LENGTH_SHORT);
-                        toastIn.setGravity(Gravity.CENTER, 0, 0);
-                        toastIn.show();
-                        return true;
-                    // User clicked btn_goto_add_event
-                    case R.id.btn_goto_add_event:
-                        // Create new intent to start a new activity (AddEventActivity)
-                        Intent intentAdd = new Intent(DisplayEventsActivity.this,
-                                AddEventActivity.class);
-                        // Start activity
-                        startActivity(intentAdd);
-                        return true;
-                    // User clicked btn_goto_edit_event
-                    case R.id.btn_goto_edit_event:
-                        // Create new intent to start a new activity (EditEventActivity)
-                        Intent intentEdit = new Intent(DisplayEventsActivity.this,
-                                EditEventActivity.class);
-                        // Start activity
-                        startActivity(intentEdit);
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
     }
 
 }

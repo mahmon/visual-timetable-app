@@ -8,7 +8,7 @@
 
     <!-- Include top action bar in this layout -->
     <include layout="@layout/top_tool_bar"/>
-    <include layout="@layout/bottom_action_bar"/>
+    <include layout="@layout/bottom_tool_bar"/>
 
     <!-- Top bar to display screen relevant content -->
     <android.support.v7.widget.Toolbar

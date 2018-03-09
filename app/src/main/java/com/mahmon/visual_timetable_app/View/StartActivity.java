@@ -1,20 +1,18 @@
 package com.mahmon.visual_timetable_app.View;
+
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Menu;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 
-public class AddEventActivity extends BaseActivity {
+public class StartActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
-        // Animation override:
-        // Go_in for this activity, go_out for previous activity
-        overridePendingTransition(R.anim.go_in, R.anim.go_out);
+        setContentView(R.layout.activity_visual_timetable);
     }
 
     // Implement the default options menu
@@ -34,14 +32,6 @@ public class AddEventActivity extends BaseActivity {
         topToolBarMethods(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
-    }
-
-    // Animation override for the default back button:
-    // Back_in for this activity, back_out for previous activity
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.back_in, R.anim.back_out);
     }
 
 }
