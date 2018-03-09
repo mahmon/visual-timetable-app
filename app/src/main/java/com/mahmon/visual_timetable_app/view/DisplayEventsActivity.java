@@ -8,10 +8,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -57,12 +60,11 @@ public class DisplayEventsActivity extends BaseActivity {
         //list to store events
         eventList = new ArrayList<>();
         // Listen for long click on event and launch showUpdateDeleteDialog method
-        listViewEvents.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Event event = eventList.get(i);
                 showUpdateDeleteDialog(event.getEventID(), event.getEventHeading());
-                return true;
             }
         });
 
@@ -125,6 +127,7 @@ public class DisplayEventsActivity extends BaseActivity {
         overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
     }
 
+    /* Update to database */
     // Method to Update Events
     private boolean updateEvent(String eventID, String eventHeading) {
         // Get the event ID
@@ -143,11 +146,11 @@ public class DisplayEventsActivity extends BaseActivity {
         final View dialogView = inflater.inflate(R.layout.update_delete_event, null);
         dialogBuilder.setView(dialogView);
 
+        final TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
         final EditText editTextName = dialogView.findViewById(R.id.txt_edit_events);
-        final Button buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
-        final Button buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
-
-        dialogBuilder.setTitle(eventHeading);
+        final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
+        final ImageButton buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
+        dialogTitle.setText(eventHeading);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -158,6 +161,9 @@ public class DisplayEventsActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(name)) {
                     updateEvent(eventID, name);
                     b.dismiss();
+                } else {
+                    // Prompt
+                    Toast.makeText(getApplicationContext(), "Enter a new heading", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -171,6 +177,7 @@ public class DisplayEventsActivity extends BaseActivity {
         });
     }
 
+    /* Delete from database */
     // Method to delete Event
     private boolean deleteEvent(String eventID) {
         // Get the event ID

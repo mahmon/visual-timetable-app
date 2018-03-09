@@ -21,12 +21,14 @@ public class EventList extends ArrayAdapter<Event> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.layout_event_list, null, true);
         TextView textViewEventHeading = listViewItem.findViewById(R.id.textViewEventHeading);
-        Event event = eventList.get(position);
+        final Event event = eventList.get(position);
         textViewEventHeading.setText(event.getEventHeading());
         return listViewItem;
     }
+
+
 }
