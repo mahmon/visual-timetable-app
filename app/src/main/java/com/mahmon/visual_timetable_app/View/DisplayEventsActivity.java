@@ -1,8 +1,6 @@
-package com.mahmon.visual_timetable_app.Activities;
+package com.mahmon.visual_timetable_app.View;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,14 +15,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mahmon.visual_timetable_app.Events.Event;
-import com.mahmon.visual_timetable_app.Events.EventAdapter;
+import com.mahmon.visual_timetable_app.BaseActivity;
+import com.mahmon.visual_timetable_app.Model.Event;
+import com.mahmon.visual_timetable_app.Model.EventAdapter;
 import com.mahmon.visual_timetable_app.R;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DisplayEventsActivity extends AppCompatActivity {
+public class DisplayEventsActivity extends BaseActivity {
 
     // Variable to store RecyclerView
     private RecyclerView recyclerView;
@@ -41,7 +40,6 @@ public class DisplayEventsActivity extends AppCompatActivity {
         // Go_in for this activity, go_out for previous activity
         overridePendingTransition(R.anim.go_in, R.anim.go_out);
         // Setup action bars
-        showTopActionBar();
         showBottomActionBar();
         // Start Listener and RecyclerView
         startListener();
@@ -51,18 +49,18 @@ public class DisplayEventsActivity extends AppCompatActivity {
     // Implement the default options menu
     @Override
     public boolean onCreateOptionsMenu(Menu topMenu) {
-        // Inflate the top_action_bar_menu onto top_action_bar
+        // Inflate the top_tool_bar_menu onto top_tool_bar
         MenuInflater inflater = getMenuInflater();
-        // Set top_action_bar_menu as default options menu
-        inflater.inflate(R.menu.top_action_bar_menu, topMenu);
+        // Set top_tool_bar_menu as default options menu
+        inflater.inflate(R.menu.top_tool_bar_menu, topMenu);
         return true;
     }
 
-    // Set method calls for items clicked in top_action_bar_menu
+    // Set method calls for items clicked in top_tool_bar_menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Set method calls for items clicked in top_action_bar_menu
-        topActionBarMethods(item);
+        // Set method calls for items clicked in top_tool_bar_menu
+        topToolBarMethods(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
     }
@@ -120,17 +118,6 @@ public class DisplayEventsActivity extends AppCompatActivity {
     }
 
     /* Action Bars Set Up*/
-    // Initiate topActionBar
-    public void showTopActionBar() {
-        // Implement top_action_bar as default action bar for this activity
-        Toolbar topActionBar = findViewById(R.id.top_action_bar);
-        setSupportActionBar(topActionBar);
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar actionBar = getSupportActionBar();
-        // Disable the Up button
-        actionBar.setDisplayHomeAsUpEnabled(false);
-    }
-
     // Initiate bottomActionBar
     public void showBottomActionBar() {
         // Add the bottom action bar and inflate the menu
@@ -140,27 +127,6 @@ public class DisplayEventsActivity extends AppCompatActivity {
     }
 
     /* Action Bars Methods*/
-    // Set method calls for topActionBar
-    public boolean topActionBarMethods(MenuItem item) {
-        // Switch statement to manage menu user clicks
-        switch (item.getItemId()) {
-            // User clicked toggle_theme_button
-            case R.id.btn_toggle_theme:
-                // Display toast message to confirm click
-                Toast toast = Toast
-                        .makeText(
-                                this,
-                                "You Clicked Toggle Theme",
-                                Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                return true;
-            default:
-                // Invoke the superclass to handle unrecognised user action.
-                return false;
-        }
-    }
-
     // Set method calls for bottomActionBar
     public void bottomActionBarMethods(Toolbar bottomActionBar) {
         // Create listeners for bottom_action_bar_menu

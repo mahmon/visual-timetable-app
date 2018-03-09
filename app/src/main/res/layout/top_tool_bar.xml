@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar: top_action_bar  -->
+    <!-- Toolbtop_tool_bar_bar  -->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/top_action_bar"
+        android:id="@+id/top_tool_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"

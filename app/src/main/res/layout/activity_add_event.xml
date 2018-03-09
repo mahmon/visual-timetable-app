@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mahmon.visual_timetable_app.Activities.AddEventActivity">
+    tools:context="com.mahmon.visual_timetable_app.View.AddEventActivity">
 
     <!-- Include top action bar in this layout -->
-    <include android:id="@+id/include" layout="@layout/top_action_bar" />
+    <include android:id="@+id/include" layout="@layout/top_tool_bar" />
     <include layout="@layout/bottom_action_bar"/>
 
     <!-- Top bar to display screen relevant content -->

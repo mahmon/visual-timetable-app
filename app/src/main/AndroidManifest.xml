@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- Added forced portrait only mode -->
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".View.VisualTimetable"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -20,47 +22,51 @@
             </intent-filter>
         </activity>
 
-        <!-- Added up navigation back to MainActivity -->
+        <!-- Added up navigation backVisualTimetablevity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".Activities.DisplayEventsActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".View.DisplayEventsActivity"
             android:configChanges="orientation"
+            android:parentActivityName=".View.VisualTimetable"
             android:screenOrientation="portrait">
+
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".View.VisualTimetable" />
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".Activities.AddEventActivity"
-            android:parentActivityName=".Activities.DisplayEventsActivity"
+            android:name=".View.AddEventActivity"
             android:configChanges="orientation"
+            android:parentActivityName=".View.DisplayEventsActivity"
             android:screenOrientation="portrait">
+
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.DisplayEventsActivity" />
+                android:value=".View.DisplayEventsActivity" />
         </activity>
 
         <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
         <activity
-            android:name=".Activities.EditEventActivity"
-            android:parentActivityName=".Activities.DisplayEventsActivity"
+            android:name=".View.EditEventActivity"
             android:configChanges="orientation"
+            android:parentActivityName=".View.DisplayEventsActivity"
             android:screenOrientation="portrait">
+
             <!-- Meta-data tag required to support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.DisplayEventsActivity" />
+                android:value=".View.DisplayEventsActivity" />
         </activity>
 
         <!-- Added AppMethods to manifest -->
 
+        <activity android:name=".BaseActivity"></activity>
     </application>
 
 </manifest>
