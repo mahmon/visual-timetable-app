@@ -11,7 +11,7 @@ public class Event {
     // String for event eventHeading (more attributes to be added later)
     private String eventHeading;
 
-    // Default constructor
+    // Default constructor (No called but required by Android)
     public Event() {
     }
 
@@ -21,7 +21,7 @@ public class Event {
         this.eventHeading = eventHeading;
     }
 
-    // Getter methods
+    // Getter methods for eventID and eventHeading
     public String getEventID() {
         return eventID;
     }

@@ -8,15 +8,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,77 +23,72 @@ import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.model.EventList;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayEventsActivity extends BaseActivity {
 
-    //we will use these constants later to pass the artist name and id to another activity
-    public static final String ARTIST_NAME = "net.simplifiedcoding.firebasedatabaseexample.artistname";
-    public static final String ARTIST_ID = "net.simplifiedcoding.firebasedatabaseexample.artistid";
-
-    // Declare ListView object
+    // Declare ListView to display all Event objects
     ListView listViewEvents;
-    //a list to store all the artist from firebase database
+    // Declare List to store Event objects from Firebase
     List<Event> eventList;
-    // Database reference object
+    // Declare a Database reference object
     DatabaseReference databaseEvents;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Link this activity to the relevant XML layout
         setContentView(R.layout.activity_display_events);
-        // Set bottom menu icons for this context
+        // Set bottom menu icons for this context (remove unwanted)
         getBottomToolbar().getMenu().removeItem(R.id.btn_enter_app);
         getBottomToolbar().getMenu().removeItem(R.id.btn_save_event);
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        // Get reference of Visual Events node
+        // Set database reference to Visual Events node
         databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
-        // Get views
+        // Get the listViewEvents and attach to local variable
         listViewEvents = findViewById(R.id.listViewEvents);
-        //list to store events
+        // Instantiate eventList as an ArrayList of objects
         eventList = new ArrayList<>();
-        // Listen for long click on event and launch showUpdateDeleteDialog method
+        // Listen for click on each event and launch showUpdateDeleteDialog method
         listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Instantiate new event from the eventList, get it's position
                 Event event = eventList.get(i);
+                // Pass event to showUpdateDeleteDialog with heading and ID parameters
                 showUpdateDeleteDialog(event.getEventID(), event.getEventHeading());
             }
         });
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        /* Read from database */
-        // Attach value event listener
+        /* READ: Read from database */
+        // Attach value event listener to database
         databaseEvents.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Clear previous artist list
+                // Clear previous event list
                 eventList.clear();
                 // Iterate through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
+                    // Get event and pass to local event Object
                     Event event = postSnapshot.getValue(Event.class);
-                    //adding artist to the list
+                    // Add the event object to the list
                     eventList.add(event);
                 }
-                // Create adapter
-                EventList eventListAdapter = new EventList(DisplayEventsActivity.this, eventList);
+                // Create adapter (EventList object) and pass the list
+                EventList eventListAdapter =
+                        new EventList(DisplayEventsActivity.this, eventList);
                 // Attach adapter to ListView
                 listViewEvents.setAdapter(eventListAdapter);
-                // Refresh the RecyclerView
-                eventListAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //
+                // Method run if database connection fails
             }
         });
     }
@@ -104,17 +96,17 @@ public class DisplayEventsActivity extends BaseActivity {
     // Implement the default options menu
     @Override
     public boolean onCreateOptionsMenu(Menu topMenu) {
-        // Inflate the top_tool_bar_menu onto top_tool_bar
+        // Instantiate menu inflater object
         MenuInflater inflater = getMenuInflater();
         // Set top_tool_bar_menu as default options menu
         inflater.inflate(R.menu.top_tool_bar_menu, topMenu);
         return true;
     }
 
-    // Set method calls for items clicked in top_tool_bar_menu
+    // Set method calls for default option menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Set method calls for items clicked in top_tool_bar_menu
+        // Attach topToolBarMethods to default menu
         topToolBarMethods(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
@@ -127,66 +119,85 @@ public class DisplayEventsActivity extends BaseActivity {
         overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
     }
 
-    /* Update to database */
-    // Method to Update Events
-    private boolean updateEvent(String eventID, String eventHeading) {
-        // Get the event ID
+    /* UPDATE: Update event in database */
+    // Method called to Update Events
+    private void updateEvent(String eventID, String eventHeading) {
+        // Get the event ID from database
         databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
-        // Update Event
+        // Instantiate local Event object and pass in ID and Heading
         Event event = new Event(eventID, eventHeading);
+        // Use this object to overwrite object in database
         databaseEvents.setValue(event);
+        // Send update confirmation message to user
         Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_SHORT).show();
+    }
+
+    /* DELETE: Delete events from database */
+    // Method called to Delete Events
+    private boolean deleteEvent(String eventID) {
+        // Get the event ID from database
+        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
+        // Remove the event object from the database
+        databaseEvents.removeValue();
+        // Send delete confirmation message to user
+        Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
         return true;
     }
 
-    // Method to Inflate dialog box for editing events
+    // Method to Inflate dialog box for updating and deleting events
     private void showUpdateDeleteDialog(final String eventID, String eventHeading) {
+        // Instantiate dialogBuilder object
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        // Instantiate LayoutInflater object
         LayoutInflater inflater = getLayoutInflater();
+        // Instantiate a dialogView and use inflater to inflate XML file to it
         final View dialogView = inflater.inflate(R.layout.update_delete_event, null);
+        // Use dialogBuilder setView method passing in dialogView instantiated above
         dialogBuilder.setView(dialogView);
-
+        // Create local variable and link to dialog_title
         final TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
+        // Create local variable and link to txt_edit_events
         final EditText editTextName = dialogView.findViewById(R.id.txt_edit_events);
+        // Create local variable and link to btn_save_edited_event
         final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
+        // Create local variable and link to btn_delete_event
         final ImageButton buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
+        // Use eventHeading to setText for dialogTitle
         dialogTitle.setText(eventHeading);
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
-
+        // Instantiate and AlertDialog object, used dialogBuilder to create it
+        final AlertDialog alertDialog = dialogBuilder.create();
+        // Show the AlertDialog
+        alertDialog.show();
+        // Attach an onClickListener to buttonUpdate
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editTextName.getText().toString().trim();
-                if (!TextUtils.isEmpty(name)) {
-                    updateEvent(eventID, name);
-                    b.dismiss();
+                // Get text from editTextName, store in local variable
+                String newHeading = editTextName.getText().toString().trim();
+                // If user has typed in a value...
+                if (!TextUtils.isEmpty(newHeading)) {
+                    // Call the updateEvent method
+                    updateEvent(eventID, newHeading);
+                    // Dismiss the dialog
+                    alertDialog.dismiss();
+                // If the user has NOT typed in a value...
                 } else {
-                    // Prompt
-                    Toast.makeText(getApplicationContext(), "Enter a new heading", Toast.LENGTH_SHORT).show();
+                    // Prompt user to enter a new heading
+                    Toast.makeText(getApplicationContext(),
+                            "Enter a new heading", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
+        // Attach an onClickListener to buttonDelete
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Call the deleteEvent Method
                 deleteEvent(eventID);
-                b.dismiss();
+                // Dismiss the dialog
+                alertDialog.dismiss();
             }
         });
-    }
-
-    /* Delete from database */
-    // Method to delete Event
-    private boolean deleteEvent(String eventID) {
-        // Get the event ID
-        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
-        // Remove the event
-        databaseEvents.removeValue();
-        // Confirm the deletion
-        Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
-        return true;
     }
 
 }
