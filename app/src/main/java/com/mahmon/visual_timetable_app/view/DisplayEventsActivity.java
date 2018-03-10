@@ -41,10 +41,11 @@ public class DisplayEventsActivity extends BaseActivity {
         // Link this activity to the relevant XML layout
         setContentView(R.layout.activity_display_events);
         // Set bottom menu icons for this context (remove unwanted)
-        getBottomToolbar().getMenu().removeItem(R.id.btn_enter_app);
-        getBottomToolbar().getMenu().removeItem(R.id.btn_save_event);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_enter_app);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_return_login);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
         // Animation override:
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Set database reference to Visual Events node
         databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
         // Get the listViewEvents and attach to local variable
@@ -98,8 +99,8 @@ public class DisplayEventsActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu topMenu) {
         // Instantiate menu inflater object
         MenuInflater inflater = getMenuInflater();
-        // Set top_tool_bar_menu as default options menu
-        inflater.inflate(R.menu.top_tool_bar_menu, topMenu);
+        // Set menu_tool_bar_top as default options menu
+        inflater.inflate(R.menu.menu_tool_bar_top, topMenu);
         return true;
     }
 
@@ -107,7 +108,7 @@ public class DisplayEventsActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Attach topToolBarMethods to default menu
-        topToolBarMethods(item);
+        toolBarMethodsTop(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
     }
@@ -116,7 +117,7 @@ public class DisplayEventsActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.grow_in, R.anim.grow_out);
+        overridePendingTransition(R.anim.grow_in, R.anim.slide_out);
     }
 
     /* UPDATE: Update event in database */
@@ -151,13 +152,13 @@ public class DisplayEventsActivity extends BaseActivity {
         // Instantiate LayoutInflater object
         LayoutInflater inflater = getLayoutInflater();
         // Instantiate a dialogView and use inflater to inflate XML file to it
-        final View dialogView = inflater.inflate(R.layout.update_delete_event, null);
+        final View dialogView = inflater.inflate(R.layout.dialog_update_delete_event, null);
         // Use dialogBuilder setView method passing in dialogView instantiated above
         dialogBuilder.setView(dialogView);
         // Create local variable and link to dialog_title
         final TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
-        // Create local variable and link to txt_edit_events
-        final EditText editTextName = dialogView.findViewById(R.id.txt_edit_events);
+        // Create local variable and link to txt_enter_event_heading
+        final EditText editTextName = dialogView.findViewById(R.id.txt_enter_event_heading);
         // Create local variable and link to btn_save_edited_event
         final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
         // Create local variable and link to btn_delete_event

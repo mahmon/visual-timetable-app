@@ -20,8 +20,8 @@ public class EventList extends ArrayAdapter<Event> {
 
     // Constructor; takes Activity and List<Event> as parameters
     public EventList(Activity context, List<Event> eventList) {
-        // Pass the xml layout layout_event_list to the super class
-        super(context, R.layout.layout_event_list, eventList);
+        // Pass the xml layout list_events to the super class
+        super(context, R.layout.list_events, eventList);
         this.context = context;
         this.eventList = eventList;
     }
@@ -29,9 +29,9 @@ public class EventList extends ArrayAdapter<Event> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.layout_event_list, null, true);
+        View listViewItem = inflater.inflate(R.layout.list_events, null, true);
         // Link textViewEventHeading in listView to local variable
-        TextView textViewEventHeading = listViewItem.findViewById(R.id.textViewEventHeading);
+        TextView textViewEventHeading = listViewItem.findViewById(R.id.text_view_event_heading);
         // For each event in the list get a position value
         final Event event = eventList.get(position);
         // Get eventHeading and set to local variable

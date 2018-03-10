@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- CardView to generate one card for each event -->
+    <!-- CardView: To generate one card for each event -->
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,15 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- RelativeLayout to manage the content of the card -->
+        <!-- RelativeLayout: To manage the content of the card -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-            <!-- TextView to display event title -->
+            <!-- TextView: To display event heading -->
             <TextView
-                android:id="@+id/textViewEventHeading"
+                android:id="@+id/text_view_event_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -36,8 +37,6 @@
 
         </RelativeLayout>
 
-
     </android.support.v7.widget.CardView>
 
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

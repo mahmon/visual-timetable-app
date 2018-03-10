@@ -25,12 +25,12 @@ public class BaseActivity extends AppCompatActivity {
     DatabaseReference mDatabaseRef;
 
     // Declare Toolbar objects
-    private Toolbar topToolbar;
-    private Toolbar bottomToolbar;
+    private Toolbar toolBarTop;
+    private Toolbar toolBarBottom;
 
     // Getter method for passing bottom toolbar
-    public Toolbar getBottomToolbar() {
-        return bottomToolbar;
+    public Toolbar getToolBarBottom() {
+        return toolBarBottom;
     }
 
     @Override
@@ -47,36 +47,36 @@ public class BaseActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         // Instantiate local view object
         View view = getLayoutInflater().inflate(layoutResID, null);
-        // Call configureTopToolbar method, passing in local view
-        configureTopToolbar(view);
-        // Call configureBottomToolbar method, passing in local view
-        configureBottomToolbar(view);
+        // Call configureToolBarTop method, passing in local view
+        configureToolbarTop(view);
+        // Call configureToolBarBottom method, passing in local view
+        configureToolbarBottom(view);
         // Call super setContentView method, passing in local view object
         super.setContentView(view);
     }
 
     // Configure topToolbar
-    private void configureTopToolbar(View view) {
-        // Link topToolbar to XML top_tool_bar
-        topToolbar = view.findViewById(R.id.top_tool_bar);
+    private void configureToolbarTop(View view) {
+        // Link topToolbar to XML tool_bar_top
+        toolBarTop = view.findViewById(R.id.tool_bar_top);
         // Declare topToolbar as the default ToolBar
-        setSupportActionBar(topToolbar);
+        setSupportActionBar(toolBarTop);
         // Disable to default back / home button
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     // Configure bottomToolbar
-    private void configureBottomToolbar(View view) {
-        // Link bottomToolbar to XML bottom_tool_bar
-        bottomToolbar = view.findViewById(R.id.bottom_tool_bar);
-        // Inflate XML bottom_tool_bar_menu to bottomToolbar
-        bottomToolbar.inflateMenu(R.menu.bottom_tool_bar_menu);
+    private void configureToolbarBottom(View view) {
+        // Link bottomToolbar to XML tool_bar_bottom
+        toolBarBottom = view.findViewById(R.id.tool_bar_bottom);
+        // Inflate XML menu_tool_bar_bottom to bottomToolbar
+        toolBarBottom.inflateMenu(R.menu.menu_tool_bar_bottom);
         // Link bottomToolBarMethods and bottomToolbar
-        bottomToolBarMethods(bottomToolbar);
+        toolBarMethodsBottom(toolBarBottom);
     }
 
-    // Set topToolBarMethods (called by all Activities that extend this BaseActivity)
-    public boolean topToolBarMethods(MenuItem item) {
+    // Set toolBarMethodsTop (called by all Activities that extend this BaseActivity)
+    public boolean toolBarMethodsTop(MenuItem item) {
         // Switch statement to manage menu user clicks
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
@@ -90,9 +90,9 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    // Set bottomToolBarMethods
-    public void bottomToolBarMethods(Toolbar bottomToolbar) {
-        // Create listeners for all buttons on bottom_tool_bar_menu
+    // Set toolBarMethodsBottom
+    public void toolBarMethodsBottom(Toolbar bottomToolbar) {
+        // Create listeners for all buttons on menu_tool_bar_bottom
         bottomToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -107,11 +107,19 @@ public class BaseActivity extends AppCompatActivity {
                         return true;
                     // User clicked btn_exit_app
                     case R.id.btn_exit_app:
-                        // Instantiate new intent to start StartActivity
+                        // Instantiate new intent to start FinishActivity
                         Intent intentExit =
-                                new Intent(getBaseContext(), StartActivity.class);
+                                new Intent(getBaseContext(), FinishActivity.class);
                         // Start Activity
                         startActivity(intentExit);
+                        return true;
+                    // User clicked btn_return_login
+                    case R.id.btn_return_login:
+                        // Instantiate new intent to start StartActivity
+                        Intent intentReturn =
+                                new Intent(getBaseContext(), StartActivity.class);
+                        // Start Activity
+                        startActivity(intentReturn);
                         return true;
                     // User clicked btn_zoom_out
                     case R.id.btn_zoom_out:

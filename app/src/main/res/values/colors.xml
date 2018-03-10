@@ -2,8 +2,11 @@
 <resources>
 
     <!-- Used material color tool to select new color values -->
+    <!-- Mid Grey -->
     <color name="colorPrimary">#212121</color>
+    <!-- Black -->
     <color name="colorPrimaryDark">#000000</color>
+    <!-- Light Grey -->
     <color name="colorAccent">#484848</color>
 
 </resources>

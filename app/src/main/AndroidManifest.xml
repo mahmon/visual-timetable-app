@@ -22,38 +22,30 @@
             </intent-filter>
         </activity>
 
-        <!-- Added up navigation backVisualTimetablevity -->
         <!-- Added forced portrait only mode -->
         <activity
             android:name=".view.DisplayEventsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".view.StartActivity"
             android:screenOrientation="portrait">
-            <!-- Meta-data tag required to support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.StartActivity" />
         </activity>
 
-        <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
         <activity
             android:name=".view.AddEventActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".view.DisplayEventsActivity"
             android:screenOrientation="portrait">
-            <!-- Meta-data tag required to support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.DisplayEventsActivity" />
         </activity>
 
-        <!-- Added up navigation back to DisplayEventsActivity -->
         <!-- Added forced portrait only mode -->
+        <activity
+            android:name=".view.FinishActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
 
-        <!-- Added AppMethods to manifest -->
-
+        <!-- Base Activity for tool bar methods -->
         <activity android:name=".BaseActivity" />
+
     </application>
 
 </manifest>

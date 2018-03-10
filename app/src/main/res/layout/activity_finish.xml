@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mahmon.visual_timetable_app.view.StartActivity">
+    tools:context="com.mahmon.visual_timetable_app.view.FinishActivity">
 
-    <!-- Incltop_tool_bar_bar in this layout -->
-    <include layout="@layout/top_tool_bar"/>
-    <include layout="@layout/bottom_tool_bar"/>
+    <!-- Include Toolbars in this layout -->
+    <include layout="@layout/tool_bar_top"/>
+    <include layout="@layout/tool_bar_bottom"/>
 
-    <!-- Top bar to display screen relevant content -->
+    <!-- Toolbar widget: To display screen relevant content -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/screen_name_bar"
         android:layout_width="0dp"
@@ -23,16 +23,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- TviewView: txt_start_screen_heading  -->
+    <!-- Text View: To display screen heading -->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_finish_screen_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/txt_start_screen_heading"
+        android:text="@string/txt_finish_screen_heading"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="@+id/screen_name_bar"

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Animation parameters for screen animating 'going out' -->
-    <scale android:duration="700"
-        android:fromXScale="100%"
-        android:fromYScale="100%"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:toXScale="70%"
-        android:toYScale="70%"/>
+    <!-- Animation parameters for screen animating 'Slide Out effect' -->
+    <translate
+        android:duration="700"
+        android:fromYDelta="0%"
+        android:toYDelta="100%"/>
 
 </set>

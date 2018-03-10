@@ -16,6 +16,13 @@
         android:title="@string/btn_exit_app"
         app:showAsAction="always" />
 
+    <!-- Added btn_return_login with icon -->
+    <item
+        android:id="@+id/btn_return_login"
+        android:icon="@drawable/ic_rewind_36dp"
+        android:title="@string/btn_return_login"
+        app:showAsAction="always" />
+
     <!-- Added btn_zoom_out with icon -->
     <item
         android:id="@+id/btn_zoom_out"
