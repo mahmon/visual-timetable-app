@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Animation parameters for screen animating 'going in' -->
+    <!-- Animation parameters for screen animating 'Slide Out effect' -->
     <translate
         android:duration="700"
-        android:fromYDelta="100%"
-        android:toYDelta="0%"/>
+        android:fromYDelta="0%"
+        android:toYDelta="100%"/>
 
 </set>

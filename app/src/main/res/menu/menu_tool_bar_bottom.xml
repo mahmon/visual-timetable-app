@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Added btn_enter_app with icon -->
+    <item
+        android:id="@+id/btn_enter_app"
+        android:icon="@drawable/ic_play_arrow_36dp"
+        android:title="@string/btn_enter_app"
+        app:showAsAction="always" />
+
+    <!-- Added btn_exit_app with icon -->
+    <item
+        android:id="@+id/btn_exit_app"
+        android:icon="@drawable/ic_eject_36dp"
+        android:title="@string/btn_exit_app"
+        app:showAsAction="always" />
+
+    <!-- Added btn_return_login with icon -->
+    <item
+        android:id="@+id/btn_return_login"
+        android:icon="@drawable/ic_rewind_36dp"
+        android:title="@string/btn_return_login"
+        app:showAsAction="always" />
+
+    <!-- Added btn_zoom_out with icon -->
+    <item
+        android:id="@+id/btn_zoom_out"
+        android:icon="@drawable/ic_zoom_out_36dp"
+        android:title="@string/btn_zoom_out"
+        app:showAsAction="always" />
+
+    <!-- Added btn_zoom_in with icon -->
+    <item
+        android:id="@+id/btn_zoom_in"
+        android:icon="@drawable/ic_zoom_in_36dp"
+        android:title="@string/btn_zoom_in"
+        app:showAsAction="always" />
+
+    <!-- Added btn_add_event with icon -->
+    <item
+        android:id="@+id/btn_add_event"
+        android:icon="@drawable/ic_add_box_36dp"
+        android:title="@string/btn_add_event"
+        app:showAsAction="always" />
+
+    <!-- Added btn_save_event with icon -->
+    <item
+        android:id="@+id/btn_save_event"
+        android:icon="@drawable/ic_save_36dp"
+        android:title="@string/btn_save_event"
+        app:showAsAction="always" />
+
+</menu>

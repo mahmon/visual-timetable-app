@@ -1,26 +1,26 @@
 <resources>
 
-    <!-- Changed app name shown in default action bar -->
+    <!-- BRANCH END -->
+    <!-- Set app name -->
     <string name="app_name">Visual Timetable App</string>
 
     <!-- Button IDs and Strings -->
     <string name="btn_enter_app">Enter</string>
     <string name="btn_exit_app">Exit</string>
-    <string name="btn_goto_add_event">Add New Event</string>
-    <string name="btn_goto_edit_event">Edit An Event</string>
-    <string name="btn_save_added_event">Save New Event</string>
+    <string name="btn_return_login">Return</string>
+    <string name="btn_add_event">Add Event</string>
+    <string name="btn_save_event">Save Event</string>
     <string name="btn_save_edited_event">Save Edited Event</string>
     <string name="btn_toggle_theme">Toggle Theme</string>
     <string name="btn_zoom_in">Zoom In</string>
     <string name="btn_zoom_out">Zoom Out</string>
 
-    <!-- Text View IDs and Strings -->
-    <string name="txt_app_start">Start Screen</string>
-    <string name="txt_event_heading_label">Event Heading</string>
-    <string name="txt_display_events"></string>
-    <string name="txt_add_event_heading_text_box">Enter Event Heading</string>
-    <string name="txt_enter_event_heading">Enter Event Heading</string>
-    <string name="txt_edit_events">Edit Event</string>
-
+    <!-- TextView IDs and Strings -->
+    <string name="txt_enter_event_heading">Enter New Event Heading</string>
+    <string name="txt_start_screen_heading">Login Screen</string>
+    <string name="txt_finish_screen_heading">Logout Screen</string>
+    <string name="txt_display_screen_heading">Events</string>
+    <string name="txt_add_screen_heading">Add Event</string>
+    <string name="txt_delete_event">Delete Event</string>
 
 </resources>
