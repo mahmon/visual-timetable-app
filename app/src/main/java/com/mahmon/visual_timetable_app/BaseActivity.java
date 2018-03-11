@@ -14,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.view.*;
 
+// Merged Branch dev-FirebaseCRUD into dev-main
+
 // Class to manage Tool Bars for all activities
 public class BaseActivity extends AppCompatActivity {
 
