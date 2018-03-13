@@ -165,6 +165,12 @@ public class AddEventActivity extends BaseActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+    // Method called after saving event to open DisplayEventsActivity
+    public void openDisplayEventsActivity() {
+        Intent intent = new Intent(this, DisplayEventsActivity.class);
+        startActivity(intent);
+    }
+
     /* CREATE: Write to database */
     // Save event to database
     public void saveEvent() {
@@ -193,13 +199,15 @@ public class AddEventActivity extends BaseActivity {
                                         mUploadProgressBar.setProgress(0);
                                     }
                                     // Allows user to see bar before reset
-                                }, 1000);
+                                }, 500);
                                 Toast.makeText(AddEventActivity.this,
                                         "Upload successful", Toast.LENGTH_SHORT).show();
                                 Event event = new Event(mEnterEventHeading.getText().toString().trim(),
                                         taskSnapshot.getDownloadUrl().toString());
                                 String uploadId = mDatabaseRef.push().getKey();
                                 mDatabaseRef.child(uploadId).setValue(event);
+                                // Call openDisplayEventsActivity to show events
+                                openDisplayEventsActivity();
                             }
                         })
                         // Failure listener
