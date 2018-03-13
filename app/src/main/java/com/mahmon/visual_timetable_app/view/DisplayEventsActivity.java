@@ -29,11 +29,11 @@ import java.util.List;
 public class DisplayEventsActivity extends BaseActivity {
 
     // Declare ListView to display all Event objects
-    ListView listViewEvents;
+    private ListView mListViewEvents;
     // Declare List to store Event objects from Firebase
-    List<Event> eventList;
+    private List<Event> mEventList;
     // Declare a Database reference object
-    DatabaseReference databaseEvents;
+    private DatabaseReference mDdatabaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,49 +47,19 @@ public class DisplayEventsActivity extends BaseActivity {
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Set database reference to Visual Events node
-        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
-        // Get the listViewEvents and attach to local variable
-        listViewEvents = findViewById(R.id.listViewEvents);
-        // Instantiate eventList as an ArrayList of objects
-        eventList = new ArrayList<>();
+        mDdatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
+        // Get the mListViewEvents and attach to local variable
+        mListViewEvents = findViewById(R.id.listViewEvents);
+        // Instantiate mEventList as an ArrayList of objects
+        mEventList = new ArrayList<>();
         // Listen for click on each event and launch showUpdateDeleteDialog method
-        listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Instantiate new event from the eventList, get it's position
-                Event event = eventList.get(i);
+                // Instantiate new event from the mEventList, get it's position
+                Event event = mEventList.get(i);
                 // Pass event to showUpdateDeleteDialog with heading and ID parameters
                 showUpdateDeleteDialog(event.getEventID(), event.getEventHeading());
-            }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        /* READ: Read from database */
-        // Attach value event listener to database
-        databaseEvents.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Clear previous event list
-                eventList.clear();
-                // Iterate through all the nodes
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    // Get event and pass to local event Object
-                    Event event = postSnapshot.getValue(Event.class);
-                    // Add the event object to the list
-                    eventList.add(event);
-                }
-                // Create adapter (EventList object) and pass the list
-                EventList eventListAdapter =
-                        new EventList(DisplayEventsActivity.this, eventList);
-                // Attach adapter to ListView
-                listViewEvents.setAdapter(eventListAdapter);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Method run if database connection fails
             }
         });
     }
@@ -120,15 +90,46 @@ public class DisplayEventsActivity extends BaseActivity {
         overridePendingTransition(R.anim.grow_in, R.anim.slide_out);
     }
 
+    // Check database when activity starts
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /* READ: Read from database */
+        // Attach value event listener to database
+        mDdatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Clear previous event list
+                mEventList.clear();
+                // Iterate through all the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    // Get event and pass to local event Object
+                    Event event = postSnapshot.getValue(Event.class);
+                    // Add the event object to the list
+                    mEventList.add(event);
+                }
+                // Create adapter (EventList object) and pass the list
+                EventList eventListAdapter =
+                        new EventList(DisplayEventsActivity.this, mEventList);
+                // Attach adapter to ListView
+                mListViewEvents.setAdapter(eventListAdapter);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Method run if database connection fails
+            }
+        });
+    }
+
     /* UPDATE: Update event in database */
     // Method called to Update Events
     private void updateEvent(String eventID, String eventHeading) {
         // Get the event ID from database
-        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
+        mDdatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
         // Instantiate local Event object and pass in ID and Heading
         Event event = new Event(eventID, eventHeading);
         // Use this object to overwrite object in database
-        databaseEvents.setValue(event);
+        mDdatabaseRef.setValue(event);
         // Send update confirmation message to user
         Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_SHORT).show();
     }
@@ -137,9 +138,9 @@ public class DisplayEventsActivity extends BaseActivity {
     // Method called to Delete Events
     private boolean deleteEvent(String eventID) {
         // Get the event ID from database
-        databaseEvents = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
+        mDdatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS).child(eventID);
         // Remove the event object from the database
-        databaseEvents.removeValue();
+        mDdatabaseRef.removeValue();
         // Send delete confirmation message to user
         Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
         return true;
