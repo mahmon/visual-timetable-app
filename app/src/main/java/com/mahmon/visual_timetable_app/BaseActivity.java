@@ -2,17 +2,11 @@ package com.mahmon.visual_timetable_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.view.*;
 
 // Class to manage Tool Bars for all activities
@@ -20,12 +14,6 @@ public class BaseActivity extends AppCompatActivity {
 
     // Used to set global database node
     public static final String VISUAL_EVENTS = "Visual Events";
-    // View items
-    private EditText mEnterEventHeading;
-    private String mEventHeading;
-    // database variables
-    private DatabaseReference mDatabaseRef;
-    private String mEventID;
     // Toolbar variables
     private Toolbar mToolBarTop;
     private Toolbar mToolBarBottom;
@@ -38,8 +26,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Instantiate database reference linked to VISUAL_EVENTS node
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
     }
 
     @Override
@@ -121,11 +107,6 @@ public class BaseActivity extends AppCompatActivity {
                     case R.id.btn_add_event:
                         addEvent();
                         return true;
-                    // User clicked btn_save_event
-                    case R.id.btn_save_event:
-                        // Call save event method
-                        saveEvent();
-                        return true;
                     default:
                         return false;
                 }
@@ -184,44 +165,6 @@ public class BaseActivity extends AppCompatActivity {
         Intent intentAdd = new Intent(getBaseContext(), AddEventActivity.class);
         // Start Activity
         startActivity(intentAdd);
-    }
-
-    /* CREATE: Write to database */
-    // Save event to database
-    private void saveEvent() {
-        // Link mEnterEventHeading to txt_enter_event_heading
-        mEnterEventHeading = findViewById(R.id.txt_enter_event_heading);
-        // Store input from editText test in String mEventHeading
-        mEventHeading = mEnterEventHeading.getText().toString().trim();
-        // If EditText box is NOT blank...
-        if (!TextUtils.isEmpty(mEventHeading)) {
-            // Get an auto generated unique ID from Firebase
-            mEventID = mDatabaseRef.push().getKey();
-            // Instantiate new Event Object, pass in Firebase ID and mEventHeading
-            Event event = new Event(mEventID, mEventHeading);
-            // Save the Event object to Firebase at the retrieved ID
-            mDatabaseRef.child(mEventID).setValue(event);
-            // Display Confirmation message
-            Toast.makeText(getBaseContext(),
-                    "Event saved", Toast.LENGTH_SHORT).show();
-            // Create new intent to start a new activity (DisplayEventsActivity)
-            final Intent intentSave =
-                    new Intent(getBaseContext(), DisplayEventsActivity.class);
-            // Pause 5000 milliseconds
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Start activity
-                    startActivity(intentSave);
-                }
-            }, 1000);
-        // If EditText box IS blank...
-        } else {
-            // Prompt user to enter a heading
-            Toast.makeText(this,
-                    "Please enter a heading", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }

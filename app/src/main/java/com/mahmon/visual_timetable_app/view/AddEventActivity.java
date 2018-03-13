@@ -1,15 +1,29 @@
 package com.mahmon.visual_timetable_app.view;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 import com.squareup.picasso.Picasso;
@@ -17,6 +31,14 @@ import com.squareup.picasso.Picasso;
 // Class to manage AddEventActivity
 public class AddEventActivity extends BaseActivity {
 
+    // Variable to connect to mEnterEventHeading
+    private EditText mEnterEventHeading;
+    // Variable to store mEventHeading
+    private String mEventHeading;
+    // database variables
+    private StorageReference mStorageRef;
+    private DatabaseReference mDatabaseRef;
+    private String mEventID;
     // Used to identify image request
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variable to identify chosen image location
@@ -43,6 +65,9 @@ public class AddEventActivity extends BaseActivity {
                 openFileChooser();
             }
         });
+        // Instantiate database reference linked to VISUAL_EVENTS node
+        mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
         // Set bottom menu icons for this context (remove unwanted)
         getToolBarBottom().getMenu().removeItem(R.id.btn_enter_app);
         getToolBarBottom().getMenu().removeItem(R.id.btn_exit_app);
@@ -71,6 +96,25 @@ public class AddEventActivity extends BaseActivity {
         toolBarMethodsTop(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
+    }
+
+    // set method calls for toolBarMethodsBottom
+    public void toolBarMethodsBottom(Toolbar bottomToolbar) {
+        // Create listeners for all buttons on menu_tool_bar_bottom
+        bottomToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    // User clicked btn_save_event
+                    case R.id.btn_save_event:
+                    // Call save event method
+                        saveEvent();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     // Animation override for the default back button:
@@ -103,6 +147,65 @@ public class AddEventActivity extends BaseActivity {
             mImageUri = data.getData();
             // Use mImageUri to pass image to image view mSelectedImage
             Picasso.with(this).load(mImageUri).into(mSelectedImage);
+        }
+    }
+
+    // Method called to get file extension of chosen image
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    /* CREATE: Write to database */
+    // Save event to database
+    public void saveEvent() {
+        // Attach Edit Text txt_enter_event_heading to mEnterEventHeading
+        mEnterEventHeading = findViewById(R.id.txt_enter_event_heading);
+        // Store Edit Text txt_enter_event_heading in mEventHeading
+        mEventHeading = mEnterEventHeading.getText().toString().trim();
+        // If EditText box is NOT blank...
+        if (!TextUtils.isEmpty(mEventHeading)) {
+            // If an Image HAS been selected...
+            if (mImageUri != null) {
+                // Create a storage reference of currentTimeMillis and the file extension
+                StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                        + "." + getFileExtension(mImageUri));
+                // Write the selected image into the database
+                fileReference.putFile(mImageUri)
+                        // Success listener
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(AddEventActivity.this,
+                                        "Event saved", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        // Failure listener
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AddEventActivity.this,
+                                        "Upload failed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        // Progress listener
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            }
+                        });
+            } else {
+                // Prompt user to select an image
+                Toast.makeText(this,
+                        "Please choose an image", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // Prompt user to enter a heading
+            Toast.makeText(this,
+                    "Please enter a heading", Toast.LENGTH_SHORT).show();
         }
     }
 
