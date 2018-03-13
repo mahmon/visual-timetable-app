@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,36 +25,37 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
 // Class to manage AddEventActivity
 public class AddEventActivity extends BaseActivity {
 
-    // Variable to connect to mEnterEventHeading
+    // View variables
     private EditText mEnterEventHeading;
-    // Variable to store mEventHeading
     private String mEventHeading;
+    private ProgressBar mUploadProgressBar;
+    private Button mBtnChooseImage;
+    private ImageView mSelectedImage;
     // database variables
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private String mEventID;
+    private StorageTask mUploadTask;
     // Used to identify image request
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variable to identify chosen image location
     private Uri mImageUri;
-    // Local variable for btn_choose_image
-    private Button mBtnChooseImage;
-    // Local variable for img_selected_image
-    private ImageView mSelectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Link this activity to the relevant XML layout
         setContentView(R.layout.activity_add_event);
+        mUploadProgressBar = findViewById(R.id.upload_progress_bar);
         // Attach Button btn_choose_image to local variable mBtnChooseImage
         mBtnChooseImage = findViewById(R.id.btn_choose_image);
         // Attache imageView img_selected_image to mSelectedImage
@@ -65,7 +68,7 @@ public class AddEventActivity extends BaseActivity {
                 openFileChooser();
             }
         });
-        // Instantiate database reference linked to VISUAL_EVENTS node
+        // Instantiate database and storage eferences linked to VISUAL_EVENTS node
         mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
         // Set bottom menu icons for this context (remove unwanted)
@@ -107,8 +110,14 @@ public class AddEventActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     // User clicked btn_save_event
                     case R.id.btn_save_event:
-                    // Call save event method
-                        saveEvent();
+                        // Prevent multiple clicks of the save button
+                        if (mUploadTask != null && mUploadTask.isInProgress()) {
+                            Toast.makeText(AddEventActivity.this,
+                                    "Upload in progress", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Call save event method
+                            saveEvent();
+                        }
                         return true;
                     default:
                         return false;
@@ -134,7 +143,6 @@ public class AddEventActivity extends BaseActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         // Start the activity and place call to onActivityResult method
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
-
     }
 
     // Method called when openFileChooser method is run
@@ -172,29 +180,48 @@ public class AddEventActivity extends BaseActivity {
                 StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                         + "." + getFileExtension(mImageUri));
                 // Write the selected image into the database
-                fileReference.putFile(mImageUri)
+                mUploadTask = fileReference.putFile(mImageUri)
                         // Success listener
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // Create handler to delay reset of progress bar
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mUploadProgressBar.setProgress(0);
+                                    }
+                                    // Allows user to see bar before reset
+                                }, 1000);
                                 Toast.makeText(AddEventActivity.this,
-                                        "Event saved", Toast.LENGTH_SHORT).show();
+                                        "Upload successful", Toast.LENGTH_SHORT).show();
+                                Event event = new Event(mEnterEventHeading.getText().toString().trim(),
+                                        taskSnapshot.getDownloadUrl().toString());
+                                String uploadId = mDatabaseRef.push().getKey();
+                                mDatabaseRef.child(uploadId).setValue(event);
                             }
                         })
                         // Failure listener
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
+                            // Send error message to a toast
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(AddEventActivity.this,
-                                        "Upload failed", Toast.LENGTH_SHORT).show();
-
+                                        e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         })
                         // Progress listener
                         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
+                            // Method to calculate the progress
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
+                                // Store current progress into a double
+                                double progress = (100.0 *
+                                        taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount());
+                                // Cast double into an int and use to set mUploadProgressbar
+                                mUploadProgressBar.setProgress((int) progress);
                             }
                         });
             } else {
