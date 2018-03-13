@@ -1,6 +1,5 @@
 <resources>
 
-    <!-- BRANCH END -->
     <!-- Set app name -->
     <string name="app_name">Visual Timetable App</string>
 
