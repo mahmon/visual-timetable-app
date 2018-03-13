@@ -1,8 +1,12 @@
 package com.mahmon.visual_timetable_app.model;
 
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,60 +17,104 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-// Recycler view adapter, joins data to recycler view
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
-    // Variables used to pass contect and event list
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHolder> {
     private Context mContext;
     private List<Event> mEvents;
+    private OnItemClickListener mListener;
 
-    // Constructor
     public EventAdapter(Context context, List<Event> events) {
         mContext = context;
         mEvents = events;
     }
 
-    // Called when EventViewHolder is created
     @Override
-    public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Create a new view, pass in layout_single_event
-        View view = LayoutInflater.from(mContext)
-                .inflate(R.layout.layout_single_event, parent,false);
-        // Return the EventViewHolder passing in the view above
-        return new EventViewHolder(view);
+    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.event_item, parent, false);
+        return new ImageViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(EventViewHolder holder, int position) {
-        // Get position of current event and store in eventCurrent
+    public void onBindViewHolder(ImageViewHolder holder, int position) {
         Event eventCurrent = mEvents.get(position);
-        // Create holder and set text to eventCurrent heading
-        holder.mTextViewEventName.setText(eventCurrent.getEventHeading());
-        // Get eventCurrent image and pass to holder
+        holder.textViewName.setText(eventCurrent.getName());
         Picasso.with(mContext)
                 .load(eventCurrent.getImageUrl())
+                .placeholder(R.mipmap.ic_launcher)
                 .fit()
                 .centerCrop()
-                .into(holder.mImageViewEventImage);
+                .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        // Show as many events as in the list
         return mEvents.size();
     }
 
-    // Create EventViewHolder
-    public class EventViewHolder extends RecyclerView.ViewHolder {
-        // View variables
-        public TextView mTextViewEventName;
-        public ImageView mImageViewEventImage;
-        // Constructor passes view and links to XML tags
-        public EventViewHolder(View itemView) {
+    public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+        public TextView textViewName;
+        public ImageView imageView;
+
+        public ImageViewHolder(View itemView) {
             super(itemView);
-            // Create link between the View variables and XML tags in layout_single_event
-            mTextViewEventName = itemView.findViewById(R.id.text_view_card_heading);
-            mImageViewEventImage = itemView.findViewById(R.id.image_view_card_image);
+
+            textViewName = itemView.findViewById(R.id.text_view_name);
+            imageView = itemView.findViewById(R.id.image_view_upload);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    mListener.onItemClick(position);
+                }
+            }
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("Select Action");
+            MenuItem doWhatever = menu.add(Menu.NONE, 1, 1, "Do whatever");
+            MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+
+            doWhatever.setOnMenuItemClickListener(this);
+            delete.setOnMenuItemClickListener(this);
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+
+                    switch (item.getItemId()) {
+                        case 1:
+                            mListener.onWhatEverClick(position);
+                            return true;
+                        case 2:
+                            mListener.onDeleteClick(position);
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+
+        void onWhatEverClick(int position);
+
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 }

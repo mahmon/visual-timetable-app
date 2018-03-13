@@ -1,21 +1,20 @@
 package com.mahmon.visual_timetable_app;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import com.mahmon.visual_timetable_app.view.*;
+
+import com.mahmon.visual_timetable_app.view.AddEventActivity;
+import com.mahmon.visual_timetable_app.view.DisplayEventsActivity;
+import com.mahmon.visual_timetable_app.view.FinishActivity;
+import com.mahmon.visual_timetable_app.view.StartActivity;
 
 // Class to manage Tool Bars for all activities
 public class BaseActivity extends AppCompatActivity {
 
-    // Used to set global database node
-    public static final String VISUAL_EVENTS = "Visual Events";
-    // Toolbar variables
-    private Toolbar mToolBarTop;
     private Toolbar mToolBarBottom;
 
     // Getter method for passing bottom toolbar
@@ -24,33 +23,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     // Method called by all Activities that extend this BaseActivity
     public void setContentView(int layoutResID) {
         // Instantiate local view object
         View view = getLayoutInflater().inflate(layoutResID, null);
-        // Call configureToolBarTop method, passing in local view
-        configureToolbarTop(view);
         // Call configureToolBarBottom method, passing in local view
         configureToolbarBottom(view);
         // Call super setContentView method, passing in local view object
         super.setContentView(view);
-    }
-
-    // Configure topToolbar
-    private void configureToolbarTop(View view) {
-        // Link topToolbar to XML tool_bar_top
-        mToolBarTop = view.findViewById(R.id.tool_bar_top);
-        // Declare topToolbar as the default ToolBar
-        setSupportActionBar(mToolBarTop);
-        // Disable default back / home button
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
     }
 
     // Configure bottomToolbar
@@ -61,19 +41,6 @@ public class BaseActivity extends AppCompatActivity {
         mToolBarBottom.inflateMenu(R.menu.menu_tool_bar_bottom);
         // Link bottomToolBarMethods and bottomToolbar
         toolBarMethodsBottom(mToolBarBottom);
-    }
-
-    // Set method calls for toolBarMethodsTop
-    public boolean toolBarMethodsTop(MenuItem item) {
-        // Switch statement to manage menu user clicks
-        switch (item.getItemId()) {
-            // User clicked toggle_theme_button
-            case R.id.btn_toggle_theme:
-                toggleTheme();
-                return true;
-            default:
-                return false;
-        }
     }
 
     // Set method calls for toolBarMethodsBottom
@@ -168,3 +135,4 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 }
+

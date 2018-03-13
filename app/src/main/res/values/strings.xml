@@ -22,5 +22,7 @@
     <string name="txt_display_screen_heading">Events</string>
     <string name="txt_add_screen_heading">Add Event</string>
     <string name="txt_delete_event">Delete Event</string>
+    <string name="title_activity_images">ImagesActivity</string>
+    <string name="title_activity_finish">FinishActivity</string>
 
 </resources>

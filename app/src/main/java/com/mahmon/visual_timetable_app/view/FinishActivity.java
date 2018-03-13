@@ -1,13 +1,12 @@
 package com.mahmon.visual_timetable_app.view;
 
 import android.os.Bundle;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.Menu;
+import android.support.v7.app.AppCompatActivity;
+
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 
-// Class for Logout
+
 public class FinishActivity extends BaseActivity {
 
     @Override
@@ -25,26 +24,5 @@ public class FinishActivity extends BaseActivity {
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
     }
-
-    // Implement the default options menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu topMenu) {
-        // Instantiate menu inflater object
-        MenuInflater inflater = getMenuInflater();
-        // Set menu_tool_bar_top as default options menu
-        inflater.inflate(R.menu.menu_tool_bar_top, topMenu);
-        return true;
-    }
-
-    // Set method calls for default option menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Attach topToolBarMethods to default menu
-        toolBarMethodsTop(item);
-        // Invoke the superclass to handle unrecognised user action.
-        return super.onOptionsItemSelected(item);
-    }
-
-    // TODO create Logout screen and methods
 
 }
