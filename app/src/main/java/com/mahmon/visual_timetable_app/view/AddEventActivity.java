@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -151,52 +152,68 @@ public class AddEventActivity extends BaseActivity {
     }
 
     private void uploadFile() {
-        if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
 
-            mUploadTask = fileReference.putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler progHandler = new Handler();
-                            progHandler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mProgressBar.setProgress(0);
-                                }
-                            }, 250);
-                            Toast.makeText(AddEventActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Event event = new Event(mEditTextFileName.getText().toString().trim(),
-                                    taskSnapshot.getDownloadUrl().toString());
-                            String uploadId = mDatabaseRef.push().getKey();
-                            mDatabaseRef.child(uploadId).setValue(event);
+    // If EditText box is NOT blank...
+        if (!TextUtils.isEmpty(mEditTextFileName.getText().toString().trim())) {
+            // DO this
+            if (mImageUri != null) {
+                StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                        + "." + getFileExtension(mImageUri));
 
-                            Handler showHandler = new Handler();
-                            showHandler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    openImagesActivity();
-                                }
-                            }, 250);
+                mUploadTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddEventActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mProgressBar.setProgress((int) progress);
-                        }
-                    });
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Handler progHandler = new Handler();
+                        progHandler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                mProgressBar.setProgress(0);
+                            }
+
+                        }, 250);
+
+                        Toast.makeText(AddEventActivity.this,
+                                "Upload successful", Toast.LENGTH_LONG).show();
+                        Event event = new Event(mEditTextFileName.getText().toString().trim(),
+                                taskSnapshot.getDownloadUrl().toString());
+                        String uploadId = mDatabaseRef.push().getKey();
+                        mDatabaseRef.child(uploadId).setValue(event);
+                        Handler showHandler = new Handler();
+                        showHandler.postDelayed(new Runnable() {
+
+
+                            @Override
+                            public void run() {
+                                openImagesActivity();
+                            }
+                        }, 250);
+
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddEventActivity.this,
+                                e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                        mProgressBar.setProgress((int) progress);
+                    }
+
+                });
+            } else {
+                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter a heading", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -79,11 +79,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Select Action");
-            MenuItem doWhatever = menu.add(Menu.NONE, 1, 1, "Do whatever");
-            MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+            MenuItem updateEvent = menu.add(Menu.NONE, 1, 1, "Update Event");
+            MenuItem deleteEvent = menu.add(Menu.NONE, 2, 2, "Delete Event");
 
-            doWhatever.setOnMenuItemClickListener(this);
-            delete.setOnMenuItemClickListener(this);
+            updateEvent.setOnMenuItemClickListener(this);
+            deleteEvent.setOnMenuItemClickListener(this);
         }
 
         @Override
@@ -94,7 +94,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
 
                     switch (item.getItemId()) {
                         case 1:
-                            mListener.onWhatEverClick(position);
+                            mListener.onUpdateClick(position);
                             return true;
                         case 2:
                             mListener.onDeleteClick(position);
@@ -109,7 +109,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onWhatEverClick(int position);
+        void onUpdateClick(int position);
 
         void onDeleteClick(int position);
     }
