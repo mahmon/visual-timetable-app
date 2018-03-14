@@ -8,11 +8,13 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_bottom" />
+    <include layout="@layout/tool_bar_top" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize">
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <ProgressBar
             android:id="@+id/progress_circle"

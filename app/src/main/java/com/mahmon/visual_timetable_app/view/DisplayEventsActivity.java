@@ -1,9 +1,11 @@
 package com.mahmon.visual_timetable_app.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -89,6 +91,25 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+    }
+
+    // Implement the default options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu topMenu) {
+        // Instantiate menu inflater object
+        MenuInflater inflater = getMenuInflater();
+        // Set menu_tool_bar_top as default options menu
+        inflater.inflate(R.menu.menu_tool_bar_top, topMenu);
+        return true;
+    }
+
+    // Set method calls for default option menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Attach topToolBarMethods to default menu
+        toolBarMethodsTop(item);
+        // Invoke the superclass to handle unrecognised user action.
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

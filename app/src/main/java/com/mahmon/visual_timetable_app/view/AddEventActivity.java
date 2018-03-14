@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -14,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -98,6 +99,25 @@ public class AddEventActivity extends BaseActivity {
             }
         });
 
+    }
+
+    // Implement the default options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu topMenu) {
+        // Instantiate menu inflater object
+        MenuInflater inflater = getMenuInflater();
+        // Set menu_tool_bar_top as default options menu
+        inflater.inflate(R.menu.menu_tool_bar_top, topMenu);
+        return true;
+    }
+
+    // Set method calls for default option menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Attach topToolBarMethods to default menu
+        toolBarMethodsTop(item);
+        // Invoke the superclass to handle unrecognised user action.
+        return super.onOptionsItemSelected(item);
     }
 
     private void openFileChooser() {
