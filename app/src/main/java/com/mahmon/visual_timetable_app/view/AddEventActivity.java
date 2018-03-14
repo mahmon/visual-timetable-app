@@ -67,6 +67,10 @@ public class AddEventActivity extends BaseActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     // User clicked btn_add_event
+                    case R.id.btn_cancel_save:
+                        cancelAddEvent();
+                        return true;
+                    // User clicked btn_add_event
                     case R.id.btn_save_event:
                         if (mUploadTask != null && mUploadTask.isInProgress()) {
                             Toast.makeText(AddEventActivity.this,

@@ -10,6 +10,7 @@
     <string name="btn_choose_image">Choose Image</string>
     <string name="btn_add_event">Add Event</string>
     <string name="btn_save_event">Save Event</string>
+    <string name="btn_cancel_save">Cancel</string>
     <string name="btn_save_edited_event">Save Edited Event</string>
     <string name="btn_toggle_theme">Toggle Theme</string>
     <string name="btn_zoom_in">Zoom In</string>

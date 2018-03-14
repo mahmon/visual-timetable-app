@@ -47,6 +47,8 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
         getToolBarBottom().getMenu().removeItem(R.id.btn_enter_app);
         getToolBarBottom().getMenu().removeItem(R.id.btn_return_login);
         getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_cancel_save);
+
 
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);

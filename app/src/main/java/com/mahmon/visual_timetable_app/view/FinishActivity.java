@@ -23,6 +23,8 @@ public class FinishActivity extends BaseActivity {
         getToolBarBottom().getMenu().removeItem(R.id.btn_zoom_in);
         getToolBarBottom().getMenu().removeItem(R.id.btn_add_event);
         getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_cancel_save);
+
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
     }

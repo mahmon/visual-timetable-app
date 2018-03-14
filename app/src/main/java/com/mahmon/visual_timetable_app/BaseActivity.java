@@ -64,9 +64,7 @@ public class BaseActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // User clicked toggle_theme_button
             case R.id.btn_toggle_theme:
-                // TODO Create Theme Toggle method
-                // Display toast message to confirm click
-                Toast.makeText(this,"Theme Toggled", Toast.LENGTH_SHORT).show();
+                toggleTheme();
                 return true;
             default:
                 return false;
@@ -103,6 +101,10 @@ public class BaseActivity extends AppCompatActivity {
                     // User clicked btn_add_event
                     case R.id.btn_add_event:
                         addEvent();
+                        return true;
+                    // User clicked btn_add_event
+                    case R.id.btn_cancel_save:
+                        cancelAddEvent();
                         return true;
                     default:
                         return false;
@@ -154,6 +156,14 @@ public class BaseActivity extends AppCompatActivity {
         // TODO Create Zoom In method
         // Display toast message to confirm click
         Toast.makeText(getBaseContext(),"Zoom In", Toast.LENGTH_SHORT).show();
+    }
+
+    // Called by btn_add_event
+    public void cancelAddEvent() {
+        // Create new intent to start AddEventActivity
+        Intent intentAdd = new Intent(getBaseContext(), DisplayEventsActivity.class);
+        // Start Activity
+        startActivity(intentAdd);
     }
 
     // Called by btn_add_event
