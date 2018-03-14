@@ -16,16 +16,32 @@
         android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginTop="?attr/actionBarSize">
 
+        <!-- Text View: To display screen heading -->
+        <TextView
+            android:id="@+id/txt_display_screen_heading"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/txt_display_screen_heading"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/progress_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:paddingBottom="@dimen/fab_margin"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txt_display_screen_heading" />
 
     </RelativeLayout>
 

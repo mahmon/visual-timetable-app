@@ -20,10 +20,7 @@
         </activity>
         <activity android:name=".view.AddEventActivity" />
         <activity android:name=".view.DisplayEventsActivity" />
-        <activity
-            android:name=".view.FinishActivity"
-            android:label="@string/title_activity_finish"
-            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".view.FinishActivity" />
     </application>
 
 </manifest>
