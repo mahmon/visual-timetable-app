@@ -47,5 +47,4 @@ public class StartActivity extends BaseActivity {
     }
 
     // TODO create Login screen and methods
-
 }

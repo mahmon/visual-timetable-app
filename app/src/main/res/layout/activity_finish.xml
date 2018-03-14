@@ -10,11 +10,26 @@
     <include layout="@layout/tool_bar_top" />
     <include layout="@layout/tool_bar_bottom" />
 
+    <!-- Layout to hold the main center screen -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize">
+
+        <!-- Text View: To display screen heading -->
+        <TextView
+            android:id="@+id/txt_finish_screen_heading"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/txt_finish_screen_heading"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </RelativeLayout>
 

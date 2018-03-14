@@ -135,7 +135,7 @@ public class AddEventActivity extends BaseActivity {
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
-            Picasso.with(this).load(mImageUri).into(mImageView);
+            Picasso.with(this).load(mImageUri).fit().centerCrop().into(mImageView);
         }
     }
 
