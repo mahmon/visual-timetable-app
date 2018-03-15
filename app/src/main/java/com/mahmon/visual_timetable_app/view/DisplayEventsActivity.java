@@ -1,14 +1,20 @@
 package com.mahmon.visual_timetable_app.view;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -120,12 +126,82 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
     @Override
     public void onItemClick(int position) {
         Toast.makeText(this, "TODO!! Zoom in event at position: " + position, Toast.LENGTH_SHORT).show();
+        showUpdateDeleteDialog(position);
     }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
     }
+
+    /* UPDATE: Update event in database */
+    // Method called to Update Events
+    private void updateEvent() {
+        Toast.makeText(getApplicationContext(), "TODO: Event Updated", Toast.LENGTH_SHORT).show();
+    }
+
+    /* DELETE: Delete events from database */
+    // Method called to Delete Events
+    private void deleteEvent() {
+        // Send delete confirmation message to user
+        Toast.makeText(getApplicationContext(), "TODO: Event Deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    // Method to Inflate dialog box for updating and deleting events
+    private void showUpdateDeleteDialog(final int position) {
+        // Instantiate dialogBuilder object
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        // Instantiate LayoutInflater object
+        LayoutInflater inflater = getLayoutInflater();
+        // Instantiate a dialogView and use inflater to inflate XML file to it
+        final View dialogView = inflater.inflate(R.layout.dialog_update_delete_event, null);
+        // Use dialogBuilder setView method passing in dialogView instantiated above
+        dialogBuilder.setView(dialogView);
+        // Create local variable and link to dialog_title
+        final TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
+        // Create local variable and link to txt_enter_event_heading
+        final EditText editTextName = dialogView.findViewById(R.id.txt_enter_event_heading);
+        // Create local variable and link to btn_save_edited_event
+        final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
+        // Create local variable and link to btn_delete_event
+        final ImageButton buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
+        // Use eventHeading to setText for dialogTitle
+        dialogTitle.setText("Event at position: " + position);
+        // Instantiate and AlertDialog object, used dialogBuilder to create it
+        final AlertDialog alertDialog = dialogBuilder.create();
+        // Show the AlertDialog
+        alertDialog.show();
+        // Attach an onClickListener to buttonUpdate
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get text from editTextName, store in local variable
+                String newHeading = editTextName.getText().toString().trim();
+                // If user has typed in a value...
+                if (!TextUtils.isEmpty(newHeading)) {
+                    // Call the updateEvent method
+                    updateEvent();
+                    // Dismiss the dialog
+                    alertDialog.dismiss();
+                    // If the user has NOT typed in a value...
+                } else {
+                    // Prompt user to enter a new heading
+                    Toast.makeText(getApplicationContext(),
+                            "Enter a new heading", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        // Attach an onClickListener to buttonDelete
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the deleteEvent Method
+                deleteEvent();
+                // Dismiss the dialog
+                alertDialog.dismiss();
+            }
+        });
+    }
+
 }
