@@ -15,6 +15,8 @@ import com.mahmon.visual_timetable_app.view.StartActivity;
 // Class to manage Tool Bars for all activities
 public class BaseActivity extends AppCompatActivity {
 
+    // Constant used for database node
+    public static final String VISUAL_EVENTS = "visualEvents";
 
     // Declare Toolbar objects
     private Toolbar mToolBarTop;

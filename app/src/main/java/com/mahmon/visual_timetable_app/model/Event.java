@@ -12,10 +12,6 @@ public class Event {
     }
 
     public Event(String name, String imageUrl) {
-        if (name.trim().equals("")) {
-            name = "No Name";
-        }
-
         mName = name;
         mImageUrl = imageUrl;
     }

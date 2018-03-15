@@ -95,8 +95,8 @@ public class AddEventActivity extends BaseActivity {
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
 
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override

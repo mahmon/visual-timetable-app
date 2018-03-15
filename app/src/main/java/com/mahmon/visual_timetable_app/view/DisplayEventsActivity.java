@@ -75,7 +75,7 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
 
 
         mStorage = FirebaseStorage.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
 
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
