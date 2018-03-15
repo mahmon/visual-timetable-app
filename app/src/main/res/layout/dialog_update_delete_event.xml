@@ -56,7 +56,7 @@
         android:layout_marginLeft="@dimen/wide_margin"
         android:layout_marginRight="@dimen/wide_margin"
         android:layout_marginTop="@dimen/super_wide_margin"
-        android:background="#ffffff"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_save_edited_event" />
