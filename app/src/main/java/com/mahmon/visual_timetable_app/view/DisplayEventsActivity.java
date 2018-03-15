@@ -125,7 +125,6 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(this, "TODO!! Zoom in event at position: " + position, Toast.LENGTH_SHORT).show();
         showUpdateDeleteDialog(position);
     }
 
@@ -143,9 +142,17 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
 
     /* DELETE: Delete events from database */
     // Method called to Delete Events
-    private void deleteEvent() {
-        // Send delete confirmation message to user
-        Toast.makeText(getApplicationContext(), "TODO: Event Deleted", Toast.LENGTH_SHORT).show();
+    private void deleteEvent(int position) {
+        Event selectedEvent = mEvents.get(position);
+        final String selectedKey = selectedEvent.getKey();
+        StorageReference eventRef = mStorage.getReferenceFromUrl(selectedEvent.getImageUrl());
+        eventRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDatabaseRef.child(selectedKey).removeValue();
+                Toast.makeText(DisplayEventsActivity.this, "Event Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Method to Inflate dialog box for updating and deleting events
@@ -197,7 +204,7 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
             @Override
             public void onClick(View view) {
                 // Call the deleteEvent Method
-                deleteEvent();
+                deleteEvent(position);
                 // Dismiss the dialog
                 alertDialog.dismiss();
             }
