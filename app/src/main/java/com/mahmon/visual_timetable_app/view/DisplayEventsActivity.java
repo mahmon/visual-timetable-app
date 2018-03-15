@@ -136,14 +136,17 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
 
     /* UPDATE: Update event in database */
     // Method called to Update Events
-    private void updateEvent() {
-        Toast.makeText(getApplicationContext(), "TODO: Event Updated", Toast.LENGTH_SHORT).show();
+    private void updateEvent(Event selectedEvent, int position, String newName) {
+        // Get event key, generated when dialog inflates
+        final String selectedKey = selectedEvent.getKey();
+        // Use selectedKey to change event heading value
+        mDatabaseRef.child(selectedKey).child("name").setValue(newName);
+        Toast.makeText(getApplicationContext(), "Event Name Updated", Toast.LENGTH_SHORT).show();
     }
 
     /* DELETE: Delete events from database */
     // Method called to Delete Events
-    private void deleteEvent(int position) {
-        Event selectedEvent = mEvents.get(position);
+    private void deleteEvent(Event selectedEvent, int position) {
         final String selectedKey = selectedEvent.getKey();
         StorageReference eventRef = mStorage.getReferenceFromUrl(selectedEvent.getImageUrl());
         eventRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -173,8 +176,12 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
         final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
         // Create local variable and link to btn_delete_event
         final ImageButton buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
+
+
+        final Event selectedEvent = mEvents.get(position);
         // Use eventHeading to setText for dialogTitle
-        dialogTitle.setText("Event at position: " + position);
+        dialogTitle.setText("Update event '" + selectedEvent.getName() + "'");
+
         // Instantiate and AlertDialog object, used dialogBuilder to create it
         final AlertDialog alertDialog = dialogBuilder.create();
         // Show the AlertDialog
@@ -184,11 +191,11 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
             @Override
             public void onClick(View view) {
                 // Get text from editTextName, store in local variable
-                String newHeading = editTextName.getText().toString().trim();
+                String newName = editTextName.getText().toString().trim();
                 // If user has typed in a value...
-                if (!TextUtils.isEmpty(newHeading)) {
+                if (!TextUtils.isEmpty(newName)) {
                     // Call the updateEvent method
-                    updateEvent();
+                    updateEvent(selectedEvent, position, newName);
                     // Dismiss the dialog
                     alertDialog.dismiss();
                     // If the user has NOT typed in a value...
@@ -204,7 +211,7 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
             @Override
             public void onClick(View view) {
                 // Call the deleteEvent Method
-                deleteEvent(position);
+                deleteEvent(selectedEvent, position);
                 // Dismiss the dialog
                 alertDialog.dismiss();
             }
