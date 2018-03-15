@@ -104,10 +104,6 @@ public class BaseActivity extends AppCompatActivity {
                     case R.id.btn_add_event:
                         addEvent();
                         return true;
-                    // User clicked btn_add_event
-                    case R.id.btn_cancel_save:
-                        cancelAddEvent();
-                        return true;
                     default:
                         return false;
                 }
@@ -160,7 +156,7 @@ public class BaseActivity extends AppCompatActivity {
         Toast.makeText(getBaseContext(),"Zoom In", Toast.LENGTH_SHORT).show();
     }
 
-    // Called by btn_add_event
+    // Called by btn_cancel_save
     public void cancelAddEvent() {
         // Create new intent to start AddEventActivity
         Intent intentAdd = new Intent(getBaseContext(), DisplayEventsActivity.class);
@@ -168,7 +164,7 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intentAdd);
     }
 
-    // Called by btn_add_event
+    // Called by btn_save_event
     public void addEvent() {
         // Create new intent to start AddEventActivity
         Intent intentAdd = new Intent(getBaseContext(), AddEventActivity.class);
