@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -49,7 +50,6 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
         getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
         getToolBarBottom().getMenu().removeItem(R.id.btn_cancel_save);
 
-
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
 
@@ -66,6 +66,7 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(DisplayEventsActivity.this);
+
 
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -93,7 +94,9 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+
     }
+
 
     // Implement the default options menu
     @Override
@@ -119,25 +122,6 @@ public class DisplayEventsActivity extends BaseActivity implements EventAdapter.
         Toast.makeText(this, "TODO!! Zoom in event at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onUpdateClick(int position) {
-        Toast.makeText(this, "TODO!! Update event at position: " + position, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onDeleteClick(int position) {
-        Event selectedItem = mEvents.get(position);
-        final String selectedKey = selectedItem.getKey();
-
-        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
-        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(DisplayEventsActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     @Override
     protected void onDestroy() {

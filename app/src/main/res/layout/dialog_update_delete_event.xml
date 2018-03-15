@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Text View: To hold dialog title -->
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Edit Text: To receive new event heading -->
+    <EditText
+        android:id="@+id/txt_enter_event_heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:hint="@string/txt_enter_event_heading"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+
+    <!-- Image Button: Save icon, to save edited event -->
+    <ImageButton
+        android:id="@+id/btn_save_edited_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/btn_save_edited_event"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_enter_event_heading"
+        app:srcCompat="@drawable/ic_save_36dp" />
+
+    <!-- Text View: Delete event label -->
+    <TextView
+        android:id="@+id/txt_delete_event_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:text="@string/txt_delete_event"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_edited_event" />
+
+    <!-- Image Button: Trash bin icon, to delete events -->
+    <ImageButton
+        android:id="@+id/btn_delete_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wide_margin"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/txt_delete_event"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_delete_event_label"
+        app:srcCompat="@drawable/ic_delete_36dp" />
+
+</android.support.constraint.ConstraintLayout>

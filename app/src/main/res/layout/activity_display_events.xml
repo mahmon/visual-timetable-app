@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:paddingBottom="@dimen/fab_margin"/>
+            android:paddingBottom="@dimen/wide_margin"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

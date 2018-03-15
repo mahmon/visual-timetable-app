@@ -45,4 +45,5 @@ public class Event {
     public void setKey(String key) {
         mKey = key;
     }
+
 }
