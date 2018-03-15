@@ -29,5 +29,6 @@
     <string name="title_activity_images">ImagesActivity</string>
     <string name="title_activity_finish">FinishActivity</string>
 
+    <!-- PUSH MESSAGE: App tested on emulator and phone, success. END BRANCH -->
 
 </resources>
