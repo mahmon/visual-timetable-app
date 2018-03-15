@@ -30,6 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- ProgressBar: shows while RecyclerView loads -->
         <ProgressBar
             android:id="@+id/progress_circle"
             android:layout_width="wrap_content"
@@ -37,6 +38,7 @@
             android:layout_centerInParent="true"
             android:paddingBottom="@dimen/wide_margin"/>
 
+        <!-- RecyclerView: Display events -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"

@@ -18,6 +18,7 @@
 
     <!-- TextView IDs and Strings -->
     <string name="txt_enter_event_heading">Enter Event Name</string>
+    <string name="txt_update_event_heading">Enter New Event Name</string>
     <string name="txt_start_screen_heading">Login</string>
     <string name="txt_finish_screen_heading">Logout</string>
     <string name="txt_display_screen_heading">Events</string>

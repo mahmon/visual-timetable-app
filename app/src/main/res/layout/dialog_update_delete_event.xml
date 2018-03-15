@@ -47,6 +47,20 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_enter_event_heading"
         app:srcCompat="@drawable/ic_save_36dp" />
 
+    <!-- Separator line to keep delete and save apart -->
+    <View
+        android:id="@+id/line_separator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/super_wide_margin"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_edited_event" />
+
     <!-- Text View: Delete event label -->
     <TextView
         android:id="@+id/txt_delete_event_label"
@@ -60,7 +74,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save_edited_event" />
+        app:layout_constraintTop_toBottomOf="@+id/line_separator" />
 
 
 
