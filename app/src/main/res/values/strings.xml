@@ -1,6 +1,5 @@
 <resources>
 
-    <!-- BRANCH END -->
     <!-- Set app name -->
     <string name="app_name">Visual Timetable App</string>
 
@@ -8,19 +7,28 @@
     <string name="btn_enter_app">Enter</string>
     <string name="btn_exit_app">Exit</string>
     <string name="btn_return_login">Return</string>
+    <string name="btn_choose_image">Choose Image</string>
     <string name="btn_add_event">Add Event</string>
     <string name="btn_save_event">Save Event</string>
+    <string name="btn_cancel_save">Cancel</string>
     <string name="btn_save_edited_event">Save Edited Event</string>
     <string name="btn_toggle_theme">Toggle Theme</string>
     <string name="btn_zoom_in">Zoom In</string>
     <string name="btn_zoom_out">Zoom Out</string>
 
     <!-- TextView IDs and Strings -->
-    <string name="txt_enter_event_heading">Enter New Event Heading</string>
-    <string name="txt_start_screen_heading">Login Screen</string>
-    <string name="txt_finish_screen_heading">Logout Screen</string>
+    <string name="txt_enter_event_heading">Enter Event Name</string>
+    <string name="txt_update_event_heading">Enter New Event Name</string>
+    <string name="txt_update_event_dialog_title">Update Event</string>
+    <string name="txt_start_screen_heading">Login</string>
+    <string name="txt_finish_screen_heading">Logout</string>
     <string name="txt_display_screen_heading">Events</string>
     <string name="txt_add_screen_heading">Add Event</string>
+    <string name="txt_choose_image">Choose Image</string>
     <string name="txt_delete_event">Delete Event</string>
+    <string name="title_activity_images">ImagesActivity</string>
+    <string name="title_activity_finish">FinishActivity</string>
+
+    <!-- PUSH MESSAGE: App tested on emulator and phone, success. END BRANCH -->
 
 </resources>

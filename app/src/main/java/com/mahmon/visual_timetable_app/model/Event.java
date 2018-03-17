@@ -1,32 +1,50 @@
 package com.mahmon.visual_timetable_app.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.Exclude;
 
-// Class for generating Event objects
-@IgnoreExtraProperties
+// Class used to instantiate Event objects for storage in database
 public class Event {
 
-    // String for eventID
-    private String eventID;
-    // String for event eventHeading (more attributes to be added later)
-    private String eventHeading;
+    // Variables for name, image url and database key
+    private String mName;
+    private String mImageUrl;
+    private String mKey;
 
-    // Default constructor (No called but required by Android)
+    // Dfault constructor required by Firebase
     public Event() {
     }
 
-    // Constructor to make sure a value is set
-    public Event(String eventID, String eventHeading) {
-        this.eventID = eventID;
-        this.eventHeading = eventHeading;
+    // Constructor to build event objects, pass name and imageUrl
+    public Event(String name, String imageUrl) {
+        mName = name;
+        mImageUrl = imageUrl;
     }
 
-    // Getter methods for eventID and eventHeading
-    public String getEventID() {
-        return eventID;
+    // Getter methods
+    public String getName() {
+        return mName;
     }
-    public String getEventHeading() {
-        return eventHeading;
+    public String getImageUrl() {
+        return mImageUrl;
+    }
+
+    // Setter methods
+    public void setName(String name) {
+        mName = name;
+    }
+    public void setImageUrl(String imageUrl) {
+        mImageUrl = imageUrl;
+    }
+
+    // Getter and setter for Key
+    // Excluded from Firebase to avoid duplicate data
+    @Exclude
+    public String getKey() {
+        return mKey;
+    }
+    @Exclude
+    public void setKey(String key) {
+        mKey = key;
     }
 
 }

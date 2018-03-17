@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "957040602749-a3acqf10io6n79a1g980n07544pmi7d4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mahmon.visual_timetable_app",
+            "certificate_hash": "6b9545ad758fe1a5e55bafeeb553ad4fa1295422"
+          }
+        },
+        {
           "client_id": "957040602749-3d17hblipk3s30fm2j381s87uj7sdied.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

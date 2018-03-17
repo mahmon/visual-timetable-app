@@ -1,13 +1,14 @@
 package com.mahmon.visual_timetable_app.view;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Menu;
+
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 
-// Class for Logout
+
 public class FinishActivity extends BaseActivity {
 
     @Override
@@ -22,6 +23,8 @@ public class FinishActivity extends BaseActivity {
         getToolBarBottom().getMenu().removeItem(R.id.btn_zoom_in);
         getToolBarBottom().getMenu().removeItem(R.id.btn_add_event);
         getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_cancel_save);
+
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
     }
@@ -44,7 +47,5 @@ public class FinishActivity extends BaseActivity {
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
     }
-
-    // TODO create Logout screen and methods
 
 }

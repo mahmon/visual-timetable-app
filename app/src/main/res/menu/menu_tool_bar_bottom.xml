@@ -44,6 +44,13 @@
         android:title="@string/btn_add_event"
         app:showAsAction="always" />
 
+    <!-- Added btn_cancel_save with icon -->
+    <item
+        android:id="@+id/btn_cancel_save"
+        android:icon="@drawable/ic_cancel_36dp"
+        android:title="@string/btn_cancel_save"
+        app:showAsAction="always" />
+
     <!-- Added btn_save_event with icon -->
     <item
         android:id="@+id/btn_save_event"

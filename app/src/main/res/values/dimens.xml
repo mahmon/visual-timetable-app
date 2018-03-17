@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="wide_margin">16dp</dimen>
+    <dimen name="super_wide_margin">32dp</dimen>
+</resources>

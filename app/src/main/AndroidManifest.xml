@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mahmon.visual_timetable_app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!-- Added forced portrait only mode -->
-        <activity
-            android:name=".view.StartActivity"
-            android:configChanges="orientation"
+        <activity android:name=".view.StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,31 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Added forced portrait only mode -->
-        <activity
-            android:name=".view.DisplayEventsActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!-- Added forced portrait only mode -->
-        <activity
-            android:name=".view.AddEventActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!-- Added forced portrait only mode -->
-        <activity
-            android:name=".view.FinishActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!-- Base Activity for tool bar methods -->
-        <activity android:name=".BaseActivity" />
-
+        <activity android:name=".view.AddEventActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.DisplayEventsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.FinishActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
