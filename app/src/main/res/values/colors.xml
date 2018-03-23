@@ -8,5 +8,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <!-- Light Grey -->
     <color name="colorAccent">#787878</color>
+    <!-- Picture Tint -->
+    <color name="colorPicTint">#454545</color>
 
 </resources>

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.model.EventAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,6 +141,8 @@ public class DisplayEventsActivity extends BaseActivity
 
     // Method to Inflate dialog box for updating and deleting events
     private void showUpdateDeleteDialog(final int position) {
+        // Instantiate an event object from the list position
+        final Event selectedEvent = mEvents.get(position);
         // Instantiate dialogBuilder object
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // Instantiate LayoutInflater object
@@ -151,12 +155,19 @@ public class DisplayEventsActivity extends BaseActivity
         final TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
         // Create local variable and link to txt_enter_event_heading
         final EditText editTextName = dialogView.findViewById(R.id.txt_enter_event_heading);
+        // Create local variable and link to image_view_edit_upload
+        final ImageView editImageView = dialogView.findViewById(R.id.image_view_edit_upload);
+        // Load the selected event image into the edit dialog
+        Picasso.with(this)
+                .load(selectedEvent.getImageUrl())
+                .placeholder(R.mipmap.ic_launcher)
+                .fit()
+                .centerCrop()
+                .into(editImageView);
         // Create local variable and link to btn_save_edited_event
         final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
         // Create local variable and link to btn_delete_event
         final ImageButton buttonDelete = dialogView.findViewById(R.id.btn_delete_event);
-        // Instaniate an event object from the list position
-        final Event selectedEvent = mEvents.get(position);
         // Use eventHeading to setText for dialogTitle
         String title = getResources().getString(R.string.txt_update_event_dialog_title)
                 + " '" + selectedEvent.getName() + "'";
