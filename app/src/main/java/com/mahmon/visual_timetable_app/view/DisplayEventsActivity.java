@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -287,13 +286,12 @@ public class DisplayEventsActivity extends BaseActivity
 
         // Get current file name
         String filename = selectedEvent.getKey().toString();
-
         Toast.makeText(getApplicationContext(), filename, Toast.LENGTH_LONG).show();
 
 
         /* METHOD TO LOAD NEW IMAGE TO DATABASE */
         // Create file name of current time in millis plus image file extension
-        StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+        StorageReference fileReference = mStorageRef.child(filename
                 + "." + getFileExtension(mImageUri));
         // Create storage task, load image to cloud with listener
         mUploadTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
