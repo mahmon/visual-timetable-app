@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +31,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 import com.mahmon.visual_timetable_app.model.Event;
@@ -48,6 +55,7 @@ public class DisplayEventsActivity extends BaseActivity
     // Progress bar shown while adapter loads
     private ProgressBar mProgressCircle;
     // Variables for Firebase connections
+    private StorageReference mStorageRef;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     // Listener variable used to kill listener
@@ -58,6 +66,8 @@ public class DisplayEventsActivity extends BaseActivity
     private ImageView editImageView;
     // Variable to store image URI
     private Uri mImageUri;
+    // Storage task variable
+    private StorageTask mUploadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +98,7 @@ public class DisplayEventsActivity extends BaseActivity
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
         // Get Firebase storageRef
         mStorage = FirebaseStorage.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
         // Instantiate database listener
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             // Method called on activity load and on any data changes
@@ -261,6 +272,8 @@ public class DisplayEventsActivity extends BaseActivity
     private void updateEvent(Event selectedEvent, String newName) {
         // Get event key, generated when dialog inflates
         final String selectedKey = selectedEvent.getKey();
+
+        /* Update event title */
         // Use selectedKey to change event heading value
         mDatabaseRef.child(selectedKey).child("name").setValue(newName)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -271,6 +284,29 @@ public class DisplayEventsActivity extends BaseActivity
                         "Event Name Updated", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        /* METHOD TO LOAD NEW IMAGE TO DATABASE */
+        // Create file name of current time in millis plus image file extension
+        StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                + "." + getFileExtension(mImageUri));
+        // Create storage task, load image to cloud with listener
+        mUploadTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            // If succesful..
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // Prompt user that upload succesful
+                Toast.makeText(getApplicationContext(),"Upload successful", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            // Show error message if database write fails
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     /* DELETE: Delete events from database */

@@ -9,6 +9,6 @@
     <!-- Light Grey -->
     <color name="colorAccent">#787878</color>
     <!-- Picture Tint -->
-    <color name="colorPicTint">#454545</color>
+    <color name="colorPicTint">#585858</color>
 
 </resources>
