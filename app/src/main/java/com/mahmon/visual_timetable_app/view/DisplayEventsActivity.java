@@ -164,6 +164,19 @@ public class DisplayEventsActivity extends BaseActivity
                 .fit()
                 .centerCrop()
                 .into(editImageView);
+
+
+        // Add a click listener to the image view
+        editImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Method call to load new image
+                chooseNewImage();
+            }
+        });
+
+
+
         // Create local variable and link to btn_save_edited_event
         final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
         // Create local variable and link to btn_delete_event
@@ -206,6 +219,11 @@ public class DisplayEventsActivity extends BaseActivity
                 alertDialog.dismiss();
             }
         });
+    }
+
+    // Method called to choose new image
+    private void chooseNewImage() {
+        Toast.makeText(getApplicationContext(), "image clicked", Toast.LENGTH_LONG).show();
     }
 
     /* UPDATE: Update event in database */
