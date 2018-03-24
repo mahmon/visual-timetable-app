@@ -166,8 +166,10 @@ public class AddEventActivity extends BaseActivity {
         if (!TextUtils.isEmpty(mEditTextFileName.getText().toString().trim())) {
             // Then... If and image has been selected
             if (mImageUri != null) {
-                // Create file name of current time in millis plus image file extension
-                StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                // Get a unique key from the database
+                final String uploadId = mDatabaseRef.push().getKey();
+                // Create a file name for the image using the unique key
+                StorageReference fileReference = mStorageRef.child(uploadId
                         + "." + getFileExtension(mImageUri));
                 // Create storage task, load image to cloud with listener
                 mUploadTask = fileReference.putFile(mImageUri)
@@ -189,8 +191,6 @@ public class AddEventActivity extends BaseActivity {
                         // Create a new event object, pass event name entered and image URL
                         Event event = new Event(mEditTextFileName.getText().toString().trim(),
                                 taskSnapshot.getDownloadUrl().toString());
-                        // Get a unique key from the database
-                        String uploadId = mDatabaseRef.push().getKey();
                         // Write event to database a key from line above
                         mDatabaseRef.child(uploadId).setValue(event);
                         // Run short delay before switching activities

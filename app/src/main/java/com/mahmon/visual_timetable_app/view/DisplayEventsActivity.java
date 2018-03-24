@@ -285,6 +285,11 @@ public class DisplayEventsActivity extends BaseActivity
             }
         });
 
+        // Get current file name
+        String filename = selectedEvent.getKey().toString();
+
+        Toast.makeText(getApplicationContext(), filename, Toast.LENGTH_LONG).show();
+
 
         /* METHOD TO LOAD NEW IMAGE TO DATABASE */
         // Create file name of current time in millis plus image file extension
