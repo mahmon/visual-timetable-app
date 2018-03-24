@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -50,8 +52,9 @@ public class DisplayEventsActivity extends BaseActivity
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManger;
     private EventAdapter mAdapter;
-    // Progress bar shown while adapter loads
+    // Progress bars shown while adapter loads or image updates
     private ProgressBar mProgressCircle;
+    private ProgressBar mProgressBar;
     // Variables for Firebase connections
     private StorageReference mStorageRef;
     private FirebaseStorage mStorage;
@@ -60,6 +63,8 @@ public class DisplayEventsActivity extends BaseActivity
     private ValueEventListener mDBListener;
     // List used to hold events for display
     private List<Event> mEvents;
+    // AlertDialog
+    private AlertDialog alertDialog;
     // Variable for imageView in dialog view
     private ImageView editImageView;
     // Variable to store image URI
@@ -173,6 +178,8 @@ public class DisplayEventsActivity extends BaseActivity
         TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
         // Create local variable and link to txt_enter_event_heading
         final EditText editTextName = dialogView.findViewById(R.id.txt_enter_event_heading);
+        // Progress bar
+        mProgressBar = dialogView.findViewById(R.id.progress_bar_edit);
         // Create local variable and link to image_view_edit_upload
         editImageView = dialogView.findViewById(R.id.image_view_current_image);
         // Load the current event image into the edit dialog
@@ -199,7 +206,7 @@ public class DisplayEventsActivity extends BaseActivity
                 + " '" + selectedEvent.getName() + "'";
         dialogTitle.setText(title);
         // Instantiate an AlertDialog object, used dialogBuilder to create it
-        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog = dialogBuilder.create();
         // Show the AlertDialog
         alertDialog.show();
         // Attach an onClickListener to buttonUpdate
@@ -224,8 +231,6 @@ public class DisplayEventsActivity extends BaseActivity
                         updateEvent(selectedEvent, selectedEvent.getName());
                     }
                 }
-                // Dismiss the dialog
-                alertDialog.dismiss();
             }
         });
         // Attach an onClickListener to buttonDelete
@@ -234,8 +239,6 @@ public class DisplayEventsActivity extends BaseActivity
             public void onClick(View view) {
                 // Call the deleteEvent Method
                 deleteEvent(selectedEvent);
-                // Dismiss the dialog
-                alertDialog.dismiss();
             }
         });
     }
@@ -283,9 +286,11 @@ public class DisplayEventsActivity extends BaseActivity
         if (newName == selectedEvent.getName() && mImageUri == null) {
             Toast.makeText(getApplicationContext(),
                     "No updates entered", Toast.LENGTH_SHORT).show();
+            // Close dialog
+            closeDialog();
+        /* Update event TITLE */
         // If event heading is added and NO image selected
         } else if (newName != selectedEvent.getName() && mImageUri == null) {
-            /* Update event title */
             // Use selectedKey to change event heading value
             mDatabaseRef.child(selectedKey).child("name").setValue(newName)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -296,9 +301,11 @@ public class DisplayEventsActivity extends BaseActivity
                     "Event Heading Updated", Toast.LENGTH_SHORT).show();
                     }
             });
+            // Close dialog
+            closeDialog();
+        /* Update event IMAGE */
         // If NO event heading is added and image selected
         } else if (newName == selectedEvent.getName() && mImageUri != null) {
-            /* Update event image */
             // Create file name plus image file extension
             StorageReference fileReference = mStorageRef.child(uploadId
                     + "." + getFileExtension(mImageUri));
@@ -308,9 +315,26 @@ public class DisplayEventsActivity extends BaseActivity
                 // If successful...
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler progHandler = new Handler();
+                    progHandler.postDelayed(new Runnable() {
+                        // Set a short delay to allow progress bar to be viewable
+                        @Override
+                        public void run() {
+                            mProgressBar.setProgress(0);
+                        }
+                    }, 500);
                     // Prompt user that upload successful
                     Toast.makeText(getApplicationContext(),
                             "New Image Uploaded", Toast.LENGTH_LONG).show();
+                    // Run short delay before closing dialog
+                    Handler showHandler = new Handler();
+                    showHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Call close dialog method
+                            closeDialog();
+                        }
+                    }, 250);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 // Show error message if database write fails
@@ -318,15 +342,32 @@ public class DisplayEventsActivity extends BaseActivity
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getApplicationContext(),
                             e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    // Call close dialog method
+                    closeDialog();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                // Calculate upload percentage and use to animate progress bar
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()
+                            / taskSnapshot.getTotalByteCount());
+                    mProgressBar.setProgress((int) progress);
+                }
             });
 
+        /* Update event TITLE and IMAGE */
         // If event heading is added and image selected
         } else if (newName != selectedEvent.getName() && mImageUri != null) {
-            /* Update event title and image */
             // Use selectedKey to change event heading value
-            mDatabaseRef.child(selectedKey).child("name").setValue(newName);
-
+            mDatabaseRef.child(selectedKey).child("name").setValue(newName)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Confirm update
+                    Toast.makeText(getApplicationContext(),
+                            "Event Heading Updated", Toast.LENGTH_SHORT).show();
+                }
+            });
             // Create file name plus image file extension
             StorageReference fileReference = mStorageRef.child(uploadId
                     + "." + getFileExtension(mImageUri));
@@ -336,9 +377,26 @@ public class DisplayEventsActivity extends BaseActivity
                 // If successful...
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler progHandler = new Handler();
+                    progHandler.postDelayed(new Runnable() {
+                    // Set a short delay to allow progress bar to be viewable
+                        @Override
+                        public void run() {
+                            mProgressBar.setProgress(0);
+                        }
+                    }, 500);
                     // Prompt user that upload successful
                     Toast.makeText(getApplicationContext(),
-                            "Event Updated", Toast.LENGTH_LONG).show();
+                            "New Image Uploaded", Toast.LENGTH_LONG).show();
+                    // Run short delay before closing dialog
+                    Handler showHandler = new Handler();
+                    showHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Call close dialog method
+                            closeDialog();
+                        }
+                    }, 250);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 // Show error message if database write fails
@@ -346,6 +404,16 @@ public class DisplayEventsActivity extends BaseActivity
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getApplicationContext(),
                             e.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Call close dialog method
+                    closeDialog();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                // Calculate upload percentage and use to animate progress bar
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()
+                            / taskSnapshot.getTotalByteCount());
+                    mProgressBar.setProgress((int) progress);
                 }
             });
         }
@@ -367,8 +435,16 @@ public class DisplayEventsActivity extends BaseActivity
                 // Confirm deletion
                 Toast.makeText(DisplayEventsActivity.this,
                         "Event Deleted", Toast.LENGTH_SHORT).show();
+                // Close dialog
+                closeDialog();
             }
         });
+    }
+
+    // Method called to close dialog
+    private void closeDialog() {
+        // Dismiss the dialog
+        alertDialog.dismiss();
     }
 
     // Destroy EventListener when Activity is destroyed

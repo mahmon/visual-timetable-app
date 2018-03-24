@@ -10,5 +10,7 @@
     <color name="colorAccent">#787878</color>
     <!-- Picture Tint -->
     <color name="colorPicTint">#585858</color>
+    <!-- Progress bar tint -->
+    <color name="progressBarTint">#FF6600</color>
 
 </resources>

@@ -95,7 +95,7 @@ public class AddEventActivity extends BaseActivity {
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
-        mProgressBar = findViewById(R.id.progress_bar);
+        mProgressBar = findViewById(R.id.progress_bar_upload);
         // Instantiate database and storage references
         mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);

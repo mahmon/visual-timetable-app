@@ -59,6 +59,18 @@
 
     </RelativeLayout>
 
+    <!-- Progress Bar: Shows upload progress-->
+    <ProgressBar
+        android:id="@+id/progress_bar_edit"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/wide_margin"
+        android:layout_marginLeft="@dimen/wide_margin"
+        android:layout_marginRight="@dimen/wide_margin"
+        app:layout_constraintTop_toBottomOf="@+id/edit_image_layout" />
+
     <!-- Image Button: Save icon, to save edited event -->
     <ImageButton
         android:id="@+id/btn_save_edited_event"
@@ -71,7 +83,7 @@
         android:contentDescription="@string/btn_save_edited_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_image_layout"
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar_edit"
         app:srcCompat="@drawable/ic_save_36dp" />
 
     <!-- Separator line to keep delete and save apart -->

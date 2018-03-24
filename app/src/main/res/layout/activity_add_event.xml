@@ -60,7 +60,7 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/progress_bar"
+            android:layout_above="@id/progress_bar_upload"
             android:layout_below="@id/button_choose_image"
             android:layout_marginBottom="@dimen/wide_margin"
             android:layout_marginLeft="@dimen/wide_margin"
@@ -70,7 +70,7 @@
 
         <!-- Progress Bar: Shows upload progress-->
         <ProgressBar
-            android:id="@+id/progress_bar"
+            android:id="@+id/progress_bar_upload"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
