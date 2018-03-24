@@ -42,7 +42,6 @@ public class DisplayEventsActivity extends BaseActivity
 
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
-
     // Variables for RecyclerView and Adapter
     private RecyclerView mRecyclerView;
     private EventAdapter mAdapter;
@@ -55,11 +54,10 @@ public class DisplayEventsActivity extends BaseActivity
     private ValueEventListener mDBListener;
     // List used to hold events for display
     private List<Event> mEvents;
-
-
+    // Variable for imageView in dialog view
+    private ImageView editImageView;
     // Variable to store image URI
     private Uri mImageUri;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,26 +156,22 @@ public class DisplayEventsActivity extends BaseActivity
         // Instantiate LayoutInflater object
         LayoutInflater inflater = getLayoutInflater();
         // Instantiate a dialogView and use inflater to inflate XML file to it
-        final View dialogView = inflater.inflate(R.layout.dialog_update_delete_event, null);
+        View dialogView = inflater.inflate(R.layout.dialog_update_delete_event, null);
         // Use dialogBuilder setView method passing in dialogView instantiated above
         dialogBuilder.setView(dialogView);
         // Create local variable and link to dialog_title
-        final TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
+        TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
         // Create local variable and link to txt_enter_event_heading
         final EditText editTextName = dialogView.findViewById(R.id.txt_enter_event_heading);
         // Create local variable and link to image_view_edit_upload
-        final ImageView editImageView = dialogView.findViewById(R.id.image_view_current_image);
-
-
-        // Load the selected event image into the edit dialog
+        editImageView = dialogView.findViewById(R.id.image_view_current_image);
+        // Load the current event image into the edit dialog
         Picasso.with(this)
                 .load(selectedEvent.getImageUrl())
                 .placeholder(R.mipmap.ic_launcher)
                 .fit()
                 .centerCrop()
                 .into(editImageView);
-
-
         // Add a click listener to the image view
         editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,8 +180,6 @@ public class DisplayEventsActivity extends BaseActivity
                 openFileChooser();
             }
         });
-
-
         // Create local variable and link to btn_save_edited_event
         final ImageButton buttonUpdate = dialogView.findViewById(R.id.btn_save_edited_event);
         // Create local variable and link to btn_delete_event
@@ -232,8 +224,6 @@ public class DisplayEventsActivity extends BaseActivity
         });
     }
 
-
-
     // Method to open file chooser for selecting images from phone
     private void openFileChooser() {
         Intent intent = new Intent();
@@ -254,9 +244,8 @@ public class DisplayEventsActivity extends BaseActivity
                 && data != null && data.getData() != null) {
             // Store the Uri of the image
             mImageUri = data.getData();
-
             // Use Picasso to pass the image into the view
-            Picasso.with(this).load(mImageUri).fit().centerCrop().into(mImageView);
+            Picasso.with(this).load(mImageUri).fit().centerCrop().into(editImageView);
         }
     }
 
@@ -266,9 +255,6 @@ public class DisplayEventsActivity extends BaseActivity
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
-
-
-
 
     /* UPDATE: Update event in database */
     // Method called to Update Events
