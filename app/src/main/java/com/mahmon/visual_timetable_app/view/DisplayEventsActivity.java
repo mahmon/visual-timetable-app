@@ -1,5 +1,8 @@
 package com.mahmon.visual_timetable_app.view;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +13,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,13 +33,15 @@ import com.mahmon.visual_timetable_app.R;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.model.EventAdapter;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
 // Class to display events, implements the adapter and a listener
 public class DisplayEventsActivity extends BaseActivity
         implements EventAdapter.OnItemClickListener {
+
+    // Constant used to assign arbitrary value to image pick
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     // Variables for RecyclerView and Adapter
     private RecyclerView mRecyclerView;
@@ -50,6 +55,11 @@ public class DisplayEventsActivity extends BaseActivity
     private ValueEventListener mDBListener;
     // List used to hold events for display
     private List<Event> mEvents;
+
+
+    // Variable to store image URI
+    private Uri mImageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +166,9 @@ public class DisplayEventsActivity extends BaseActivity
         // Create local variable and link to txt_enter_event_heading
         final EditText editTextName = dialogView.findViewById(R.id.txt_enter_event_heading);
         // Create local variable and link to image_view_edit_upload
-        final ImageView editImageView = dialogView.findViewById(R.id.image_view_edit_upload);
+        final ImageView editImageView = dialogView.findViewById(R.id.image_view_current_image);
+
+
         // Load the selected event image into the edit dialog
         Picasso.with(this)
                 .load(selectedEvent.getImageUrl())
@@ -170,11 +182,10 @@ public class DisplayEventsActivity extends BaseActivity
         editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Method call to load new image
-                chooseNewImage();
+                // Method call to select new image
+                openFileChooser();
             }
         });
-
 
 
         // Create local variable and link to btn_save_edited_event
@@ -221,10 +232,43 @@ public class DisplayEventsActivity extends BaseActivity
         });
     }
 
-    // Method called to choose new image
-    private void chooseNewImage() {
-        Toast.makeText(getApplicationContext(), "image clicked", Toast.LENGTH_LONG).show();
+
+
+    // Method to open file chooser for selecting images from phone
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        // Limit to image files
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        // Start activity and pass arbitrary image request value
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
+
+    // Method called when file chooser is used
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        // Check that image request is valid and an image has been selected
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            // Store the Uri of the image
+            mImageUri = data.getData();
+
+            // Use Picasso to pass the image into the view
+            Picasso.with(this).load(mImageUri).fit().centerCrop().into(mImageView);
+        }
+    }
+
+    // Get file extension of the image
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+
+
 
     /* UPDATE: Update event in database */
     // Method called to Update Events
