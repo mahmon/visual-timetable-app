@@ -48,6 +48,7 @@ public class DisplayEventsActivity extends BaseActivity
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variables for RecyclerView and Adapter
     private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManger;
     private EventAdapter mAdapter;
     // Progress bar shown while adapter loads
     private ProgressBar mProgressCircle;
@@ -79,8 +80,9 @@ public class DisplayEventsActivity extends BaseActivity
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Attach mRecyclerView to recycler_view
         mRecyclerView = findViewById(R.id.recycler_view);
-        // Instnatiate LinearLayoutManager for mRecyclerView
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Instantiate LinearLayoutManager for mRecyclerView
+        mLayoutManger = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManger);
         // Attach mProgressCircle to progress_circle
         mProgressCircle = findViewById(R.id.progress_circle);
         // Instantiate mEvents as ArrayList
@@ -276,6 +278,7 @@ public class DisplayEventsActivity extends BaseActivity
         final String selectedKey = selectedEvent.getKey();
         // Get current file name
         final String uploadId = selectedEvent.getKey();
+        /* Update cancelled */
         // If NO event heading added and NO image selected
         if (newName == selectedEvent.getName() && mImageUri == null) {
             Toast.makeText(getApplicationContext(),
@@ -295,6 +298,7 @@ public class DisplayEventsActivity extends BaseActivity
             });
         // If NO event heading is added and image selected
         } else if (newName == selectedEvent.getName() && mImageUri != null) {
+            /* Update event image */
             // Create file name plus image file extension
             StorageReference fileReference = mStorageRef.child(uploadId
                     + "." + getFileExtension(mImageUri));
@@ -319,7 +323,7 @@ public class DisplayEventsActivity extends BaseActivity
 
         // If event heading is added and image selected
         } else if (newName != selectedEvent.getName() && mImageUri != null) {
-            /* Update event title */
+            /* Update event title and image */
             // Use selectedKey to change event heading value
             mDatabaseRef.child(selectedKey).child("name").setValue(newName);
 
