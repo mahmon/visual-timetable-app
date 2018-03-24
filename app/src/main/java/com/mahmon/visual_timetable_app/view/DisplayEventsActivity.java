@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -206,20 +204,26 @@ public class DisplayEventsActivity extends BaseActivity
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Get text from editTextName, store in local variable
-                String newName = editTextName.getText().toString().trim();
-                // If user has typed in a value...
-                if (!TextUtils.isEmpty(newName)) {
-                    // Call the updateEvent method
-                    updateEvent(selectedEvent, newName);
-                    // Dismiss the dialog
-                    alertDialog.dismiss();
-                    // If the user has NOT typed in a value...
-                } else {
-                    // Prompt user to enter a new heading
+                // If upload task is NOT null and Up load is in progress
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    // Prevents multiple clicks and uploads
                     Toast.makeText(getApplicationContext(),
-                            "Enter a new heading", Toast.LENGTH_SHORT).show();
+                            "Event in progress", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Get text from editTextName, store in local variable
+                    String newName = editTextName.getText().toString().trim();
+                    // If user has typed in a value...
+                    if (!TextUtils.isEmpty(newName)) {
+                        // Call the updateEvent method
+                        updateEvent(selectedEvent, newName);
+                        // If the user has NOT typed in a value...
+                    } else {
+                        // Get existing name value and overwrite itself
+                        updateEvent(selectedEvent, selectedEvent.getName());
+                    }
                 }
+                // Dismiss the dialog
+                alertDialog.dismiss();
             }
         });
         // Attach an onClickListener to buttonDelete
@@ -247,7 +251,6 @@ public class DisplayEventsActivity extends BaseActivity
     // Method called when file chooser is used
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
         // Check that image request is valid and an image has been selected
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
@@ -271,45 +274,77 @@ public class DisplayEventsActivity extends BaseActivity
     private void updateEvent(Event selectedEvent, String newName) {
         // Get event key, generated when dialog inflates
         final String selectedKey = selectedEvent.getKey();
-
-        /* Update event title */
-        // Use selectedKey to change event heading value
-        mDatabaseRef.child(selectedKey).child("name").setValue(newName)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                // Confirm update
-                Toast.makeText(getApplicationContext(),
-                        "Event Name Updated", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         // Get current file name
-        String filename = selectedEvent.getKey().toString();
-        Toast.makeText(getApplicationContext(), filename, Toast.LENGTH_LONG).show();
+        final String uploadId = selectedEvent.getKey();
+        // If NO event heading added and NO image selected
+        if (newName == selectedEvent.getName() && mImageUri == null) {
+            Toast.makeText(getApplicationContext(),
+                    "No updates entered", Toast.LENGTH_SHORT).show();
+        // If event heading is added and NO image selected
+        } else if (newName != selectedEvent.getName() && mImageUri == null) {
+            /* Update event title */
+            // Use selectedKey to change event heading value
+            mDatabaseRef.child(selectedKey).child("name").setValue(newName)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Confirm update
+                    Toast.makeText(getApplicationContext(),
+                    "Event Heading Updated", Toast.LENGTH_SHORT).show();
+                    }
+            });
+        // If NO event heading is added and image selected
+        } else if (newName == selectedEvent.getName() && mImageUri != null) {
+            // Create file name plus image file extension
+            StorageReference fileReference = mStorageRef.child(uploadId
+                    + "." + getFileExtension(mImageUri));
+            // Create storage task, load image to cloud with listener
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                // If successful...
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Prompt user that upload successful
+                    Toast.makeText(getApplicationContext(),
+                            "New Image Uploaded", Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                // Show error message if database write fails
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),
+                            e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+            });
 
+        // If event heading is added and image selected
+        } else if (newName != selectedEvent.getName() && mImageUri != null) {
+            /* Update event title */
+            // Use selectedKey to change event heading value
+            mDatabaseRef.child(selectedKey).child("name").setValue(newName);
 
-        /* METHOD TO LOAD NEW IMAGE TO DATABASE */
-        // Create file name of current time in millis plus image file extension
-        StorageReference fileReference = mStorageRef.child(filename
-                + "." + getFileExtension(mImageUri));
-        // Create storage task, load image to cloud with listener
-        mUploadTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            // If succesful..
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // Prompt user that upload succesful
-                Toast.makeText(getApplicationContext(),"Upload successful", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            // Show error message if database write fails
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+            // Create file name plus image file extension
+            StorageReference fileReference = mStorageRef.child(uploadId
+                    + "." + getFileExtension(mImageUri));
+            // Create storage task, load image to cloud with listener
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                // If successful...
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Prompt user that upload successful
+                    Toast.makeText(getApplicationContext(),
+                            "Event Updated", Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                // Show error message if database write fails
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),
+                            e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     /* DELETE: Delete events from database */

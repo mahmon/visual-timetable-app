@@ -174,7 +174,7 @@ public class AddEventActivity extends BaseActivity {
                 // Create storage task, load image to cloud with listener
                 mUploadTask = fileReference.putFile(mImageUri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    // If succesful..
+                    // If successful...
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Handler progHandler = new Handler();
@@ -185,7 +185,7 @@ public class AddEventActivity extends BaseActivity {
                                 mProgressBar.setProgress(0);
                             }
                         }, 250);
-                        // Prompt user that upload succesful
+                        // Prompt user that upload successful
                         Toast.makeText(AddEventActivity.this,
                                 "Upload successful", Toast.LENGTH_LONG).show();
                         // Create a new event object, pass event name entered and image URL
