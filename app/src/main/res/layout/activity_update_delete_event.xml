@@ -8,6 +8,7 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
+
     <include layout="@layout/tool_bar_bottom" />
 
     <!-- Layout to hold the main center screen -->
@@ -46,9 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@id/txt_enter_event_heading"
-            android:layout_margin="@dimen/narrow_margin"
-            android:tint="@color/colorPicTint"
-            android:tintMode="multiply" />
+            android:layout_margin="@dimen/narrow_margin" />
 
         <!-- Text View: Delete event label -->
         <TextView
