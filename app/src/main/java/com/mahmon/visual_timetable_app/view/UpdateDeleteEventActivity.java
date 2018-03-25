@@ -29,7 +29,6 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
-import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
 public class UpdateDeleteEventActivity extends BaseActivity {

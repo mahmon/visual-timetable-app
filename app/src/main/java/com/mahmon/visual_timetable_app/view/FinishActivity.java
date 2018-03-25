@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 
-
 public class FinishActivity extends BaseActivity {
 
     @Override
