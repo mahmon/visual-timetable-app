@@ -70,7 +70,7 @@ public class AddEventActivity extends BaseActivity {
                     // User clicked btn_cancel_save
                     case R.id.btn_cancel_save:
                         // Calls method from BaseActivity
-                        cancelAddEvent();
+                        cancelAddUpdateDeleteEvent();
                         return true;
                     // User clicked btn_save_event
                     case R.id.btn_save_event:

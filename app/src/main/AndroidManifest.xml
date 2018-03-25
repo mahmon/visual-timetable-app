@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.StartActivity"
+        <activity
+            android:name=".view.StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.AddEventActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.DisplayEventsActivity"
+        <activity
+            android:name=".view.AddEventActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.FinishActivity"
+        <activity
+            android:name=".view.DisplayEventsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.FinishActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.UpdateDeleteEventActivity"
             android:screenOrientation="portrait" />
     </application>
 

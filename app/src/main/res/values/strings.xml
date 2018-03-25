@@ -18,9 +18,9 @@
 
     <!-- TextView IDs and Strings -->
     <string name="txt_enter_event_heading">Enter Event Name</string>
-    <string name="txt_update_event_heading">Enter New Event Name</string>
+    <string name="txt_update_event_prompt">Enter New Event Name</string>
     <string name="txt_change_image_prompt">Click To Change Image</string>
-    <string name="txt_update_event_dialog_title">Update Event</string>
+    <string name="txt_update_event_heading">Edit Event</string>
     <string name="txt_start_screen_heading">Login</string>
     <string name="txt_finish_screen_heading">Logout</string>
     <string name="txt_display_screen_heading">Events</string>
@@ -29,7 +29,6 @@
     <string name="txt_delete_event">Delete Event</string>
     <string name="title_activity_images">ImagesActivity</string>
     <string name="title_activity_finish">FinishActivity</string>
-
-    <!-- PUSH MESSAGE: App tested on emulator and phone, success. END BRANCH -->
+    <string name="title_activity_edit_event">EditEventActivity</string>
 
 </resources>

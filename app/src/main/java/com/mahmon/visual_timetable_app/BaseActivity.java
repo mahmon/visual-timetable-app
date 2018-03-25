@@ -157,7 +157,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     // Called by btn_cancel_save
-    public void cancelAddEvent() {
+    public void cancelAddUpdateDeleteEvent() {
         // Create new intent to start AddEventActivity
         Intent intentAdd = new Intent(getBaseContext(), DisplayEventsActivity.class);
         // Start Activity
