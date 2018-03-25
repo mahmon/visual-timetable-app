@@ -40,6 +40,8 @@ public class DisplayEventsActivity extends BaseActivity
     // List used to hold events for display
     private List<Event> mEvents;
     // Variable for passing key to update edit event activity
+    private String selectedEventName;
+    private String selectedEventImageUrl;
     private String selectedEventKey;
 
     @Override
@@ -132,14 +134,21 @@ public class DisplayEventsActivity extends BaseActivity
 
     // Method to Inflate dialog box for updating and deleting events
     private void showUpdateDeleteActivity(final int position) {
-
         // Instantiate an event object from the list position
         final Event selectedEvent = mEvents.get(position);
         // Store the event details in passable strings
+        selectedEventName = selectedEvent.getName();
+        selectedEventImageUrl = selectedEvent.getImageUrl();
         selectedEventKey = selectedEvent.getKey();
         // Instantiate new intent to start DisplayEventsActivity
         Intent intent = new Intent(getBaseContext(), UpdateDeleteEventActivity.class);
-        intent.putExtra("selectedEventKey", selectedEventKey);
+        // Create bundle to pass event data
+        Bundle data = new Bundle();
+        data.putString("EXTRA_EVENT_NAME", selectedEventName);
+        data.putString("EXTRA_EVENT_IMAGE_URL", selectedEventImageUrl);
+        data.putString("EXTRA_EVENT_KEY", selectedEventKey);
+        // Package the bundle into intent
+        intent.putExtras(data);
         // Start Activity
         startActivity(intent);
     }
