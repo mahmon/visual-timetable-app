@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -13,16 +15,21 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
 public class UpdateDeleteEventActivity extends BaseActivity {
@@ -43,6 +50,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     private StorageReference mStorageRef;
+    private ProgressBar mProgressBar;
     // Storage task variable
     private StorageTask mUploadTask;
 
@@ -59,6 +67,9 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         getToolBarBottom().getMenu().removeItem(R.id.btn_return_login);
         // Get Firebase database reference for VISUAL_EVENTS node
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
+        // Get Firebase storageRef
+        mStorage = FirebaseStorage.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
         // Receive intent data from DisplayEventsActivity
         Intent intent = getIntent();
         // Copy bundle to local bundle
@@ -122,6 +133,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
                     // User clicked btn_delete_event
                     case R.id.btn_delete_event:
                         // TODO
+                        deleteEvent();
                         return true;
                     default:
                         return false;
@@ -130,6 +142,10 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         });
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
+
+        // Progress bar
+        mProgressBar = findViewById(R.id.progress_bar_edit);
+
     }
 
     // Implement the default options menu
@@ -196,16 +212,160 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             // Use selectedKey to change event heading value
             mDatabaseRef.child(selectedEventKey).child("name").setValue(name)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Confirm update
+                    Toast.makeText(getApplicationContext(),
+                            "Event Heading Updated", Toast.LENGTH_SHORT).show();
+                }
+            });
+            // Finish Activity and return to DisplayEvents
+            openDisplayEventsActivity();
+        /* Update event IMAGE */
+        // If NO event heading is added and image selected
+        } else if (name.equals(selectedEventName) && mImageUri != null) {
+            // Delete existing image
+            // Generate storageRef from selected event
+            StorageReference deleteRef = mStorage.getReferenceFromUrl(selectedEventImageUrl);
+            // Use storageRef to delete image
+            deleteRef.delete();
+            // Write new image to storage
+            // Create a file name for the image using the unique key
+            StorageReference fileReference = mStorageRef.child(selectedEventKey
+                    + "." + getFileExtension(mImageUri));
+            // Create storage task, load image to cloud with listener
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                // If successful...
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler progHandler = new Handler();
+                    progHandler.postDelayed(new Runnable() {
+                    // Set a short delay to allow progress bar to be viewable
+                    @Override
+                        public void run() {
+                            mProgressBar.setProgress(0);
+                        }
+                    }, 250);
+                    // Get new URL
+                    String newImageURL = taskSnapshot.getDownloadUrl().toString();
+                    // Write new URL to existing event
+                    // Use selectedKey to change event heading value
+                    mDatabaseRef.child(selectedEventKey).child("imageUrl")
+                            .setValue(newImageURL).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             // Confirm update
                             Toast.makeText(getApplicationContext(),
-                                    "Event Heading Updated", Toast.LENGTH_SHORT).show();
+                                    "Event Image Updated", Toast.LENGTH_SHORT).show();
                         }
                     });
-            // Finish Activity and return to DisplayEvents
-            finish();
+                    // Finish Activity and return to DisplayEvents
+                    openDisplayEventsActivity();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                // Show error message if database write fails
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(UpdateDeleteEventActivity.this,
+                            e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                // Calculate upload percentage and use to animate progress bar
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()
+                            / taskSnapshot.getTotalByteCount());
+                    mProgressBar.setProgress((int) progress);
+                }
+            });
+        /* Update event TITLE and IMAGE */
+        // If NO event heading is added and image selected
+        } else if (!name.equals(selectedEventName) && mImageUri != null) {
+            // Use selectedKey to change event heading value
+            mDatabaseRef.child(selectedEventKey).child("name").setValue(name);
+            // Delete existing image
+            // Generate storageRef from selected event
+            StorageReference deleteRef = mStorage.getReferenceFromUrl(selectedEventImageUrl);
+            // Use storageRef to delete image
+            deleteRef.delete();
+            // Write new image to storage
+            // Create a file name for the image using the unique key
+            StorageReference fileReference = mStorageRef.child(selectedEventKey
+                    + "." + getFileExtension(mImageUri));
+            // Create storage task, load image to cloud with listener
+            mUploadTask = fileReference.putFile(mImageUri).
+                    addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                // If successful...
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler progHandler = new Handler();
+                    progHandler.postDelayed(new Runnable() {
+                        // Set a short delay to allow progress bar to be viewable
+                        @Override
+                        public void run() {
+                            mProgressBar.setProgress(0);
+                        }
+                    }, 250);
+                    // Get new URL
+                    String newImageURL = taskSnapshot.getDownloadUrl().toString();
+                    // Write new URL to existing event
+                    // Use selectedKey to change event heading value
+                    mDatabaseRef.child(selectedEventKey).child("imageUrl")
+                            .setValue(newImageURL).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        // Confirm update
+                        Toast.makeText(getApplicationContext(),
+                                "Event Heading and Image Updated", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    // Finish Activity and return to DisplayEvents
+                    openDisplayEventsActivity();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                // Show error message if database write fails
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(UpdateDeleteEventActivity.this,
+                            e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                // Calculate upload percentage and use to animate progress bar
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()
+                            / taskSnapshot.getTotalByteCount());
+                    mProgressBar.setProgress((int) progress);
+                }
+            });
         }
+    }
+
+    /* DELETE: Delete events from database */
+    // Method called to Delete Events
+    private void deleteEvent() {
+        // Generate storageRef from selected event
+        StorageReference deleteRef = mStorage.getReferenceFromUrl(selectedEventImageUrl);
+        // Use storageRef to delete image
+        deleteRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // Following image deletion, delete database entry
+                mDatabaseRef.child(selectedEventKey).removeValue();
+                // Confirm deletion
+                Toast.makeText(getBaseContext(),
+                        "Event Deleted", Toast.LENGTH_SHORT).show();
+                // Finish Activity and return to DisplayEvents
+                openDisplayEventsActivity();
+            }
+        });
+    }
+
+    // Method called to close activity and openDisplayEventsActivity
+    public void openDisplayEventsActivity() {
+        Intent intent = new Intent(this, DisplayEventsActivity.class);
+        startActivity(intent);
     }
 
 }

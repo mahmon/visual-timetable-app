@@ -155,8 +155,8 @@ public class DisplayEventsActivity extends BaseActivity
 
     // Destroy EventListener when Activity is destroyed
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         mDatabaseRef.removeEventListener(mDBListener);
     }
 
