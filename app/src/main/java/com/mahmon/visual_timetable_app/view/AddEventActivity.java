@@ -62,6 +62,7 @@ public class AddEventActivity extends BaseActivity {
         getToolBarBottom().getMenu().removeItem(R.id.btn_zoom_out);
         getToolBarBottom().getMenu().removeItem(R.id.btn_zoom_in);
         getToolBarBottom().getMenu().removeItem(R.id.btn_add_event);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_delete_event);
         // Button listener for bottom menu
         getToolBarBottom().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

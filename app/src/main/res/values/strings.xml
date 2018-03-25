@@ -11,6 +11,7 @@
     <string name="btn_add_event">Add Event</string>
     <string name="btn_save_event">Save Event</string>
     <string name="btn_cancel_save">Cancel</string>
+    <string name="btn_delete_event">Delete Event</string>
     <string name="btn_save_edited_event">Save Edited Event</string>
     <string name="btn_toggle_theme">Toggle Theme</string>
     <string name="btn_zoom_in">Zoom In</string>
@@ -19,6 +20,7 @@
     <!-- TextView IDs and Strings -->
     <string name="txt_enter_event_heading">Enter Event Name</string>
     <string name="txt_update_event_prompt">Enter New Event Name</string>
+    <string name="txt_save_updated_event">Save Updates</string>
     <string name="txt_change_image_prompt">Click To Change Image</string>
     <string name="txt_update_event_heading">Edit Event</string>
     <string name="txt_start_screen_heading">Login</string>
@@ -27,8 +29,5 @@
     <string name="txt_add_screen_heading">Add Event</string>
     <string name="txt_choose_image">Choose Image</string>
     <string name="txt_delete_event">Delete Event</string>
-    <string name="title_activity_images">ImagesActivity</string>
-    <string name="title_activity_finish">FinishActivity</string>
-    <string name="title_activity_edit_event">EditEventActivity</string>
 
 </resources>

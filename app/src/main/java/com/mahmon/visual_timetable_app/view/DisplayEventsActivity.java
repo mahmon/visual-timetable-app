@@ -49,8 +49,9 @@ public class DisplayEventsActivity extends BaseActivity
         // Set bottom menu icons for this context (remove unwanted)
         getToolBarBottom().getMenu().removeItem(R.id.btn_enter_app);
         getToolBarBottom().getMenu().removeItem(R.id.btn_return_login);
-        getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
         getToolBarBottom().getMenu().removeItem(R.id.btn_cancel_save);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_save_event);
+        getToolBarBottom().getMenu().removeItem(R.id.btn_delete_event);
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Attach mRecyclerView to recycler_view
