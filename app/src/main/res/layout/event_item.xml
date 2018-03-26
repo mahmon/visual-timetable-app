@@ -15,7 +15,7 @@
         <!-- TextView: to display event name -->
         <TextView
             android:id="@+id/text_view_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/wide_margin"
@@ -26,6 +26,15 @@
             android:id="@+id/image_view_upload"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
+
+        <!-- TextView: to display event description -->
+        <TextView
+            android:id="@+id/text_view_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/wide_margin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </LinearLayout>
 
