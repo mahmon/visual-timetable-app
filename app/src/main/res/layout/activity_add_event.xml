@@ -8,7 +8,6 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
-
     <include layout="@layout/tool_bar_bottom" />
 
     <RelativeLayout
@@ -38,33 +37,35 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_add_screen_heading"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/wide_margin"
+            android:layout_marginLeft="@dimen/wide_margin"
+            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginTop="@dimen/narrow_margin"
             android:hint="@string/txt_enter_event_heading"
             android:inputType="text"
             android:paddingTop="@dimen/wide_margin"
             android:textAlignment="center" />
 
-        <!-- Button: Choose event image -->
-        <Button
-            android:id="@+id/button_choose_image"
-            android:layout_width="wrap_content"
+        <!-- Text View: Choose event image -->
+        <TextView
+            android:id="@+id/txt_choose_image"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_text_file_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/wide_margin"
+            android:layout_below="@+id/edit_text_file_name"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
             android:text="@string/btn_choose_image"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <!-- Image View: Display selected image -->
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/progress_bar_upload"
-            android:layout_below="@id/button_choose_image"
-            android:layout_marginBottom="@dimen/wide_margin"
+            android:layout_height="200dp"
+            android:layout_below="@id/edit_text_file_name"
             android:layout_marginLeft="@dimen/wide_margin"
             android:layout_marginRight="@dimen/wide_margin"
+            android:alpha="0.4"
             android:background="@color/colorAccent"
             android:contentDescription="@string/txt_choose_image" />
 
@@ -74,10 +75,25 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/wide_margin"
+            android:layout_below="@id/image_view"
             android:layout_marginLeft="@dimen/wide_margin"
-            android:layout_marginRight="@dimen/wide_margin" />
+            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginTop="@dimen/narrow_margin" />
+
+        <!-- Edit Text: To receive event description  -->
+        <EditText
+            android:id="@+id/edit_text_file_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress_bar_upload"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/wide_margin"
+            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:hint="@string/txt_enter_event_description"
+            android:inputType="text"
+            android:paddingTop="@dimen/wide_margin"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 
