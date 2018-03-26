@@ -74,6 +74,8 @@ public class DisplayEventsActivity extends BaseActivity
         mAdapter.setOnItemClickListener(DisplayEventsActivity.this);
         // Get Firebase database reference for VISUAL_EVENTS node
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
+        // Keep data synced in offline mode
+        mDatabaseRef.keepSynced(true);
         // Instantiate database listener
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             // Method called on activity load and on any data changes

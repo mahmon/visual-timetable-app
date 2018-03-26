@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 
@@ -27,6 +28,8 @@ public class StartActivity extends BaseActivity {
         getToolBarBottom().getMenu().removeItem(R.id.btn_delete_event);
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
+        // Set up Firebase for offline mode
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     // Implement the default options menu

@@ -42,11 +42,12 @@
             android:textAlignment="center" />
 
         <!-- Image View: Display current image -->
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image_view_current_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@id/txt_enter_event_heading"
+            android:alpha="0.4"
             android:layout_margin="@dimen/narrow_margin" />
 
         <!-- Text View: Delete event label -->
