@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -39,10 +38,10 @@ public class AddEventActivity extends BaseActivity {
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variables for view elements
-    private Button mButtonChooseImage;
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
+    private EditText mEditTextDescription;
     // Variable to store image URI
     private Uri mImageUri;
     // Database and Storage references
@@ -93,15 +92,15 @@ public class AddEventActivity extends BaseActivity {
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Attach local view variables to XML elements
-        mButtonChooseImage = findViewById(R.id.button_choose_image);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar_upload);
+        mEditTextDescription = findViewById(R.id.edit_text_file_description);
         // Instantiate database and storage references
         mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
-        // Set click listener for choose image button
-        mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
+        // Set click listener for choose image view
+        mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // On click open file chooser method
@@ -165,7 +164,7 @@ public class AddEventActivity extends BaseActivity {
     private void uploadFile() {
     // If EditText box is NOT blank...
         if (!TextUtils.isEmpty(mEditTextFileName.getText().toString().trim())) {
-            // Then... If and image has been selected
+            // Then... If an image has been selected
             if (mImageUri != null) {
                 // Get a unique key from the database
                 final String uploadId = mDatabaseRef.push().getKey();
@@ -186,14 +185,17 @@ public class AddEventActivity extends BaseActivity {
                                 mProgressBar.setProgress(0);
                             }
                         }, 250);
+                        // Gather details to create object
+                        String name = mEditTextFileName.getText().toString().trim();
+                        String description = mEditTextDescription.getText().toString().trim();
+                        // Create a new event object, pass event name, description and image URL
+                        Event event = new Event(name, taskSnapshot.getDownloadUrl()
+                                .toString(), description);
+                        // Write event to database using key from line above
+                        mDatabaseRef.child(uploadId).setValue(event);
                         // Prompt user that upload successful
                         Toast.makeText(AddEventActivity.this,
                                 "Event created", Toast.LENGTH_LONG).show();
-                        // Create a new event object, pass event name entered and image URL
-                        Event event = new Event(mEditTextFileName.getText().toString().trim(),
-                                taskSnapshot.getDownloadUrl().toString());
-                        // Write event to database a key from line above
-                        mDatabaseRef.child(uploadId).setValue(event);
                         // Run short delay before switching activities
                         Handler showHandler = new Handler();
                         showHandler.postDelayed(new Runnable() {
