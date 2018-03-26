@@ -20,6 +20,7 @@
     <!-- TextView IDs and Strings -->
     <string name="txt_enter_event_heading">Enter Event Name</string>
     <string name="txt_enter_event_description">Enter Event Description</string>
+    <string name="txt_update_event_description">Enter New Event Description</string>
     <string name="txt_update_event_prompt">Enter New Event Name</string>
     <string name="txt_save_updated_event">Save Updates</string>
     <string name="txt_change_image_prompt">Click To Change Image</string>

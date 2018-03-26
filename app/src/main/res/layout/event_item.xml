@@ -22,7 +22,7 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorFont"
-            android:textSize="20dp" />
+            android:textSize="@dimen/font_large" />
 
         <!-- ImageView: to display event image -->
         <ImageView
@@ -39,7 +39,7 @@
             android:layout_margin="@dimen/wide_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorFont"
-            android:textSize="14dp" />
+            android:textSize="@dimen/font_small" />
 
     </LinearLayout>
 

@@ -8,6 +8,7 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
+
     <include layout="@layout/tool_bar_bottom" />
 
     <RelativeLayout
@@ -44,7 +45,7 @@
             android:inputType="text"
             android:paddingTop="@dimen/wide_margin"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textSize="@dimen/font_large" />
 
         <!-- Text View: Choose event image -->
         <TextView
@@ -92,10 +93,10 @@
             android:layout_marginRight="@dimen/wide_margin"
             android:layout_marginTop="@dimen/narrow_margin"
             android:hint="@string/txt_enter_event_description"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:paddingTop="@dimen/wide_margin"
             android:textAlignment="center"
-            android:textSize="14dp" />
+            android:textSize="@dimen/font_small" />
 
     </RelativeLayout>
 
