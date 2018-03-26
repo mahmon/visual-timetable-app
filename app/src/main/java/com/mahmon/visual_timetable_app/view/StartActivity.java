@@ -28,7 +28,7 @@ public class StartActivity extends BaseActivity {
         getToolBarBottom().getMenu().removeItem(R.id.btn_delete_event);
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
-        // Set up Firebase for offline mode
+        // Set up Firebase to work offline
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
