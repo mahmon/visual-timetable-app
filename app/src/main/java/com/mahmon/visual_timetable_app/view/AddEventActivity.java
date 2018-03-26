@@ -188,7 +188,7 @@ public class AddEventActivity extends BaseActivity {
                         }, 250);
                         // Prompt user that upload successful
                         Toast.makeText(AddEventActivity.this,
-                                "Upload successful", Toast.LENGTH_LONG).show();
+                                "Event created", Toast.LENGTH_LONG).show();
                         // Create a new event object, pass event name entered and image URL
                         Event event = new Event(mEditTextFileName.getText().toString().trim(),
                                 taskSnapshot.getDownloadUrl().toString());

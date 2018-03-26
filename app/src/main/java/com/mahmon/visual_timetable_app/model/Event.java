@@ -10,6 +10,7 @@ public class Event {
     // Variables for name, image url and database key
     private String mName;
     private String mImageUrl;
+    private String mDescription;
     private String mKey;
 
     // Dfault constructor required by Firebase
@@ -17,9 +18,10 @@ public class Event {
     }
 
     // Constructor to build event objects, pass name and imageUrl
-    public Event(String name, String imageUrl) {
+    public Event(String name, String imageUrl, String description) {
         mName = name;
         mImageUrl = imageUrl;
+        mDescription = description;
     }
 
     // Getter methods
@@ -29,6 +31,9 @@ public class Event {
     public String getImageUrl() {
         return mImageUrl;
     }
+    public String getDescription() {
+        return mDescription;
+    }
 
     // Setter methods
     public void setName(String name) {
@@ -36,6 +41,9 @@ public class Event {
     }
     public void setImageUrl(String imageUrl) {
         mImageUrl = imageUrl;
+    }
+    public void setIDescription(String description) {
+        mDescription = description;
     }
 
     // Getter and setter for Key
