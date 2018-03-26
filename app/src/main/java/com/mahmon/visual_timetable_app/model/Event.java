@@ -13,7 +13,7 @@ public class Event {
     private String mDescription;
     private String mKey;
 
-    // Dfault constructor required by Firebase
+    // Default constructor required by Firebase
     public Event() {
     }
 
