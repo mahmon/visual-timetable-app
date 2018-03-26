@@ -5,6 +5,8 @@ import com.google.firebase.database.Exclude;
 // Class used to instantiate Event objects for storage in database
 public class Event {
 
+    // Need to add descriptions and allow for links to open browser
+
     // Variables for name, image url and database key
     private String mName;
     private String mImageUrl;
