@@ -42,7 +42,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         // Get event at each list position
         Event eventCurrent = mEvents.get(position);
-        // Get event name and picture and load into current event
+        // Get event name, picture, desciption and load into current event
         holder.textViewName.setText(eventCurrent.getName());
         Picasso.with(mContext)
                 .load(eventCurrent.getImageUrl())
@@ -50,6 +50,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
+        holder.textViewDescription.setText(eventCurrent.getDescription());
     }
 
     // Override method to return size of list
@@ -65,6 +66,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
         // Variables to hold the name and the image
         public TextView textViewName;
         public ImageView imageView;
+        public TextView textViewDescription;
 
         // Constructor
         public ImageViewHolder(View itemView) {
@@ -74,6 +76,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
             textViewName = itemView.findViewById(R.id.text_view_name);
             // Link imageView to image_view_upload
             imageView = itemView.findViewById(R.id.image_view_upload);
+            // Link textView description to text_view_description
+            textViewDescription = itemView.findViewById(R.id.text_view_description);
             // Set the onClickListener
             itemView.setOnClickListener(this);
 
