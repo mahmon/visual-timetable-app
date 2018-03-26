@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.mahmon.visual_timetable_app.view.AddEventActivity;
 import com.mahmon.visual_timetable_app.view.DisplayEventsActivity;
 import com.mahmon.visual_timetable_app.view.FinishActivity;

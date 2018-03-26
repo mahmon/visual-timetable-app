@@ -43,7 +43,8 @@
             android:hint="@string/txt_enter_event_heading"
             android:inputType="text"
             android:paddingTop="@dimen/wide_margin"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="20dp" />
 
         <!-- Text View: Choose event image -->
         <TextView
@@ -93,7 +94,8 @@
             android:hint="@string/txt_enter_event_description"
             android:inputType="text"
             android:paddingTop="@dimen/wide_margin"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="14dp" />
 
     </RelativeLayout>
 
