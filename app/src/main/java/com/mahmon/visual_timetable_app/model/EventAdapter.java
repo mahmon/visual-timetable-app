@@ -33,8 +33,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
     @Override
     public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Instantiate new view and inflate an event item
-        View v = LayoutInflater.from(mContext).inflate(R.layout.event_item, parent, false);
-        return new ImageViewHolder(v);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.event_item, parent, false);
+        return new ImageViewHolder(view);
     }
 
     // Override method to bind data to ImageView
@@ -42,7 +42,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         // Get event at each list position
         Event eventCurrent = mEvents.get(position);
-        // Get event name, picture, desciption and load into current event
+        // Get event name, picture, description and load into current event
         holder.textViewName.setText(eventCurrent.getName());
         Picasso.with(mContext)
                 .load(eventCurrent.getImageUrl())

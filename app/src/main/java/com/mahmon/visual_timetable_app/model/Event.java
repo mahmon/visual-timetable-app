@@ -42,7 +42,7 @@ public class Event {
     public void setImageUrl(String imageUrl) {
         mImageUrl = imageUrl;
     }
-    public void setIDescription(String description) {
+    public void setDescription(String description) {
         mDescription = description;
     }
 

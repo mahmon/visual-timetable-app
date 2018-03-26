@@ -12,5 +12,7 @@
     <color name="colorPicTint">#585858</color>
     <!-- Progress bar tint -->
     <color name="progressBarTint">#FF6600</color>
+    <!-- Off White Text -->
+    <color name="colorFont">#CDCDCD</color>
 
 </resources>
