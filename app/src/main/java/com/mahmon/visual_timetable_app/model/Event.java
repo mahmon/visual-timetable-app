@@ -8,6 +8,7 @@ public class Event {
     // Need to add descriptions and allow for links to open browser
 
     // Variables for name, image url and database key
+    private int mDate;
     private String mName;
     private String mImageUrl;
     private String mDescription;
@@ -18,13 +19,17 @@ public class Event {
     }
 
     // Constructor to build event objects, pass name and imageUrl
-    public Event(String name, String imageUrl, String description) {
+    public Event(int date, String name, String imageUrl, String description) {
+        mDate = date;
         mName = name;
         mImageUrl = imageUrl;
         mDescription = description;
     }
 
     // Getter methods
+    public int getDate() {
+        return mDate;
+    }
     public String getName() {
         return mName;
     }
@@ -36,6 +41,9 @@ public class Event {
     }
 
     // Setter methods
+    public void setDate(int date) {
+        mDate = date;
+    }
     public void setName(String name) {
         mName = name;
     }
