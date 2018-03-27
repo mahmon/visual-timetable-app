@@ -42,7 +42,7 @@
         <!-- Button: To open date picker -->
         <Button
             android:id="@+id/btn_pick_date"
-            android:layout_width="@dimen/wide_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/dummy_view"
             android:layout_below="@+id/txt_add_screen_heading"

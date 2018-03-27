@@ -38,9 +38,18 @@ import com.mahmon.visual_timetable_app.R;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 // Class to Add events to database
 public class AddEventActivity extends BaseActivity {
 
+    // Constant used for formatting selected date
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
     // Variable to catch the selected date
     public int mDate;
     // Broadcast receiver used to get values from date picker
@@ -205,6 +214,16 @@ public class AddEventActivity extends BaseActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+
+    // Method used to parse int received from date picker back into date format
+    public static Date parseDate(String dateStr) {
+        try {
+            return DATE_FORMAT.parse(dateStr);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     // Nested class called to construct local broadcast receiver
     private class LocalBroadcastReceiverDate extends BroadcastReceiver {
         @Override
@@ -219,10 +238,15 @@ public class AddEventActivity extends BaseActivity {
                 Bundle dateBundle = intent.getExtras();
                 // Save dateAsInt into mDate
                 mDate = dateBundle.getInt("dateAsInt");
-                // Convert mDate to String
-                String btnDate = "" + mDate;
-                // Write the date on the button
-                mButtonDate.setText(btnDate);
+                /* SET Button text to selected date */
+                // Create String from int mDate
+                String mDateAsString = "" + mDate;
+                // Create Date object from mDateAsString
+                Date mDateAsDate = parseDate(mDateAsString);
+                // Convert date object back to String to display on button
+                String btnDateText = String.format("%1$s %2$tB %2$td, %2$tY", "" , mDateAsDate);
+                // Write selected date onto the button
+                mButtonDate.setText(btnDateText);
             }
         }
     }
