@@ -47,7 +47,6 @@
             android:layout_alignRight="@+id/dummy_view"
             android:layout_below="@+id/txt_add_screen_heading"
             android:layout_marginTop="@dimen/narrow_margin"
-            android:onClick="showDatePickerDialog"
             android:text="@string/btn_pick_date" />
 
         <!-- Button: To open time picker -->

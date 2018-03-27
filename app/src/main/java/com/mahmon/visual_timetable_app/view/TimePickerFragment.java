@@ -1,4 +1,4 @@
-package com.mahmon.visual_timetable_app;
+package com.mahmon.visual_timetable_app.view;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -33,9 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
-import com.mahmon.visual_timetable_app.DatePickerFragment;
 import com.mahmon.visual_timetable_app.R;
-import com.mahmon.visual_timetable_app.TimePickerFragment;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
@@ -49,6 +48,7 @@ public class AddEventActivity extends BaseActivity {
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variables for view elements
+    private Button mButtonDate;
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -103,12 +103,22 @@ public class AddEventActivity extends BaseActivity {
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Instantiate local broadcast receiver for dates
-        localBroadcastReceiverDate = new LocalBroadcastReceiver();
+        localBroadcastReceiverDate = new LocalBroadcastReceiverDate();
         // Attach local view variables to XML elements
+        mButtonDate = findViewById(R.id.btn_pick_date);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar_upload);
         mEditTextDescription = findViewById(R.id.edit_text_file_description);
+
+
+        mButtonDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+
         // Instantiate database and storage references
         mStorageRef = FirebaseStorage.getInstance().getReference(VISUAL_EVENTS);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
@@ -190,13 +200,13 @@ public class AddEventActivity extends BaseActivity {
     }
 
     // Inflate date picker, called from XML for btn_pick_date
-    public void showDatePickerDialog(View v) {
+    public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     // Nested class called to construct local broadcast receiver
-    private class LocalBroadcastReceiver extends BroadcastReceiver {
+    private class LocalBroadcastReceiverDate extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Check for null entries
@@ -209,10 +219,10 @@ public class AddEventActivity extends BaseActivity {
                 Bundle dateBundle = intent.getExtras();
                 // Save dateAsInt into mDate
                 mDate = dateBundle.getInt("dateAsInt");
-
-                // TEST: Pass int into string and print to toast
-                String dateAsString = "" + mDate;
-                Toast.makeText(context, dateAsString, Toast.LENGTH_LONG).show();
+                // Convert mDate to String
+                String btnDate = "" + mDate;
+                // Write the date on the button
+                mButtonDate.setText(btnDate);
             }
         }
     }
