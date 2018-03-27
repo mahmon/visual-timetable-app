@@ -31,37 +31,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Button: To open time picker -->
-        <Button
-            android:id="@+id/btn_pick_time"
-            android:layout_width="@dimen/wide_button"
-            android:layout_height="wrap_content"
+        <!-- View: Empty view to align buttons to -->
+        <View
+            android:id="@+id/dummy_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_below="@+id/txt_add_screen_heading"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/narrow_margin"
-            android:text="@string/btn_pick_time" />
+            android:layout_centerInParent="true" />
 
         <!-- Button: To open date picker -->
         <Button
             android:id="@+id/btn_pick_date"
             android:layout_width="@dimen/wide_button"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/btn_pick_time"
-            android:layout_marginRight="@dimen/wide_button"
+            android:layout_alignRight="@+id/dummy_view"
             android:layout_below="@+id/txt_add_screen_heading"
             android:layout_marginTop="@dimen/narrow_margin"
+            android:onClick="showDatePickerDialog"
             android:text="@string/btn_pick_date" />
 
-        <!-- Button: To open duration picker -->
+        <!-- Button: To open time picker -->
         <Button
-            android:id="@+id/btn_pick_duration"
+            android:id="@+id/btn_pick_time"
             android:layout_width="@dimen/wide_button"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btn_pick_time"
-            android:layout_marginLeft="@dimen/wide_button"
+            android:layout_alignLeft="@+id/dummy_view"
             android:layout_below="@+id/txt_add_screen_heading"
+            android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/narrow_margin"
-            android:text="@string/btn_pick_duration" />
+            android:onClick="showTimePickerDialog"
+            android:text="@string/btn_pick_time" />
 
         <!-- Edit Text: To receive event heading  -->
         <EditText

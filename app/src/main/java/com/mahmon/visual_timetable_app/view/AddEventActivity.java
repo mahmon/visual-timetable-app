@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -28,7 +29,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
+import com.mahmon.visual_timetable_app.DatePickerFragment;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.TimePickerFragment;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
@@ -157,6 +160,18 @@ public class AddEventActivity extends BaseActivity {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    // Inflate date picker, called from XML for btn_pick_date
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    // Inflate time picker, called from XML for btn_pick_time
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     /* CREATE: Write to database */
