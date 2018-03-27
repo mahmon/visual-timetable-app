@@ -2,15 +2,21 @@ package com.mahmon.visual_timetable_app;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
+
+    // Variable used to store date as concatenated String
+    private String dateAsString;
+    // Variable used to store concatenated String as int
+    private int dateAsInt;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -26,9 +32,14 @@ public class DatePickerFragment extends DialogFragment
 
     // Method called when user clicks OK in the dialog
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        // TODO
-        String selectedDate = "" + getDateFromDatePicker(view);
-        Toast.makeText(getContext(), selectedDate , Toast.LENGTH_LONG).show();
+
+        // Call method to convert picked date to concatenated int
+        getDateFromDatePicker(view);
+
+        // Broadcast the result back to the activity
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(
+                new Intent("SOME_ACTION").putExtra("dateAsInt", dateAsInt));
+
     }
 
     // Method to convert the date into a string - YYYYMMDD
@@ -47,12 +58,12 @@ public class DatePickerFragment extends DialogFragment
         String yyyy = "" + year;
 
         // Concantenate values into one long String
-        String dateAsString = yyyy + mm + dd;
+        dateAsString = yyyy + mm + dd;
 
-        // Convert String back into int
-        int dateAsInt = Integer.parseInt(dateAsString);
+        // Convert concatenated String into int
+        dateAsInt = Integer.parseInt(dateAsString);
 
-        // Return the date value as an int
+        // Return the date value as a String
         return dateAsInt;
     }
 

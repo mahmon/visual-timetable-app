@@ -1,12 +1,16 @@
 package com.mahmon.visual_timetable_app.view;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -38,6 +42,8 @@ import com.squareup.picasso.Picasso;
 // Class to Add events to database
 public class AddEventActivity extends BaseActivity {
 
+    // Variable to catch the selected date
+    public int mDate;
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variables for view elements
@@ -57,6 +63,12 @@ public class AddEventActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
+
+        localBroadcastReceiver = new LocalBroadcastReceiver();
+
+
+
         // Set bottom menu icons for this context (remove unwanted)
         getToolBarBottom().getMenu().removeItem(R.id.btn_enter_app);
         getToolBarBottom().getMenu().removeItem(R.id.btn_exit_app);
@@ -111,6 +123,23 @@ public class AddEventActivity extends BaseActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                localBroadcastReceiver,
+                new IntentFilter("SOME_ACTION"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(
+                localBroadcastReceiver);
+    }
+
 
     // Implement the default options menu
     @Override
@@ -168,6 +197,35 @@ public class AddEventActivity extends BaseActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    // TODO
+
+    private class LocalBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // safety check
+            if (intent == null || intent.getAction() == null) {
+                return;
+            }
+
+            if (intent.getAction().equals("SOME_ACTION")) {
+                Bundle dateBundle = intent.getExtras();
+
+                mDate = dateBundle.getInt("dateAsInt");
+
+
+                String dateAsString = "" + mDate;
+
+                Toast.makeText(context, dateAsString, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private BroadcastReceiver localBroadcastReceiver;
+
+
+
+
     // Inflate time picker, called from XML for btn_pick_time
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
@@ -204,7 +262,7 @@ public class AddEventActivity extends BaseActivity {
                         String name = mEditTextFileName.getText().toString().trim();
                         String description = mEditTextDescription.getText().toString().trim();
                         // Create a new event object, pass event name, description and image URL
-                        Event event = new Event(name, taskSnapshot.getDownloadUrl()
+                        Event event = new Event(mDate, name, taskSnapshot.getDownloadUrl()
                                 .toString(), description);
                         // Write event to database using key from line above
                         mDatabaseRef.child(uploadId).setValue(event);
