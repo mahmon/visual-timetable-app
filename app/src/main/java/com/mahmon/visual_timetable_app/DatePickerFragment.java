@@ -36,10 +36,9 @@ public class DatePickerFragment extends DialogFragment
         // Call method to convert picked date to concatenated int
         getDateFromDatePicker(view);
 
-        // Broadcast the result back to the activity
+        // Broadcast the result back to the activity, bundle in dateAsInt
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(
-                new Intent("SOME_ACTION").putExtra("dateAsInt", dateAsInt));
-
+                new Intent("GET_DATE").putExtra("dateAsInt", dateAsInt));
     }
 
     // Method to convert the date into a string - YYYYMMDD

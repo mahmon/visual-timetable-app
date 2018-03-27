@@ -44,6 +44,8 @@ public class AddEventActivity extends BaseActivity {
 
     // Variable to catch the selected date
     public int mDate;
+    // Broadcast receiver used to get values from date picker
+    private BroadcastReceiver localBroadcastReceiverDate;
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variables for view elements
@@ -63,12 +65,6 @@ public class AddEventActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
-
-        localBroadcastReceiver = new LocalBroadcastReceiver();
-
-
-
         // Set bottom menu icons for this context (remove unwanted)
         getToolBarBottom().getMenu().removeItem(R.id.btn_enter_app);
         getToolBarBottom().getMenu().removeItem(R.id.btn_exit_app);
@@ -106,6 +102,8 @@ public class AddEventActivity extends BaseActivity {
         });
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
+        // Instantiate local broadcast receiver for dates
+        localBroadcastReceiverDate = new LocalBroadcastReceiver();
         // Attach local view variables to XML elements
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
@@ -124,22 +122,22 @@ public class AddEventActivity extends BaseActivity {
         });
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
+        // Register broadcast receiver to get date on resume
         LocalBroadcastManager.getInstance(this).registerReceiver(
-                localBroadcastReceiver,
-                new IntentFilter("SOME_ACTION"));
+                localBroadcastReceiverDate,
+                new IntentFilter("GET_DATE"));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        // Un register broadcast receiver on pause
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
-                localBroadcastReceiver);
+                localBroadcastReceiverDate);
     }
-
 
     // Implement the default options menu
     @Override
@@ -197,34 +195,27 @@ public class AddEventActivity extends BaseActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    // TODO
-
+    // Nested class called to construct local broadcast receiver
     private class LocalBroadcastReceiver extends BroadcastReceiver {
-
         @Override
         public void onReceive(Context context, Intent intent) {
-            // safety check
+            // Check for null entries
             if (intent == null || intent.getAction() == null) {
                 return;
             }
-
-            if (intent.getAction().equals("SOME_ACTION")) {
+            // If intents match...
+            if (intent.getAction().equals("GET_DATE")) {
+                // Get bundled data and store locally
                 Bundle dateBundle = intent.getExtras();
-
+                // Save dateAsInt into mDate
                 mDate = dateBundle.getInt("dateAsInt");
 
-
+                // TEST: Pass int into string and print to toast
                 String dateAsString = "" + mDate;
-
                 Toast.makeText(context, dateAsString, Toast.LENGTH_LONG).show();
             }
         }
     }
-
-    private BroadcastReceiver localBroadcastReceiver;
-
-
-
 
     // Inflate time picker, called from XML for btn_pick_time
     public void showTimePickerDialog(View v) {
