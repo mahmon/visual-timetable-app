@@ -167,6 +167,7 @@ public class AddEventActivity extends BaseActivity {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
+
     // Inflate time picker, called from XML for btn_pick_time
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
