@@ -38,10 +38,7 @@ import com.mahmon.visual_timetable_app.R;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -119,11 +116,11 @@ public class AddEventActivity extends BaseActivity {
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar_upload);
         mEditTextDescription = findViewById(R.id.edit_text_file_description);
-
-
+        // Set onClick listener for date picker button
         mButtonDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Call picker dialog defined below
                 showDatePickerDialog();
             }
         });
@@ -144,7 +141,7 @@ public class AddEventActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Register broadcast receiver to get date on resume
+        // Register broadcast receiver to get date from dialog on resume
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 localBroadcastReceiverDate,
                 new IntentFilter("GET_DATE"));
@@ -153,7 +150,7 @@ public class AddEventActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        // Un register broadcast receiver on pause
+        // Unregister broadcast receiver on pause
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
                 localBroadcastReceiverDate);
     }
