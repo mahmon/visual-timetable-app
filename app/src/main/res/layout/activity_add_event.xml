@@ -8,6 +8,7 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
+
     <include layout="@layout/tool_bar_bottom" />
 
     <RelativeLayout
@@ -30,21 +31,65 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Button: To open time picker -->
+        <Button
+            android:id="@+id/btn_pick_time"
+            android:layout_width="@dimen/wide_button"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_add_screen_heading"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:text="@string/btn_pick_time" />
+
+        <!-- Button: To open date picker -->
+        <Button
+            android:id="@+id/btn_pick_date"
+            android:layout_width="@dimen/wide_button"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/btn_pick_time"
+            android:layout_marginRight="@dimen/wide_button"
+            android:layout_below="@+id/txt_add_screen_heading"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:text="@string/btn_pick_date" />
+
+        <!-- Button: To open duration picker -->
+        <Button
+            android:id="@+id/btn_pick_duration"
+            android:layout_width="@dimen/wide_button"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btn_pick_time"
+            android:layout_marginLeft="@dimen/wide_button"
+            android:layout_below="@+id/txt_add_screen_heading"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:text="@string/btn_pick_duration" />
+
         <!-- Edit Text: To receive event heading  -->
         <EditText
             android:id="@+id/edit_text_file_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_add_screen_heading"
+            android:layout_below="@+id/btn_pick_time"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/wide_margin"
             android:layout_marginRight="@dimen/wide_margin"
-            android:layout_marginTop="@dimen/narrow_margin"
             android:hint="@string/txt_enter_event_heading"
             android:inputType="text"
             android:paddingTop="@dimen/wide_margin"
             android:textAlignment="center"
             android:textSize="@dimen/font_large" />
+
+        <!-- Image View: Display selected image -->
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/edit_text_file_name"
+            android:layout_marginLeft="@dimen/super_wide_margin"
+            android:layout_marginRight="@dimen/super_wide_margin"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:alpha="0.4"
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/txt_choose_image" />
 
         <!-- Text View: Choose event image -->
         <TextView
@@ -52,23 +97,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edit_text_file_name"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="65dp"
             android:gravity="center"
             android:text="@string/btn_choose_image"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <!-- Image View: Display selected image -->
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/edit_text_file_name"
-            android:layout_marginLeft="@dimen/wide_margin"
-            android:layout_marginRight="@dimen/wide_margin"
-            android:alpha="0.4"
-            android:background="@color/colorAccent"
-            android:contentDescription="@string/txt_choose_image" />
 
         <!-- Progress Bar: Shows upload progress-->
         <ProgressBar

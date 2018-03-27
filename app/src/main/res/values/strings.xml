@@ -9,6 +9,9 @@
     <string name="btn_return_login">Return</string>
     <string name="btn_choose_image">Choose Image</string>
     <string name="btn_add_event">Add Event</string>
+    <string name="btn_pick_date">Date</string>
+    <string name="btn_pick_time">Time</string>
+    <string name="btn_pick_duration">Duration</string>
     <string name="btn_save_event">Save Event</string>
     <string name="btn_cancel_save">Cancel</string>
     <string name="btn_delete_event">Delete Event</string>
