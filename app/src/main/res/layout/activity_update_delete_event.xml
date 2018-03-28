@@ -16,25 +16,54 @@
         android:id="@+id/layout_update_screen_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginTop="?android:attr/actionBarSize">
 
         <!-- Text View: To display screen heading -->
         <TextView
             android:id="@+id/txt_update_event_heading"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/txt_update_event_heading"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+        <!-- View: Empty view to align buttons to -->
+        <View
+            android:id="@+id/dummy_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/txt_update_event_heading"
+            android:layout_centerInParent="true" />
+
+        <!-- Button: To open date picker -->
+        <Button
+            android:id="@+id/btn_edit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/dummy_view"
+            android:layout_below="@+id/txt_update_event_heading"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:text="@string/btn_pick_date" />
+
+        <!-- Button: To open time picker -->
+        <Button
+            android:id="@+id/btn_edit_time"
+            android:layout_width="@dimen/wide_button"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/dummy_view"
+            android:layout_below="@+id/txt_update_event_heading"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/narrow_margin"
+            android:text="@string/btn_pick_time" />
+
         <!-- Edit Text: To receive new event heading -->
         <EditText
             android:id="@+id/edit_txt_enter_event_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_update_event_heading"
+            android:layout_below="@id/btn_edit_time"
             android:layout_marginLeft="@dimen/wide_margin"
             android:layout_marginRight="@dimen/wide_margin"
             android:layout_marginTop="@dimen/narrow_margin"
@@ -48,10 +77,11 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image_view_current_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             android:layout_below="@id/edit_txt_enter_event_heading"
-            android:layout_marginLeft="@dimen/wide_margin"
-            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginLeft="@dimen/super_wide_margin"
+            android:layout_marginRight="@dimen/super_wide_margin"
+            android:layout_marginTop="@dimen/narrow_margin"
             android:alpha="0.4" />
 
         <!-- Text View: Change image label -->
@@ -61,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/edit_txt_enter_event_heading"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:text="@string/txt_change_image_prompt"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -73,7 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/image_view_current_image"
             android:layout_marginLeft="@dimen/wide_margin"
-            android:layout_marginRight="@dimen/wide_margin" />
+            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginTop="@dimen/narrow_margin" />
 
         <!-- Edit Text: To receive event description  -->
         <EditText

@@ -14,22 +14,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginBottom="?android:attr/actionBarSize"
+        android:layout_marginTop="?android:attr/actionBarSize">
 
         <!-- Text View: To display screen heading -->
         <TextView
             android:id="@+id/txt_add_screen_heading"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/txt_add_screen_heading"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <!-- View: Empty view to align buttons to -->
         <View
@@ -58,7 +55,6 @@
             android:layout_below="@+id/txt_add_screen_heading"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/narrow_margin"
-            android:onClick="showTimePickerDialog"
             android:text="@string/btn_pick_time" />
 
         <!-- Edit Text: To receive event heading  -->
@@ -95,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edit_text_file_name"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
             android:text="@string/btn_choose_image"
             android:textAlignment="center"
