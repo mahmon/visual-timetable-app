@@ -11,7 +11,11 @@ import android.widget.TextView;
 import com.mahmon.visual_timetable_app.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import static com.mahmon.visual_timetable_app.view.AddEventActivity.parseDate;
 
 // Adapter class to join event list to recycler view
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHolder> {
@@ -42,7 +46,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         // Get event at each list position
         Event eventCurrent = mEvents.get(position);
-        // Get event name, picture, description and load into current event
+        // Get event date and convert to String
+        String dateAsString = "" + eventCurrent.getDate();
+        // Create Date object from dateAsString
+        Date dateAsDate = parseDate(dateAsString);
+        // Convert date object into formatted String
+        dateAsString = String.format(Locale.getDefault(),
+                "%1$s %2$tB %2$td, %2$tY", "" , dateAsDate);
+        // Load current event data into the holder for display
+        holder.textViewDate.setText(dateAsString);
         holder.textViewName.setText(eventCurrent.getName());
         Picasso.with(mContext)
                 .load(eventCurrent.getImageUrl())
@@ -63,7 +75,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
     public class ImageViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        // Variables to hold the name and the image
+        // Variables to hold the date, name, image and description
+        public TextView textViewDate;
         public TextView textViewName;
         public ImageView imageView;
         public TextView textViewDescription;
@@ -71,7 +84,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
         // Constructor
         public ImageViewHolder(View itemView) {
             super(itemView);
-
+            // Link textViewDate to text_view_date
+            textViewDate = itemView.findViewById(R.id.text_view_date);
             // Link textViewName to text_view_name
             textViewName = itemView.findViewById(R.id.text_view_name);
             // Link imageView to image_view_upload
@@ -80,7 +94,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ImageViewHol
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             // Set the onClickListener
             itemView.setOnClickListener(this);
-
         }
 
         // Get event position
