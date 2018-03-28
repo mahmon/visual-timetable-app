@@ -14,6 +14,20 @@
 
         <!-- TextView: to display event name -->
         <TextView
+            android:id="@+id/text_view_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/wide_margin"
+            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginTop="@dimen/wide_margin"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorFont"
+            android:textSize="@dimen/font_large" />
+
+        <!-- TextView: to display event name -->
+        <TextView
             android:id="@+id/text_view_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
