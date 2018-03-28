@@ -64,6 +64,5 @@
         android:icon="@drawable/ic_save_36dp"
         android:title="@string/btn_save_event"
         app:showAsAction="always" />
-
-
+    
 </menu>

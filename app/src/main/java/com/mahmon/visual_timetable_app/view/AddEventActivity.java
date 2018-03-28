@@ -114,8 +114,11 @@ public class AddEventActivity extends BaseActivity {
         localBroadcastReceiverDate = new LocalBroadcastReceiverDate();
         // Set mDatePicked to false
         mDatePicked = false;
-        // Attach local view variables to XML elements
+        // Attach local view btn_pick_date
         mButtonDate = findViewById(R.id.btn_pick_date);
+        // Set button text color to dim
+        mButtonDate.setTextColor(getResources().getColor(R.color.colorAccent));
+        // Attach local view variables to XML elements
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar_upload);
@@ -231,6 +234,8 @@ public class AddEventActivity extends BaseActivity {
                 mDate = dateBundle.getInt("dateAsInt");
                 /* SET Button text to selected date */
                 setButtonTextToDate(mButtonDate);
+                // Set button text color to bright
+                mButtonDate.setTextColor(getResources().getColor(R.color.colorFont));
                 // Set mDatePicked to true
                 mDatePicked = true;
             }

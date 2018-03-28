@@ -16,13 +16,13 @@
         android:id="@+id/layout_update_screen_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_marginTop="@dimen/tool_bar_height">
 
         <!-- Text View: To display screen heading -->
         <TextView
             android:id="@+id/txt_update_event_heading"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="@dimen/tool_bar_height"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/txt_update_event_heading"

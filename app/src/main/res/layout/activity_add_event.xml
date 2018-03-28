@@ -14,14 +14,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?android:attr/actionBarSize"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_marginBottom="@dimen/tool_bar_height"
+        android:layout_marginTop="@dimen/tool_bar_height">
 
         <!-- Text View: To display screen heading -->
         <TextView
             android:id="@+id/txt_add_screen_heading"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="@dimen/tool_bar_height"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/txt_add_screen_heading"
