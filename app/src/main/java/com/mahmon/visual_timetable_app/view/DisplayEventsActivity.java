@@ -41,6 +41,7 @@ public class DisplayEventsActivity extends BaseActivity
     // List used to hold events for display
     private List<Event> mEvents;
     // Variable for passing key to update edit event activity
+    private int selectedEventDate;
     private String selectedEventName;
     private String selectedEventImageUrl;
     private String selectedEventDescription;
@@ -141,6 +142,7 @@ public class DisplayEventsActivity extends BaseActivity
         // Instantiate an event object from the list position
         final Event selectedEvent = mEvents.get(position);
         // Store the event details in passable strings
+        selectedEventDate = selectedEvent.getDate();
         selectedEventName = selectedEvent.getName();
         selectedEventImageUrl = selectedEvent.getImageUrl();
         selectedEventDescription = selectedEvent.getDescription();
@@ -149,6 +151,7 @@ public class DisplayEventsActivity extends BaseActivity
         Intent intent = new Intent(getBaseContext(), UpdateDeleteEventActivity.class);
         // Create bundle to pass event data
         Bundle data = new Bundle();
+        data.putInt("EXTRA_EVENT_DATE", selectedEventDate);
         data.putString("EXTRA_EVENT_NAME", selectedEventName);
         data.putString("EXTRA_EVENT_IMAGE_URL", selectedEventImageUrl);
         data.putString("EXTRA_EVENT_DESCRIPTION", selectedEventDescription);

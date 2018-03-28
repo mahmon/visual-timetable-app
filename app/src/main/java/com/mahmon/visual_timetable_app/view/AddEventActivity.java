@@ -224,6 +224,18 @@ public class AddEventActivity extends BaseActivity {
         }
     }
 
+    public void setButtonTextToDate (Button btn) {
+        /* SET Button text to selected date */
+        // Create String from int mDate
+        String mDateAsString = "" + mDate;
+        // Create Date object from mDateAsString
+        Date mDateAsDate = parseDate(mDateAsString);
+        // Convert date object back to String to display on button
+        String btnDateText = String.format("%1$s %2$tB %2$td, %2$tY", "" , mDateAsDate);
+        // Write selected date onto the button
+        btn.setText(btnDateText);
+    }
+
     // Nested class called to construct local broadcast receiver
     private class LocalBroadcastReceiverDate extends BroadcastReceiver {
         @Override
@@ -240,24 +252,11 @@ public class AddEventActivity extends BaseActivity {
                 // Save dateAsInt into mDate
                 mDate = dateBundle.getInt("dateAsInt");
                 /* SET Button text to selected date */
-                // Create String from int mDate
-                String mDateAsString = "" + mDate;
-                // Create Date object from mDateAsString
-                Date mDateAsDate = parseDate(mDateAsString);
-                // Convert date object back to String to display on button
-                String btnDateText = String.format("%1$s %2$tB %2$td, %2$tY", "" , mDateAsDate);
-                // Write selected date onto the button
-                mButtonDate.setText(btnDateText);
+                setButtonTextToDate(mButtonDate);
                 // Set mDatePicked to true
                 mDatePicked = true;
             }
         }
-    }
-
-    // Inflate time picker, called from XML for btn_pick_time
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     // Method called when save button is clicked, check user entered required details

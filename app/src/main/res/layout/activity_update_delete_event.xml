@@ -29,47 +29,27 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        <!-- View: Empty view to align buttons to -->
-        <View
-            android:id="@+id/dummy_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_below="@+id/txt_update_event_heading"
-            android:layout_centerInParent="true" />
-
         <!-- Button: To open date picker -->
         <Button
             android:id="@+id/btn_edit_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/dummy_view"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/txt_update_event_heading"
             android:layout_marginTop="@dimen/narrow_margin"
-            android:text="@string/btn_pick_date" />
-
-        <!-- Button: To open time picker -->
-        <Button
-            android:id="@+id/btn_edit_time"
-            android:layout_width="@dimen/wide_button"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/dummy_view"
-            android:layout_below="@+id/txt_update_event_heading"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/narrow_margin"
-            android:text="@string/btn_pick_time" />
+            android:text="@string/btn_edit_date" />
 
         <!-- Edit Text: To receive new event heading -->
         <EditText
             android:id="@+id/edit_txt_enter_event_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btn_edit_time"
+            android:layout_below="@id/btn_edit_date"
             android:layout_marginLeft="@dimen/wide_margin"
             android:layout_marginRight="@dimen/wide_margin"
-            android:layout_marginTop="@dimen/narrow_margin"
             android:hint="@string/txt_update_event_prompt"
             android:inputType="text"
-            android:paddingTop="@dimen/wide_margin"
+            android:paddingTop="@dimen/narrow_margin"
             android:textAlignment="center"
             android:textSize="@dimen/font_large" />
 

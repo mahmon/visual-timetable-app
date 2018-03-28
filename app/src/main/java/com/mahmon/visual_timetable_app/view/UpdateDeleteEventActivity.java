@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -31,7 +33,13 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.view.AddEventActivity;
+
 import com.squareup.picasso.Picasso;
+
+import java.util.Date;
+
+import static com.mahmon.visual_timetable_app.view.AddEventActivity.parseDate;
 
 public class UpdateDeleteEventActivity extends BaseActivity {
 
@@ -39,6 +47,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     // Variables to store receive data
+    private int selectedEventDate;
     private String selectedEventName;
     private String selectedEventImageUrl;
     private String selectedEventDescription;
@@ -46,6 +55,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
     // Variable to store Uri of new image
     private Uri mImageUri;
     // View variables
+    private Button mButtonDate;
     private EditText mEditTextName;
     private ImageView mEditImageView;
     private EditText mEditTextDescription;
@@ -78,10 +88,29 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         // Copy bundle to local bundle
         Bundle data = intent.getExtras();
         // Write bundle data to local variables
+        selectedEventDate = data.getInt("EXTRA_EVENT_DATE");
         selectedEventName = data.getString("EXTRA_EVENT_NAME");
         selectedEventImageUrl = data.getString("EXTRA_EVENT_IMAGE_URL");
         selectedEventDescription = data.getString("EXTRA_EVENT_DESCRIPTION");
         selectedEventKey = data.getString("EXTRA_EVENT_KEY");
+        // Create local variable and link to mButtonDate
+        mButtonDate = findViewById(R.id.btn_edit_date);
+        // Create String from int selectedEventDate
+        String dateAsString = "" + selectedEventDate;
+        // Create Date object from mDateAsString
+        Date mDateAsDate = parseDate(dateAsString);
+        // Convert date object back to String to display on button
+        String formattedDate = String.format("%1$s %2$tB %2$td, %2$tY", "" , mDateAsDate);
+        // Write selected date onto the button
+        mButtonDate.setText(formattedDate);
+        // Set onClick listener for date editor button
+        mButtonDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Call picker dialog defined below
+                showDatePickerDialog();
+            }
+        });
         // Create local variable and link to edit_txt_enter_event_heading
         mEditTextName = findViewById(R.id.edit_txt_enter_event_heading);
         // Set hint text to selectedEventName
@@ -216,6 +245,14 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
+
+    // Inflate date picker, called from XML for btn_pick_date
+    public void showDatePickerDialog() {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
 
     /* Method - Update name */
     private void updateName(String name) {
