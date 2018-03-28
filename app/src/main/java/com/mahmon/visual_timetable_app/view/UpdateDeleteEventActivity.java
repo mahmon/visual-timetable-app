@@ -215,24 +215,21 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    // Method - No updates entered
-    private void noUpdatesEntered() {
-        Toast.makeText(getApplicationContext(),
-                "No updates entered", Toast.LENGTH_SHORT).show();
-    }
-
     /* Method - Update name */
     private void updateName(String name) {
-        // Use selectedKey to change event heading value
-        mDatabaseRef.child(selectedEventKey).child("name").setValue(name)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                // Confirm update
-                Toast.makeText(getApplicationContext(),
-                        "Event Name Updated", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // If user has entered a new name
+        if (!name.equals(selectedEventName)) {
+            // Use selectedKey to change event heading value
+            mDatabaseRef.child(selectedEventKey).child("name").setValue(name)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Confirm update
+                    Toast.makeText(getApplicationContext(),
+                            "Event Name Updated", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     /* Method - Update Image */
@@ -294,17 +291,19 @@ public class UpdateDeleteEventActivity extends BaseActivity {
 
     /* Method - Update Description */
     private void updateDescription(String description) {
-        //
-        // Use selectedKey to change event heading value
-        mDatabaseRef.child(selectedEventKey).child("description").setValue(description)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                // Confirm update
-                Toast.makeText(getApplicationContext(),
-                        "Event Description Updated", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // If user has entered a new description
+        if (!description.equals(selectedEventDescription)) {
+            // Use selectedKey to change event heading value
+            mDatabaseRef.child(selectedEventKey).child("description").setValue(description)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Confirm update
+                    Toast.makeText(getApplicationContext(),
+                            "Event Description Updated", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     /* UPDATE: Update event in database */
@@ -315,8 +314,18 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         if (    name.equals(selectedEventName)
                 && mImageUri == null
                 && description.equals(selectedEventDescription)) {
-            noUpdatesEntered();
-        /* 001 - Update NAME */
+            Toast.makeText(getApplicationContext(),
+                    "No updates entered", Toast.LENGTH_SHORT).show();
+        } else {
+            // Call update name method
+            updateName(name);
+            // Call update description method
+            updateDescription(description);
+            // Finish Activity and return to DisplayEvents
+            openDisplayEventsActivity();
+        }
+
+        /* 001 - Update NAME *//*
         // If Name only
         } else if ( !name.equals(selectedEventName)
                     && mImageUri == null
@@ -324,7 +333,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateName(name);
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        /* 010 - Update IMAGE */
+        *//* 010 - Update IMAGE *//*
         // If Image only
         } else if ( name.equals(selectedEventName)
                 && mImageUri != null
@@ -332,7 +341,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateImage();
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        /* 011 - Update NAME & IMAGE */
+        *//* 011 - Update NAME & IMAGE *//*
         // If Name and Image
         } else if ( !name.equals(selectedEventName)
                 && mImageUri != null
@@ -341,7 +350,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateImage();
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        /* 100 - Update DESCRIPTION */
+        *//* 100 - Update DESCRIPTION *//*
         // If Description
         } else if (name.equals(selectedEventName)
                 && mImageUri == null
@@ -349,7 +358,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateDescription(description);
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        /* 101 - Update NAME & DESCRIPTION */
+        *//* 101 - Update NAME & DESCRIPTION *//*
         // If Name and Description
         } else if (!name.equals(selectedEventName)
                 && mImageUri == null
@@ -358,7 +367,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateDescription(description);
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        /* 110 - Update IMAGE & DESCRIPTION */
+        *//* 110 - Update IMAGE & DESCRIPTION *//*
         // If Image and Description
         } else if (name.equals(selectedEventName)
                 && mImageUri != null
@@ -367,7 +376,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateDescription(description);
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        /* 111 - Update NAME & IMAGE & DESCRIPTION */
+        *//* 111 - Update NAME & IMAGE & DESCRIPTION *//*
         // If Name, Image and Description
         } else if (!name.equals(selectedEventName)
                 && mImageUri != null
@@ -377,7 +386,7 @@ public class UpdateDeleteEventActivity extends BaseActivity {
             updateDescription(description);
             // Finish Activity and return to DisplayEvents
             openDisplayEventsActivity();
-        }
+        }*/
     }
 
     /* DELETE: Delete events from database */
