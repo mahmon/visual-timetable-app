@@ -47,4 +47,5 @@ public class FinishActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // TODO: Create logout screen and methods
 }

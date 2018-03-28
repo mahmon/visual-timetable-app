@@ -5,7 +5,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.google.firebase.database.FirebaseDatabase;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
 

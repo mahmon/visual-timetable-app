@@ -1,12 +1,16 @@
 package com.mahmon.visual_timetable_app.view;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -20,10 +24,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,8 +35,6 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
-import com.mahmon.visual_timetable_app.view.AddEventActivity;
-
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -43,9 +43,12 @@ import static com.mahmon.visual_timetable_app.view.AddEventActivity.parseDate;
 
 public class UpdateDeleteEventActivity extends BaseActivity {
 
+    // Variable to store edited date
+    private int mDate;
+    // Broadcast receiver used to get values from date picker
+    private BroadcastReceiver localBroadcastReceiverEditDate;
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
-
     // Variables to store receive data
     private int selectedEventDate;
     private String selectedEventName;
@@ -93,16 +96,14 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         selectedEventImageUrl = data.getString("EXTRA_EVENT_IMAGE_URL");
         selectedEventDescription = data.getString("EXTRA_EVENT_DESCRIPTION");
         selectedEventKey = data.getString("EXTRA_EVENT_KEY");
+        // Used to check if new date picked
+        mDate = selectedEventDate;
         // Create local variable and link to mButtonDate
         mButtonDate = findViewById(R.id.btn_edit_date);
-        // Create String from int selectedEventDate
-        String dateAsString = "" + selectedEventDate;
-        // Create Date object from mDateAsString
-        Date mDateAsDate = parseDate(dateAsString);
-        // Convert date object back to String to display on button
-        String formattedDate = String.format("%1$s %2$tB %2$td, %2$tY", "" , mDateAsDate);
-        // Write selected date onto the button
-        mButtonDate.setText(formattedDate);
+        // Set button text to show current date (formatted)
+        mButtonDate.setText(formatDateIntToDateString(selectedEventDate));
+        // Set button text color to dim
+        mButtonDate.setTextColor(getResources().getColor(R.color.colorAccent));
         // Set onClick listener for date editor button
         mButtonDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,21 +163,21 @@ public class UpdateDeleteEventActivity extends BaseActivity {
                             if (!TextUtils.isEmpty(newEventName)
                                     && TextUtils.isEmpty(newEventDescription)) {
                                 // Call updateEvent, pass new name and existing description
-                                updateEvent(newEventName, selectedEventDescription);
+                                updateEvent(mDate, newEventName, selectedEventDescription);
                             // If user entered DESCRIPTION only
                             } else if (TextUtils.isEmpty(newEventName)
                                     && !TextUtils.isEmpty(newEventDescription)) {
                                 // Call updateEvent, pass existing name and new description
-                                updateEvent(selectedEventName, newEventDescription);
+                                updateEvent(mDate, selectedEventName, newEventDescription);
                             // If user entered NAME and DESCRIPTION
                             } else if (!TextUtils.isEmpty(newEventName)
                                     && !TextUtils.isEmpty(newEventDescription)) {
                                 // Call updateEvent, pass new name and new description
-                                updateEvent(newEventName, newEventDescription);
+                                updateEvent(mDate, newEventName, newEventDescription);
                             // If user entered no text
                             } else {
                                 // Call updateEvent, pass existing name and existing description
-                                updateEvent(selectedEventName, selectedEventDescription);
+                                updateEvent(mDate, selectedEventName, selectedEventDescription);
                             }
                         }
                         return true;
@@ -192,8 +193,27 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         });
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
+        // Instantiate local broadcast receiver for dates
+        localBroadcastReceiverEditDate = new LocalBroadcastReceiverEditDate();
         // Progress bar
         mProgressBar = findViewById(R.id.progress_bar_edit);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Register broadcast receiver to get date from dialog on resume
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                localBroadcastReceiverEditDate,
+                new IntentFilter("GET_DATE"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister broadcast receiver on pause
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(
+                localBroadcastReceiverEditDate);
     }
 
     // Implement the default options menu
@@ -246,13 +266,55 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-
     // Inflate date picker, called from XML for btn_pick_date
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    // Nested class called to construct local broadcast receiver
+    private class LocalBroadcastReceiverEditDate extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Check for null entries
+            if (intent == null || intent.getAction() == null) {
+                return;
+            }
+            // If intents match...
+            if (intent.getAction().equals("GET_DATE")) {
+                // Get bundled data and store locally
+                Bundle dateBundle = intent.getExtras();
+                // Save dateAsInt into mDate
+                mDate = dateBundle.getInt("dateAsInt");
+                // Update text on button
+                mButtonDate.setText(formatDateIntToDateString(mDate));
+                // Set button text color to bright
+                mButtonDate.setTextColor(getResources().getColor(R.color.colorFont));
+
+            }
+        }
+    }
+
+    // Method to create formatted date text for button text
+    public String formatDateIntToDateString (int date) {
+        // Create String from int
+        String dateAsString = "" + date;
+        // Create Date object from dateAsString
+        Date mDateAsDate = parseDate(dateAsString);
+        // Convert date object back to String in date format
+        String formattedDate = String.format("%1$s %2$tB %2$td, %2$tY", "", mDateAsDate);
+        // Return String formattedDate
+        return formattedDate;
+    }
+
+    /* Method - Update date */
+    private void updateDate(int date) {
+        // If user has picked a new date
+        if (date != selectedEventDate) {
+            // Use selectedKey to change event heading value
+            mDatabaseRef.child(selectedEventKey).child("date").setValue(date);
+        }
+    }
 
     /* Method - Update name */
     private void updateName(String name) {
@@ -335,17 +397,19 @@ public class UpdateDeleteEventActivity extends BaseActivity {
 
     /* UPDATE: Update event in database */
     // Method called to Update Events
-    private void updateEvent(String name, String description) {
+    private void updateEvent(int date, String name, String description) {
         // Check if Nothing entered
         if (    name.equals(selectedEventName)
                 && mImageUri == null
-                && description.equals(selectedEventDescription)) {
+                && description.equals(selectedEventDescription)
+                && mDate == selectedEventDate) {
             // Prompt user to enter some update
             Toast.makeText(getApplicationContext(),
                     "No updates entered", Toast.LENGTH_SHORT).show();
         } else {
             // Call update methods
             updateImage();
+            updateDate(date);
             updateName(name);
             updateDescription(description);
             // Confirm update
