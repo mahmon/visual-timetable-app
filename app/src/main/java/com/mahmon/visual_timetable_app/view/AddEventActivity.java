@@ -54,6 +54,7 @@ public class AddEventActivity extends BaseActivity {
     // Constant used to assign arbitrary value to image pick
     private static final int PICK_IMAGE_REQUEST = 1;
     // Variables for view elements
+    private boolean mDatePicked;
     private Button mButtonDate;
     private EditText mEditTextFileName;
     private ImageView mImageView;
@@ -98,7 +99,7 @@ public class AddEventActivity extends BaseActivity {
                                     "Event in progress", Toast.LENGTH_SHORT).show();
                         } else {
                             // Method cal to save event and image to database
-                            uploadFile();
+                            checkEventEntered();
                         }
                         return true;
                     default:
@@ -110,6 +111,8 @@ public class AddEventActivity extends BaseActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Instantiate local broadcast receiver for dates
         localBroadcastReceiverDate = new LocalBroadcastReceiverDate();
+        // Set mDatePicked to false
+        mDatePicked = false;
         // Attach local view variables to XML elements
         mButtonDate = findViewById(R.id.btn_pick_date);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
@@ -233,6 +236,7 @@ public class AddEventActivity extends BaseActivity {
             if (intent.getAction().equals("GET_DATE")) {
                 // Get bundled data and store locally
                 Bundle dateBundle = intent.getExtras();
+                /* SAVE SELECTED DATE: int mDate used in checkEventEntered method */
                 // Save dateAsInt into mDate
                 mDate = dateBundle.getInt("dateAsInt");
                 /* SET Button text to selected date */
@@ -244,6 +248,8 @@ public class AddEventActivity extends BaseActivity {
                 String btnDateText = String.format("%1$s %2$tB %2$td, %2$tY", "" , mDateAsDate);
                 // Write selected date onto the button
                 mButtonDate.setText(btnDateText);
+                // Set mDatePicked to true
+                mDatePicked = true;
             }
         }
     }
@@ -254,79 +260,93 @@ public class AddEventActivity extends BaseActivity {
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
-    /* CREATE: Write to database */
-    // Method called when save button is clicked
-    private void uploadFile() {
-    // If EditText box is NOT blank...
-        if (!TextUtils.isEmpty(mEditTextFileName.getText().toString().trim())) {
-            // Then... If an image has been selected
-            if (mImageUri != null) {
-                // Get a unique key from the database
-                final String uploadId = mDatabaseRef.push().getKey();
-                // Create a file name for the image using the unique key
-                StorageReference fileReference = mStorageRef.child(uploadId
-                        + "." + getFileExtension(mImageUri));
-                // Create storage task, load image to cloud with listener
-                mUploadTask = fileReference.putFile(mImageUri)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    // If successful...
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Handler progHandler = new Handler();
-                        progHandler.postDelayed(new Runnable() {
-                            // Set a short delay to allow progress bar to be viewable
-                            @Override
-                            public void run() {
-                                mProgressBar.setProgress(0);
-                            }
-                        }, 250);
-                        // Gather details to create object
-                        String name = mEditTextFileName.getText().toString().trim();
-                        String description = mEditTextDescription.getText().toString().trim();
-                        // Create a new event object, pass event name, description and image URL
-                        Event event = new Event(mDate, name, taskSnapshot.getDownloadUrl()
-                                .toString(), description);
-                        // Write event to database using key from line above
-                        mDatabaseRef.child(uploadId).setValue(event);
-                        // Prompt user that upload successful
-                        Toast.makeText(AddEventActivity.this,
-                                "Event created", Toast.LENGTH_LONG).show();
-                        // Run short delay before switching activities
-                        Handler showHandler = new Handler();
-                        showHandler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Call openDisplayImagesActivity
-                                openDisplayImagesActivity();
-                            }
-                        }, 250);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    // Show error message if database write fails
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddEventActivity.this,
-                                e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    // Calculate upload percentage and use to animate progress bar
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred()
-                                / taskSnapshot.getTotalByteCount());
-                        mProgressBar.setProgress((int) progress);
-                    }
-                });
+    // Method called when save button is clicked, check user entered required details
+    private void checkEventEntered() {
+        // If button text has not been set to a date...
+        if (mDatePicked) {
+            // If EditText box is NOT blank...
+            if (!TextUtils.isEmpty(mEditTextFileName.getText().toString().trim())) {
+                // If an image has been selected...
+                if (mImageUri != null) {
+                    uploadEvent();
+                    // Reset mDatePicked to false
+                    mDatePicked = false;
+                } else {
+                    // If image has NOT been selected prompt user
+                    Toast.makeText(this,
+                            "Please select an image", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                // If image has NOT been selected prompt user
+                // If user has NOT entered a name, prompt the user
                 Toast.makeText(this,
-                        "Please select an image", Toast.LENGTH_SHORT).show();
+                        "Please enter a heading", Toast.LENGTH_SHORT).show();
             }
         } else {
-            // If user has NOT entered a name, prompt the user
+            // If user has NOT picked a date, prompt the user
             Toast.makeText(this,
-                    "Please enter a heading", Toast.LENGTH_SHORT).show();
+                    "Please select a date", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /* WRITE: Write to database */
+    private void uploadEvent() {
+        // Get a unique key from the database
+        final String uploadId = mDatabaseRef.push().getKey();
+        // Create a file name for the image using the unique key
+        StorageReference fileReference = mStorageRef.child(uploadId
+                + "." + getFileExtension(mImageUri));
+        // Create storage task, load image to cloud with listener
+        mUploadTask = fileReference.putFile(mImageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            // If successful...
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Handler progHandler = new Handler();
+                progHandler.postDelayed(new Runnable() {
+                    // Set a short delay to allow progress bar to be viewable
+                    @Override
+                    public void run() {
+                        mProgressBar.setProgress(0);
+                    }
+                }, 250);
+                // Gather details to create object
+                int date = mDate;
+                String name = mEditTextFileName.getText().toString().trim();
+                String description = mEditTextDescription.getText().toString().trim();
+                // Create a new event object, pass event name, description and image URL
+                Event event = new Event(date, name, taskSnapshot.getDownloadUrl()
+                        .toString(), description);
+                // Write event to database using key from line above
+                mDatabaseRef.child(uploadId).setValue(event);
+                // Prompt user that upload successful
+                Toast.makeText(AddEventActivity.this,
+                        "Event created", Toast.LENGTH_LONG).show();
+                // Run short delay before switching activities
+                Handler showHandler = new Handler();
+                showHandler.postDelayed(new Runnable() {
+                @Override
+                    public void run() {
+                        // Call openDisplayImagesActivity
+                        openDisplayImagesActivity();
+                    }
+                }, 250);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            // Show error message if database write fails
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            Toast.makeText(AddEventActivity.this,
+                    e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            // Calculate upload percentage and use to animate progress bar
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()
+                        / taskSnapshot.getTotalByteCount());
+                mProgressBar.setProgress((int) progress);
+            }
+        });
     }
 
     // Method called to launch DisplayImagesActivity
