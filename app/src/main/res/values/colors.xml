@@ -15,4 +15,14 @@
     <!-- Off White Text -->
     <color name="colorFont">#CDCDCD</color>
 
+    <!-- Colors used for DarkTheme -->
+    <!-- Background -->
+    <color name="colorDarkThemePrimary">#000000</color>
+    <color name="colorDarkThemeFont">#FFFFFF</color>
+
+    <!-- Colors used for LightTheme -->
+    <!-- Background -->
+    <color name="colorLightThemePrimary">#FFFFFF</color>
+    <color name="colorLightThemeFont">#000000</color>
+
 </resources>

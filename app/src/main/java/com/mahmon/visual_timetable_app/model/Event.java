@@ -27,8 +27,7 @@ public class Event implements Comparator<Event> {
         mImageUrl = imageUrl;
         mDescription = description;
     }
-
-
+    
     // Overriding compare method, sort by date oldest first
     @Override
     public int compare(Event e, Event e1) {
