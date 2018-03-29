@@ -2,8 +2,10 @@ package com.mahmon.visual_timetable_app.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.Comparator;
+
 // Class used to instantiate Event objects for storage in database
-public class Event {
+public class Event implements Comparator<Event> {
 
     // Need to add descriptions and allow for links to open browser
 
@@ -24,6 +26,12 @@ public class Event {
         mName = name;
         mImageUrl = imageUrl;
         mDescription = description;
+    }
+
+    // Overriding compare method, sort by date oldest first
+    @Override
+    public int compare(Event e, Event e1) {
+        return e.mDate - e1.mDate;
     }
 
     // Getter methods

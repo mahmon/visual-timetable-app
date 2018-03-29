@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,10 @@ import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.model.EventAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // Class to display events, implements the adapter and a listener
@@ -98,6 +103,14 @@ public class DisplayEventsActivity extends BaseActivity
                 mAdapter.notifyDataSetChanged();
                 // Hide the progress bar
                 mProgressCircle.setVisibility(View.INVISIBLE);
+
+
+                // Sort Array by date, using comparator in Event class
+                Collections.sort(mEvents, new Event());
+
+
+
+
             }
             // Called if database cannot be reached
             @Override
