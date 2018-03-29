@@ -2,27 +2,19 @@
 <resources>
 
     <!-- Used material color tool to select new color values -->
-    <!-- Mid Grey -->
     <color name="colorPrimary">#212121</color>
-    <!-- Black -->
     <color name="colorPrimaryDark">#000000</color>
-    <!-- Light Grey -->
     <color name="colorAccent">#787878</color>
     <!-- Picture Tint -->
     <color name="colorPicTint">#585858</color>
-    <!-- Progress bar tint -->
-    <color name="progressBarTint">#FF6600</color>
     <!-- Off White Text -->
     <color name="colorFont">#CDCDCD</color>
 
-    <!-- Colors used for DarkTheme -->
-    <!-- Background -->
-    <color name="colorDarkThemePrimary">#000000</color>
-    <color name="colorDarkThemeFont">#FFFFFF</color>
 
-    <!-- Colors used for LightTheme -->
-    <!-- Background -->
-    <color name="colorLightThemePrimary">#FFFFFF</color>
-    <color name="colorLightThemeFont">#000000</color>
+    <!-- Colors used for DarkTheme -->
+    <color name="darkColorPrimary">#1e2756</color>
+    <color name="darkColorPrimaryDark">#141831</color>
+    <color name="darkColorAccent">#2aac4b</color>
+    <color name="darkColorBackground">#FFCC33</color>
 
 </resources>
