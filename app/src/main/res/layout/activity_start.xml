@@ -8,14 +8,15 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
+
     <include layout="@layout/tool_bar_bottom" />
 
     <!-- Layout to hold the main center screen -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/tool_bar_height"
-        android:layout_marginBottom="@dimen/tool_bar_height">
+        android:layout_marginBottom="@dimen/tool_bar_height"
+        android:layout_marginTop="@dimen/tool_bar_height">
 
         <!-- Text View: To display screen heading -->
         <TextView
@@ -30,6 +31,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_start_screen_heading"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/wide_margin"
+            android:text="Dark Theme" />
+
+        <Button
+            android:id="@+id/button_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/button_dark"
+            android:layout_margin="@dimen/wide_margin"
+            android:text="Light Theme" />
 
     </RelativeLayout>
 

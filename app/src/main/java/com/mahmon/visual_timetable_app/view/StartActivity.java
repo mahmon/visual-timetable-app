@@ -14,8 +14,14 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Theme...
+        //themeUtils.onActivityCreateSetTheme(this);
+
         // Link this activity to the relevant XML layout
         setContentView(R.layout.activity_start);
+
+
         // Set bottom menu icons for this context (remove unwanted)
         getToolBarBottom().getMenu().removeItem(R.id.btn_exit_app);
         getToolBarBottom().getMenu().removeItem(R.id.btn_return_login);
