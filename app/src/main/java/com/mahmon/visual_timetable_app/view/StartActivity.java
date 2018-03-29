@@ -4,22 +4,46 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.themeUtils;
 
 // Class for Login screen
 public class StartActivity extends BaseActivity {
 
+    private Button mDark;
+    private Button mLight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Theme...
-        //themeUtils.onActivityCreateSetTheme(this);
-
         // Link this activity to the relevant XML layout
         setContentView(R.layout.activity_start);
+
+
+        // Theme...
+        themeUtils.onActivityCreateSetTheme(this);
+        // Theme switch buttons...
+        mDark = findViewById(R.id.button_dark);
+        mLight = findViewById(R.id.button_light);
+
+        mDark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        mLight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
 
         // Set bottom menu icons for this context (remove unwanted)
@@ -34,6 +58,20 @@ public class StartActivity extends BaseActivity {
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
     }
+
+
+    public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.button_dark:
+                themeUtils.changeToTheme(this, themeUtils.DARK);
+                break;
+            case R.id.button_light:
+                themeUtils.changeToTheme(this, themeUtils.LIGHT);
+                break;
+        }
+
+    }
+
 
     // Implement the default options menu
     @Override
