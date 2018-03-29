@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- TextView: to display event name -->
+        <!-- TextView: to display event date -->
         <TextView
             android:id="@+id/text_view_date"
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorFont"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_medium" />
 
         <!-- TextView: to display event name -->
         <TextView
@@ -32,7 +32,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/wide_margin"
+            android:layout_marginBottom="@dimen/wide_margin"
+            android:layout_marginLeft="@dimen/wide_margin"
+            android:layout_marginRight="@dimen/wide_margin"
+            android:layout_marginTop="0dp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorFont"
