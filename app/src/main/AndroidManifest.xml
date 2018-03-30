@@ -33,9 +33,6 @@
             android:name=".view.UpdateDeleteEventActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SelectThemeDialogFragment"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ThemeToggleActivity"
             />
     </application>

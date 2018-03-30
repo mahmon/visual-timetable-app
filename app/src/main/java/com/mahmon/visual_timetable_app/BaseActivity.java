@@ -42,6 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         configureToolbarBottom(view);
         // Call super setContentView method, passing in local view object
         super.setContentView(view);
+
     }
 
     // Configure topToolbar
@@ -175,6 +176,24 @@ public class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), AddEventActivity.class);
         // Start Activity
         startActivity(intent);
+    }
+
+    // Set Theme Method
+    public void setThemeSelection(String mThemeValue) {
+        // Check value of selected theme and set accordingly
+        if (mThemeValue.equals(getString(R.string.theme_snowman))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeSnowman);
+        } else if (mThemeValue.equals(getString(R.string.theme_dark_knight))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeDarkKnight);
+        } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeBumbleBee);
+        } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeLadyBug);
+        }
     }
 
 }

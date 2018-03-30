@@ -1,6 +1,8 @@
 package com.mahmon.visual_timetable_app.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +31,10 @@ import java.util.List;
 public class DisplayEventsActivity extends BaseActivity
         implements EventAdapter.OnItemClickListener {
 
+    // Variables used for saving and retrieving theme preferences
+    private Context mContext;
+    private SharedPreferences mPrefs;
+    private String mThemeValue;
     // Variables for RecyclerView and Adapter
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManger;
@@ -50,6 +56,14 @@ public class DisplayEventsActivity extends BaseActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Assign preference variables
+        mContext = this;
+        mPrefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        // Get value from mPrefs and assign to mThemeVale
+        mThemeValue = mPrefs.getString(SELECTED_THEME, "");
+        // Set the theme to the current selection
+        setThemeSelection(mThemeValue);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_events);
         // Set bottom menu icons for this context (remove unwanted)

@@ -25,20 +25,8 @@ public class StartActivity extends BaseActivity {
         mPrefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         // Get value from mPrefs and assign to mThemeVale
         mThemeValue = mPrefs.getString(SELECTED_THEME, "");
-        // Check value of selected theme and set accordingly
-        if (mThemeValue.equals(getString(R.string.theme_snowman))) {
-            // Set theme to selection
-            setTheme(R.style.AppThemeSnowman);
-        } else if (mThemeValue.equals(getString(R.string.theme_dark_knight))) {
-            // Set theme to selection
-            setTheme(R.style.AppThemeDarkKnight);
-        } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
-            // Set theme to selection
-            setTheme(R.style.AppThemeBumbleBee);
-        } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
-            // Set theme to selection
-            setTheme(R.style.AppThemeLadyBug);
-        }
+        // Set the theme to the current selection
+        setThemeSelection(mThemeValue);
         super.onCreate(savedInstanceState);
         // Link this activity to the relevant XML layout
         setContentView(R.layout.activity_start);
@@ -73,6 +61,8 @@ public class StartActivity extends BaseActivity {
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
     }
+
+
 
     // TODO create Login screen and methods
 }
