@@ -20,8 +20,10 @@ public class ThemeToggleActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor mEditor;
     // Button variables
-    private Button mBtnSnow;
-    private Button mBtnYellow;
+    private Button mBtnSnowman;
+    private Button mBtnDarkKnight;
+    private Button mBtnBumbleBee;
+    private Button mBtnLadyBug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +34,23 @@ public class ThemeToggleActivity extends AppCompatActivity {
         mPrefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         mEditor = mPrefs.edit();
         // Assign buttons to view
-        mBtnSnow = findViewById(R.id.btn_snow);
-        mBtnYellow = findViewById(R.id.btn_yellow);
+        mBtnSnowman = findViewById(R.id.btn_snowman);
+        mBtnDarkKnight = findViewById(R.id.btn_dark_knight);
+        mBtnBumbleBee = findViewById(R.id.btn_bumble_bee);
+        mBtnLadyBug = findViewById(R.id.btn_lady_bug);
         // Assign listeners
-        mBtnSnow.setOnClickListener(new View.OnClickListener() {
+        mBtnSnowman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setSelectedTheme("snow");
-                setTheme(R.style.AppTheme);
+                // Call setSelectedTheme method, pass String theme_snowman
+                setSelectedTheme(getResources().getString(R.string.theme_snowman));
             }
         });
-        mBtnYellow.setOnClickListener(new View.OnClickListener() {
+        mBtnBumbleBee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setSelectedTheme("yellow");
-                setTheme(R.style.AppTheme_Yellow);
+                // Call setSelectedTheme method, pass String theme_snowman
+                setSelectedTheme(getResources().getString(R.string.theme_bumble_bee));
             }
         });
     }

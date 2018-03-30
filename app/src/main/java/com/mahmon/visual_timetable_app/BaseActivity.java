@@ -122,7 +122,6 @@ public class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), ThemeToggleActivity.class);
         // Start Activity
         startActivity(intent);
-        finish();
     }
 
     // Called by btn_enter_app

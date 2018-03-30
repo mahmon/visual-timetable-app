@@ -26,16 +26,18 @@ public class StartActivity extends BaseActivity {
         // Get value from mPrefs and assign to mThemeVale
         mThemeValue = mPrefs.getString(SELECTED_THEME, "");
         // Check value of selected theme and set accordingly
-        switch (mThemeValue) {
-            case "snow":
-                setTheme(R.style.AppTheme);
-                break;
-            case "yellow":
-                setTheme(R.style.AppTheme_Yellow);
-                break;
-            default:
-                setTheme(R.style.AppTheme);
-                break;
+        if (mThemeValue.equals(getString(R.string.theme_snowman))) {
+            // Set theme to selection
+            setTheme(R.style.AppTheme);
+        } else if (mThemeValue.equals(getString(R.string.theme_dark_knight))) {
+            // Set theme to selection
+            setTheme(R.style.AppTheme);
+        } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
+            // Set theme to selection
+            setTheme(R.style.AppTheme_Yellow);
+        } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
+            // Set theme to selection
+            setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
         // Link this activity to the relevant XML layout

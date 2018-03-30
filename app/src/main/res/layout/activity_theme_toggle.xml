@@ -11,19 +11,35 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btn_snow"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_snowman"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="snow" />
+            android:text="@string/theme_snowman" />
 
         <Button
-            android:id="@+id/btn_yellow"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_dark_knight"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_snow"
+            android:layout_below="@+id/btn_snowman"
             android:layout_centerHorizontal="true"
-            android:text="yellow" />
+            android:text="@string/theme_dark_knight" />
+
+        <Button
+            android:id="@+id/btn_bumble_bee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_dark_knight"
+            android:layout_centerHorizontal="true"
+            android:text="@string/theme_bumble_bee" />
+
+        <Button
+            android:id="@+id/btn_lady_bug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_bumble_bee"
+            android:layout_centerHorizontal="true"
+            android:text="@string/theme_lady_bug" />
 
     </RelativeLayout>
 
