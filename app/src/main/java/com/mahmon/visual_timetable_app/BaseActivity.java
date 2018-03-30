@@ -121,8 +121,7 @@ public class BaseActivity extends AppCompatActivity {
         // Instantiate new SelectDialogFragment
         SelectThemeDialogFragment themeDialogFragment = new SelectThemeDialogFragment();
         // Show the dialog
-        themeDialogFragment.show(getFragmentManager(), "dialog");
-
+        themeDialogFragment.show(getFragmentManager(), "selectThemeDialog");
     }
 
     // Called by btn_enter_app

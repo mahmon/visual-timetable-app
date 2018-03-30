@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 public class SelectThemeDialogFragment extends DialogFragment {
 
@@ -21,10 +22,18 @@ public class SelectThemeDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 // The 'which' argument contains the index position
                 // of the selected item
+                writeToast(which);
             }
         });
 
         // Create the AlertDialog object and return it
         return builder.create();
     }
+
+
+    public void writeToast(int which) {
+        //
+        Toast.makeText(getActivity(), "" + which, Toast.LENGTH_LONG).show();
+    }
+
 }
