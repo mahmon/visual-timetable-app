@@ -33,5 +33,6 @@
     <string name="txt_add_screen_heading">Add Event</string>
     <string name="txt_choose_image">Choose Image</string>
     <string name="txt_delete_event">Delete Event</string>
+    <string name="txt_select_theme">Select Theme</string>
 
 </resources>

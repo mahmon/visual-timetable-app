@@ -1,7 +1,10 @@
 package com.mahmon.visual_timetable_app;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -115,9 +118,10 @@ public class BaseActivity extends AppCompatActivity {
     /* ToolBar Methods */
     // Called by btn_toggle_theme
     public void toggleTheme() {
-        // TODO Create Theme Toggle method
-        // Display toast message to confirm click
-        Toast.makeText(this,"Theme Toggled", Toast.LENGTH_SHORT).show();
+        // Instantiate new SelectDialogFragment
+        SelectThemeDialogFragment themeDialogFragment = new SelectThemeDialogFragment();
+        // Show the dialog
+        themeDialogFragment.show(getFragmentManager(), "dialog");
     }
 
     // Called by btn_enter_app
