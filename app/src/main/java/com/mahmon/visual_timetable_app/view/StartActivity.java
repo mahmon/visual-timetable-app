@@ -31,13 +31,13 @@ public class StartActivity extends BaseActivity {
             setTheme(R.style.AppTheme);
         } else if (mThemeValue.equals(getString(R.string.theme_dark_knight))) {
             // Set theme to selection
-            setTheme(R.style.AppTheme);
+            setTheme(R.style.AppTheme_Yellow);
         } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
             // Set theme to selection
             setTheme(R.style.AppTheme_Yellow);
         } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
             // Set theme to selection
-            setTheme(R.style.AppTheme);
+            setTheme(R.style.AppTheme_Yellow);
         }
         super.onCreate(savedInstanceState);
         // Link this activity to the relevant XML layout

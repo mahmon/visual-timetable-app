@@ -46,11 +46,25 @@ public class ThemeToggleActivity extends AppCompatActivity {
                 setSelectedTheme(getResources().getString(R.string.theme_snowman));
             }
         });
+        mBtnDarkKnight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call setSelectedTheme method, pass String theme_snowman
+                setSelectedTheme(getResources().getString(R.string.theme_dark_knight));
+            }
+        });
         mBtnBumbleBee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Call setSelectedTheme method, pass String theme_snowman
                 setSelectedTheme(getResources().getString(R.string.theme_bumble_bee));
+            }
+        });
+        mBtnLadyBug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call setSelectedTheme method, pass String theme_snowman
+                setSelectedTheme(getResources().getString(R.string.theme_dark_knight));
             }
         });
     }
