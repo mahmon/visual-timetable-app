@@ -9,7 +9,7 @@
         android:id="@+id/tool_bar_top"
         android:layout_width="0dp"
         android:layout_height="@dimen/tool_bar_height"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppThemeSnowman"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

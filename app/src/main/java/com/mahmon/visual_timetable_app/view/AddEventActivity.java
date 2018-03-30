@@ -117,7 +117,7 @@ public class AddEventActivity extends BaseActivity {
         // Attach local view btn_pick_date
         mButtonDate = findViewById(R.id.btn_pick_date);
         // Set button text color to dim
-        mButtonDate.setTextColor(getResources().getColor(R.color.colorAccent));
+        mButtonDate.setTextColor(getResources().getColor(R.color.snowmanColorAccent));
         // Attach local view variables to XML elements
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
@@ -235,7 +235,7 @@ public class AddEventActivity extends BaseActivity {
                 /* SET Button text to selected date */
                 setButtonTextToDate(mButtonDate);
                 // Set button text color to bright
-                mButtonDate.setTextColor(getResources().getColor(R.color.colorFont));
+                mButtonDate.setTextColor(getResources().getColor(R.color.snowmanColorFont));
                 // Set mDatePicked to true
                 mDatePicked = true;
             }

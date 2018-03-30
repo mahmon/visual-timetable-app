@@ -1,39 +1,36 @@
 <resources>
 
-     <!-- Changed AppTheme to dark theme with no action bar -->
-     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-         <!-- Links to colors set in colors.xml -->
-         <item name="colorPrimary">@color/colorPrimary</item>
-         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-         <item name="colorAccent">@color/colorAccent</item>
+     <!-- Theme: Snowman -->
+     <style name="AppThemeSnowman" parent="Theme.AppCompat.NoActionBar">
+         <item name="colorPrimary">@color/snowmanColorPrimary</item>
+         <item name="colorPrimaryDark">@color/snowmanColorPrimaryDark</item>
+         <item name="colorAccent">@color/snowmanColorAccent</item>
+         <item name="android:background">@color/snowmanColorBackground</item>
      </style>
 
-     <style name="AppTheme.NoActionBar">
+     <style name="AppThemeSnowman.NoActionBar">
          <item name="windowActionBar">false</item>
          <item name="windowNoTitle">true</item>
      </style>
 
-     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
-     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+     <style name="AppThemeSnowman.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
+     <style name="AppThemeSnowman.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <!-- Custom Dark Theme -->
-    <style name="AppTheme.Yellow" parent="Theme.AppCompat.NoActionBar">
-        <!-- Dark theme base colours -->
-        <item name="colorPrimary">@color/darkColorPrimary</item>
-        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
-        <item name="colorAccent">@color/darkColorAccent</item>
-        <item name="android:background">@color/darkColorBackground</item>
-
+    <!-- Theme: Dark Knight -->
+    <style name="AppThemeDarkKnight" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/darkKnightColorBackground</item>
     </style>
 
-    <style name="AppTheme.Yellow.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Theme: Bumble Bee -->
+    <style name="AppThemeBumbleBee" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/bumbleBeeColorBackground</item>
     </style>
 
-    <style name="AppTheme.Yellow..AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.Yellow.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <!-- Theme: Lady Bug -->
+    <style name="AppThemeLadyBug" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/ladyBugColorBackground</item>
+    </style>
 
 
 </resources>

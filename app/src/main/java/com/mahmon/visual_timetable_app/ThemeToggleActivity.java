@@ -64,7 +64,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Call setSelectedTheme method, pass String theme_snowman
-                setSelectedTheme(getResources().getString(R.string.theme_dark_knight));
+                setSelectedTheme(getResources().getString(R.string.theme_lady_bug));
             }
         });
     }

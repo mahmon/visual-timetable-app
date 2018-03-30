@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Used material color tool to select new color values -->
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#787878</color>
-    <!-- Picture Tint -->
-    <color name="colorPicTint">#585858</color>
-    <!-- Off White Text -->
-    <color name="colorFont">#CDCDCD</color>
+    <!-- Colors used for Snowman theme -->
+    <color name="snowmanColorPrimary">#212121</color>
+    <color name="snowmanColorPrimaryDark">#000000</color>
+    <color name="snowmanColorAccent">#787878</color>
+    <color name="snowmanColorBackground">#FFFFFF</color>
+    <color name="snowmanColorPicTint">#585858</color>
+    <color name="snowmanColorFont">#CDCDCD</color>
 
+    <!-- Colors used for Dark Knight theme -->
+    <color name="bumbleBeeColorBackground">#FFCC00</color>
 
-    <!-- Colors used for DarkTheme -->
-    <color name="darkColorPrimary">#1e2756</color>
-    <color name="darkColorPrimaryDark">#141831</color>
-    <color name="darkColorAccent">#2aac4b</color>
-    <color name="darkColorBackground">#FFCC33</color>
+    <!-- Colors used for Bumble Bee theme -->
+    <color name="darkKnightColorBackground">#000000</color>
+
+    <!-- Colors used for Lady Bug theme -->
+    <color name="ladyBugColorBackground">#FF0000</color>
 
 </resources>

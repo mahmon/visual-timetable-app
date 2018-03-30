@@ -28,16 +28,16 @@ public class StartActivity extends BaseActivity {
         // Check value of selected theme and set accordingly
         if (mThemeValue.equals(getString(R.string.theme_snowman))) {
             // Set theme to selection
-            setTheme(R.style.AppTheme);
+            setTheme(R.style.AppThemeSnowman);
         } else if (mThemeValue.equals(getString(R.string.theme_dark_knight))) {
             // Set theme to selection
-            setTheme(R.style.AppTheme_Yellow);
+            setTheme(R.style.AppThemeDarkKnight);
         } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
             // Set theme to selection
-            setTheme(R.style.AppTheme_Yellow);
+            setTheme(R.style.AppThemeBumbleBee);
         } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
             // Set theme to selection
-            setTheme(R.style.AppTheme_Yellow);
+            setTheme(R.style.AppThemeLadyBug);
         }
         super.onCreate(savedInstanceState);
         // Link this activity to the relevant XML layout
