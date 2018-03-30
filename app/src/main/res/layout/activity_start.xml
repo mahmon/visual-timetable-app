@@ -32,15 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Switch
-            android:id="@+id/switch_theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_start_screen_heading"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/wide_margin"
-            android:text="Toggle Theme" />
-
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

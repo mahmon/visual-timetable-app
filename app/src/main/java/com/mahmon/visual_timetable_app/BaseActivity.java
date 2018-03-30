@@ -1,10 +1,6 @@
 package com.mahmon.visual_timetable_app;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -18,6 +14,10 @@ import com.mahmon.visual_timetable_app.view.StartActivity;
 
 // Class to manage Tool Bars for all activities
 public class BaseActivity extends AppCompatActivity {
+
+    // Constants used to store local data in shared preferences file
+    public static final String PREFS_NAME = "prefs";
+    public static final String SELECTED_THEME = "selectedTheme";
 
     // Constant used for database node
     public static final String VISUAL_EVENTS = "visualEvents";
@@ -118,10 +118,11 @@ public class BaseActivity extends AppCompatActivity {
     /* ToolBar Methods */
     // Called by btn_toggle_theme
     public void toggleTheme() {
-        // Instantiate new SelectDialogFragment
-        SelectThemeDialogFragment themeDialogFragment = new SelectThemeDialogFragment();
-        // Show the dialog
-        themeDialogFragment.show(getFragmentManager(), "selectThemeDialog");
+        // Instantiate new intent to start DisplayEventsActivity
+        Intent intent = new Intent(getBaseContext(), ThemeToggleActivity.class);
+        // Start Activity
+        startActivity(intent);
+        finish();
     }
 
     // Called by btn_enter_app
@@ -164,17 +165,17 @@ public class BaseActivity extends AppCompatActivity {
     // Called by btn_cancel_save
     public void cancelAddUpdateDeleteEvent() {
         // Create new intent to start AddEventActivity
-        Intent intentAdd = new Intent(getBaseContext(), DisplayEventsActivity.class);
+        Intent intent = new Intent(getBaseContext(), DisplayEventsActivity.class);
         // Start Activity
-        startActivity(intentAdd);
+        startActivity(intent);
     }
 
     // Called by btn_save_event
     public void addEvent() {
         // Create new intent to start AddEventActivity
-        Intent intentAdd = new Intent(getBaseContext(), AddEventActivity.class);
+        Intent intent = new Intent(getBaseContext(), AddEventActivity.class);
         // Start Activity
-        startActivity(intentAdd);
+        startActivity(intent);
     }
 
 }
