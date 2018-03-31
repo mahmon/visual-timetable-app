@@ -25,6 +25,7 @@
             android:layout_height="@dimen/tool_bar_height"
             android:gravity="center"
             android:text="@string/txt_start_screen_heading"
+            android:background="?android:attr/windowBackground"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"

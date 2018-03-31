@@ -7,8 +7,9 @@
     <!-- Toolbar: tool_bar_top  -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar_top"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/tool_bar_height"
+        android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

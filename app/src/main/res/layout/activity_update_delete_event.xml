@@ -24,6 +24,7 @@
             android:id="@+id/txt_update_event_heading"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tool_bar_height"
+            android:background="?android:attr/windowBackground"
             android:gravity="center"
             android:text="@string/txt_update_event_heading"
             android:textAlignment="center"

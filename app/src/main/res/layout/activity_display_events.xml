@@ -22,6 +22,7 @@
             android:id="@+id/txt_display_screen_heading"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tool_bar_height"
+            android:background="?android:attr/windowBackground"
             android:gravity="center"
             android:text="@string/txt_display_screen_heading"
             android:textAlignment="center"
@@ -36,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:paddingBottom="@dimen/wide_margin"/>
+            android:paddingBottom="@dimen/wide_margin" />
 
         <!-- RecyclerView: Display events -->
         <android.support.v7.widget.RecyclerView

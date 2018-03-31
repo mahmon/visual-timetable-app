@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/color"
         android:orientation="vertical">
 
         <!-- TextView: to display event date -->
@@ -21,8 +22,8 @@
             android:layout_marginLeft="@dimen/wide_margin"
             android:layout_marginRight="@dimen/wide_margin"
             android:layout_marginTop="@dimen/wide_margin"
+            android:background="?android:attr/color"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="@dimen/font_medium" />
 
         <!-- TextView: to display event name -->
@@ -35,8 +36,8 @@
             android:layout_marginLeft="@dimen/wide_margin"
             android:layout_marginRight="@dimen/wide_margin"
             android:layout_marginTop="0dp"
+            android:background="?android:attr/color"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="@dimen/font_large" />
 
         <!-- ImageView: to display event image -->
@@ -51,8 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/wide_margin"
+            android:background="?android:attr/color"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="@dimen/font_small" />
 
     </LinearLayout>

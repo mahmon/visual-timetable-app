@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Colors used for Snowman theme -->
-    <color name="snowmanColorPrimary">#FF0000</color>
-    <color name="snowmanColorPrimaryDark">#00FF00</color>
-    <color name="snowmanColorAccent">#0000FF</color>
+<!-- Colors used for Snowman theme -->
+
+    <!-- colorPrimaryDark: Used for status bar -->
+    <color name="snowmanColorPrimaryDark">#303030</color>
+
+    <!-- colorPrimary: Used for top tool bar background -->
+    <color name="snowmanColorPrimary">#A2A2A2</color>
+
+    <!-- colorScreenBar: Used for screen name bar background -->
+    <color name="snowmanColorScreenBar">#E0E0E0</color>
+
+    <!-- background: Used for overall background color -->
+    <color name="snowmanColorBackground">#FAFAFA</color>
+
+    <!-- textColorPrimary: Used to set color of text in Top Toolbar -->
+    <color name="snowmanTextColorPrimary">#212121</color>
+
+    <!-- actionBarItemBackground: Background colour for icons -->
+    <color name="snowmanIconBackground">@color/snowmanColorPrimary</color>
+
+    <!-- actionBarItemIconColor: Icon color -->
+    <color name="actionBarItemIconColor">@color/snowmanColorBackground</color>
 
 
-    <color name="snowmanColorBackground">#BCBCBC</color>
+
+    <!-- colorAccent: Used for progress bar and other highlights -->
+    <color name="snowmanColorAccent">#1E88E5</color>
+
+    <!-- textColorPrimary: Used to set color of all other text -->
+    <color name="snowmanTextColor">#424242</color>
+
+    <!-- snowmanCardBackground: Used to set background of cards -->
+    <color name="snowmanCardBackground">#FFFFFF</color>
+
+
     <color name="snowmanColorPicTint">#585858</color>
-    <color name="snowmanColorFont">#FF0000</color>
+
+
+
+
+
 
     <!-- Colors used for Dark Knight theme -->
     <color name="bumbleBeeColorBackground">#FFCC00</color>

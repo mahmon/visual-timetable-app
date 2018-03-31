@@ -1,20 +1,46 @@
 <resources>
 
+    <!-- MAKE MENU ITEMS FILL ACTION BAR -->
+    <!-- this will be applied regardless api version -->
+    <style name="Base.AppTheme.Toolbar.ActionButton" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+    <!-- this will be applied on < API 17 -->
+    <style name="AppTheme.Toolbar.ActionButton" parent="@style/Base.AppTheme.Toolbar.ActionButton">
+        <item name="android:padding">0dp</item>
+    </style>
+
     <!-- Theme: Snowman -->
     <style name="AppThemeSnowman" parent="Theme.AppCompat.NoActionBar">
-        <!-- colorPrimary: Used for ??? -->
-        <item name="colorPrimary">@color/snowmanColorPrimary</item>
-        <!-- colorPrimaryDark: Used for status bar -->
+        <!-- Make action bar items fill bar -->
+        <item name="actionButtonStyle">@style/AppTheme.Toolbar.ActionButton</item>
+        <!-- Theme Colors-->
         <item name="colorPrimaryDark">@color/snowmanColorPrimaryDark</item>
-        <!-- colorPrimaryDark: Used for ??? -->
-        <item name="colorAccent">@color/snowmanColorAccent</item>
-
-
+        <item name="colorPrimary">@color/snowmanColorPrimary</item>
+        <item name="android:windowBackground">@color/snowmanColorScreenBar</item>
         <item name="android:background">@color/snowmanColorBackground</item>
+        <item name="android:textColorPrimary">@color/snowmanTextColorPrimary</item>
+        <item name="android:actionBarItemBackground">@color/snowmanIconBackground</item>
+        <item name="colorControlNormal">@color/actionBarItemIconColor</item>
 
-
+        <item name="colorAccent">@color/snowmanColorAccent</item>
+        <item name="android:textColor">@color/snowmanTextColor</item>
+        <item name="android:color">@color/snowmanCardBackground</item>
 
     </style>
+
+
+
+    <style name="Widget.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+    </style>
+
+    <style name="MyActionButtonStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:minWidth">32dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 
     <!-- Theme: Dark Knight -->
     <style name="AppThemeDarkKnight" parent="Theme.AppCompat.NoActionBar">

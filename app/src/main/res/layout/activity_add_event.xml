@@ -22,6 +22,7 @@
             android:id="@+id/txt_add_screen_heading"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tool_bar_height"
+            android:background="?android:attr/windowBackground"
             android:gravity="center"
             android:text="@string/txt_add_screen_heading"
             android:textAlignment="center"

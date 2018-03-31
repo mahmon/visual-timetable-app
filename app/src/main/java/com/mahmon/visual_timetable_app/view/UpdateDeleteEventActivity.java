@@ -115,8 +115,6 @@ public class UpdateDeleteEventActivity extends BaseActivity {
         mButtonDate = findViewById(R.id.btn_edit_date);
         // Set button text to show current date (formatted)
         mButtonDate.setText(formatDateIntToDateString(selectedEventDate));
-        // Set button text color to dim
-        mButtonDate.setTextColor(getResources().getColor(R.color.snowmanColorAccent));
         // Set onClick listener for date editor button
         mButtonDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,9 +310,6 @@ public class UpdateDeleteEventActivity extends BaseActivity {
                 mDate = dateBundle.getInt("dateAsInt");
                 // Update text on button
                 mButtonDate.setText(formatDateIntToDateString(mDate));
-                // Set button text color to bright
-                mButtonDate.setTextColor(getResources().getColor(R.color.snowmanColorFont));
-
             }
         }
     }
