@@ -23,7 +23,7 @@
         <item name="android:textColorPrimary">@color/snowmanTextColorPrimary</item>
         <item name="android:actionBarItemBackground">@color/snowmanIconBackground</item>
         <item name="colorControlNormal">@color/actionBarItemIconColor</item>
-
+        <item name="android:button">@color/bumbleBeeColorBackground</item>
         <item name="colorAccent">@color/snowmanColorAccent</item>
         <item name="android:textColor">@color/snowmanTextColor</item>
         <item name="android:color">@color/snowmanCardBackground</item>

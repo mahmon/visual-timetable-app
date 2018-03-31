@@ -7,14 +7,18 @@
     tools:context=".ThemeToggleActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/wide_margin">
 
         <Button
             android:id="@+id/btn_snowman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/wide_margin"
+            android:background="?attr/colorPrimary"
+            android:padding="@dimen/narrow_margin"
             android:text="@string/theme_snowman" />
 
         <Button
@@ -23,6 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_snowman"
             android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/wide_margin"
+            android:background="?attr/colorPrimary"
+            android:padding="@dimen/narrow_margin"
             android:text="@string/theme_dark_knight" />
 
         <Button
@@ -31,6 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_dark_knight"
             android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/wide_margin"
+            android:background="?attr/colorPrimary"
+            android:padding="@dimen/narrow_margin"
             android:text="@string/theme_bumble_bee" />
 
         <Button
@@ -39,6 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_bumble_bee"
             android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/wide_margin"
+            android:background="?attr/colorPrimary"
+            android:padding="@dimen/narrow_margin"
             android:text="@string/theme_lady_bug" />
 
     </RelativeLayout>
