@@ -18,10 +18,10 @@ public class BaseActivity extends AppCompatActivity {
     // Constants used to store local data in shared preferences file
     public static final String PREFS_NAME = "prefs";
     public static final String SELECTED_THEME = "selectedTheme";
-
+    // Constant used for toggle theme request code
+    public static final int TOGGLE_THEME_REQUEST = 1;
     // Constant used for database node
     public static final String VISUAL_EVENTS = "visualEvents";
-
     // Declare Toolbar objects
     private Toolbar mToolBarTop;
     private Toolbar mToolBarBottom;
@@ -65,19 +65,6 @@ public class BaseActivity extends AppCompatActivity {
         toolBarMethodsBottom(mToolBarBottom);
     }
 
-    // Set toolBarMethodsTop (called by all Activities that extend this BaseActivity)
-    public boolean toolBarMethodsTop(MenuItem item) {
-        // Switch statement to manage menu user clicks
-        switch (item.getItemId()) {
-            // User clicked toggle_theme_button
-            case R.id.btn_toggle_theme:
-                toggleTheme();
-                return true;
-            default:
-                return false;
-        }
-    }
-
     // Set method calls for toolBarMethodsBottom
     public void toolBarMethodsBottom(Toolbar bottomToolbar) {
         // Create listeners for all buttons on menu_tool_bar_bottom
@@ -117,14 +104,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /* ToolBar Methods */
-    // Called by btn_toggle_theme
-    public void toggleTheme() {
-        // Instantiate new intent to start DisplayEventsActivity
-        Intent intent = new Intent(getBaseContext(), ThemeToggleActivity.class);
-        // Start Activity
-        startActivity(intent);
-    }
-
     // Called by btn_enter_app
     public void enterApp() {
         // Instantiate new intent to start DisplayEventsActivity

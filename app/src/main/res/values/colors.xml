@@ -5,7 +5,7 @@
     <color name="snowmanColorPrimary">#212121</color>
     <color name="snowmanColorPrimaryDark">#000000</color>
     <color name="snowmanColorAccent">#787878</color>
-    <color name="snowmanColorBackground">#FFFFFF</color>
+    <color name="snowmanColorBackground">#BCBCBC</color>
     <color name="snowmanColorPicTint">#585858</color>
     <color name="snowmanColorFont">#CDCDCD</color>
 
@@ -13,7 +13,7 @@
     <color name="bumbleBeeColorBackground">#FFCC00</color>
 
     <!-- Colors used for Bumble Bee theme -->
-    <color name="darkKnightColorBackground">#000000</color>
+    <color name="darkKnightColorBackground">#565656</color>
 
     <!-- Colors used for Lady Bug theme -->
     <color name="ladyBugColorBackground">#FF0000</color>

@@ -38,14 +38,14 @@ public class FinishActivity extends BaseActivity {
         return true;
     }
 
-    // Set method calls for default option menu
+    /*// Set method calls for default option menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Attach topToolBarMethods to default menu
         toolBarMethodsTop(item);
         // Invoke the superclass to handle unrecognised user action.
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     // TODO: Create logout screen and methods
 }

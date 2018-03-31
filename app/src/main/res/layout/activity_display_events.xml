@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.mahmon.visual_timetable_app.view.DisplayEventsActivity">
 
-    <!-- Include Toolbars in this layout -->
-    <include layout="@layout/tool_bar_bottom" />
+    <!-- Include top Toolbar in this layout -->
     <include layout="@layout/tool_bar_top" />
+    <!-- Include bottom Toolbar in this layout -->
+    <include layout="@layout/tool_bar_bottom" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mahmon.visual_timetable_app.BaseActivity;
 import com.mahmon.visual_timetable_app.R;
+import com.mahmon.visual_timetable_app.ThemeToggleActivity;
 import com.mahmon.visual_timetable_app.model.Event;
 import com.mahmon.visual_timetable_app.model.EventAdapter;
 
@@ -63,7 +64,6 @@ public class DisplayEventsActivity extends BaseActivity
         mThemeValue = mPrefs.getString(SELECTED_THEME, "");
         // Set the theme to the current selection
         setThemeSelection(mThemeValue);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_events);
         // Set bottom menu icons for this context (remove unwanted)
@@ -128,6 +128,15 @@ public class DisplayEventsActivity extends BaseActivity
         });
     }
 
+    // Check if Toggle Theme Activity has be launched
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TOGGLE_THEME_REQUEST) {
+            recreate();
+        }
+    }
+
     // Implement the default options menu
     @Override
     public boolean onCreateOptionsMenu(Menu topMenu) {
@@ -138,13 +147,21 @@ public class DisplayEventsActivity extends BaseActivity
         return true;
     }
 
-    // Set method calls for default option menu
+    // Set method calls for default option menu (top menu)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Attach topToolBarMethods to default menu
-        toolBarMethodsTop(item);
-        // Invoke the superclass to handle unrecognised user action.
-        return super.onOptionsItemSelected(item);
+        // Switch statement to manage menu user clicks
+        switch (item.getItemId()) {
+            // User clicked toggle_theme_button
+            case R.id.btn_toggle_theme:
+                // Instantiate new intent to start ToggleThemeActivity
+                Intent intent = new Intent(this, ThemeToggleActivity.class);
+                // Start Activity
+                startActivityForResult(intent, TOGGLE_THEME_REQUEST);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     // Method call when any list item is clicked, pass list position

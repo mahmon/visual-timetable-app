@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mahmon.visual_timetable_app.view.StartActivity;
 
@@ -73,10 +74,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
         // Commit clicked value to preferences
         mEditor.putString(SELECTED_THEME, themeClicked);
         mEditor.commit();
-        // Instantiate new intent to start DisplayEventsActivity
-        Intent intent = new Intent(getBaseContext(), StartActivity.class);
-        // Start Activity
-        startActivity(intent);
+        finish();
     }
 
 }
