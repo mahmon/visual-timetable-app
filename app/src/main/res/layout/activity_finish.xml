@@ -8,14 +8,15 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
+    <!-- Include bottom Toolbar in this layout -->
     <include layout="@layout/tool_bar_bottom" />
 
     <!-- Layout to hold the main center screen -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/tool_bar_height"
-        android:layout_marginBottom="@dimen/tool_bar_height">
+        android:layout_marginBottom="@dimen/tool_bar_height"
+        android:layout_marginTop="@dimen/tool_bar_height">
 
         <!-- Text View: To display screen heading -->
         <TextView

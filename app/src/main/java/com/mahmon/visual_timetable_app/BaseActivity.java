@@ -19,7 +19,7 @@ public class BaseActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "prefs";
     public static final String SELECTED_THEME = "selectedTheme";
     // Constant used for toggle theme request code
-    public static final int TOGGLE_THEME_REQUEST = 1;
+    public static final int TOGGLE_THEME_REQUEST = 2;
     // Constant used for database node
     public static final String VISUAL_EVENTS = "visualEvents";
     // Declare Toolbar objects
@@ -176,4 +176,3 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 }
-

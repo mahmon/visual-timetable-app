@@ -45,10 +45,10 @@ public class StartActivity extends BaseActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
     }
 
-    // Check if Toggle Theme Activity has be launched
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // Check if Toggle Theme Activity has be launched
         if (requestCode == TOGGLE_THEME_REQUEST) {
             recreate();
         }

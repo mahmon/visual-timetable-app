@@ -91,8 +91,6 @@ public class DisplayEventsActivity extends BaseActivity
         mAdapter.setOnItemClickListener(DisplayEventsActivity.this);
         // Get Firebase database reference for VISUAL_EVENTS node
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VISUAL_EVENTS);
-        // Keep data synced in offline mode
-        mDatabaseRef.keepSynced(true);
         // Instantiate database listener
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             // Method called on activity load and on any data changes
@@ -128,10 +126,16 @@ public class DisplayEventsActivity extends BaseActivity
         });
     }
 
-    // Check if Toggle Theme Activity has be launched
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // Check if Toggle Theme Activity has be launched
         if (requestCode == TOGGLE_THEME_REQUEST) {
             recreate();
         }
@@ -198,8 +202,8 @@ public class DisplayEventsActivity extends BaseActivity
 
     // Destroy EventListener when Activity is destroyed
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
     }
 

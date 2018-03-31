@@ -1,15 +1,11 @@
 package com.mahmon.visual_timetable_app;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.mahmon.visual_timetable_app.view.StartActivity;
 
 import static com.mahmon.visual_timetable_app.BaseActivity.PREFS_NAME;
 import static com.mahmon.visual_timetable_app.BaseActivity.SELECTED_THEME;
@@ -20,6 +16,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
     private Context mContext;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor mEditor;
+    private String mThemeValue;
     // Button variables
     private Button mBtnSnowman;
     private Button mBtnDarkKnight;
@@ -28,11 +25,16 @@ public class ThemeToggleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theme_toggle);
-        // Assign preference variables and create editor
+        // Assign preference variables
         mContext = this;
         mPrefs = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        // Get value from mPrefs and assign to mThemeVale
+        mThemeValue = mPrefs.getString(SELECTED_THEME, "");
+        // Set the theme to the current selection
+        setThemeSelection(mThemeValue);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_theme_toggle);
+        // Create editor for saved preferences
         mEditor = mPrefs.edit();
         // Assign buttons to view
         mBtnSnowman = findViewById(R.id.btn_snowman);
@@ -75,6 +77,24 @@ public class ThemeToggleActivity extends AppCompatActivity {
         mEditor.putString(SELECTED_THEME, themeClicked);
         mEditor.commit();
         finish();
+    }
+
+    // Set Theme Method
+    public void setThemeSelection(String mThemeValue) {
+        // Check value of selected theme and set accordingly
+        if (mThemeValue.equals(getString(R.string.theme_snowman))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeSnowman);
+        } else if (mThemeValue.equals(getString(R.string.theme_dark_knight))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeDarkKnight);
+        } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeBumbleBee);
+        } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
+            // Set theme to selection
+            setTheme(R.style.AppThemeLadyBug);
+        }
     }
 
 }

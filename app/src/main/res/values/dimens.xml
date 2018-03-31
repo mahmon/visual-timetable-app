@@ -1,4 +1,5 @@
 <resources>
+
     <dimen name="narrow_margin">8dp</dimen>
     <dimen name="wide_margin">16dp</dimen>
     <dimen name="super_wide_margin">32dp</dimen>
@@ -7,4 +8,5 @@
     <dimen name="font_large">20sp</dimen>
     <dimen name="wide_button">110dp</dimen>
     <dimen name="tool_bar_height">56dp</dimen>
+
 </resources>

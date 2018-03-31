@@ -8,7 +8,7 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
-
+    <!-- Include bottom Toolbar in this layout -->
     <include layout="@layout/tool_bar_bottom" />
 
     <RelativeLayout

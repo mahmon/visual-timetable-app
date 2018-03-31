@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,14 +8,15 @@
 
     <!-- Include Toolbars in this layout -->
     <include layout="@layout/tool_bar_top" />
-
+    <!-- Include bottom Toolbar in this layout -->
     <include layout="@layout/tool_bar_bottom" />
 
     <!-- Layout to hold the main center screen -->
     <RelativeLayout
         android:id="@+id/layout_update_screen_heading"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/tool_bar_height"
         android:layout_marginTop="@dimen/tool_bar_height">
 
         <!-- Text View: To display screen heading -->
@@ -34,8 +35,8 @@
             android:id="@+id/btn_edit_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/txt_update_event_heading"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/narrow_margin"
             android:text="@string/btn_edit_date" />
 
@@ -104,4 +105,4 @@
 
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>
