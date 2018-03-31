@@ -22,7 +22,6 @@
             android:id="@+id/txt_add_screen_heading"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tool_bar_height"
-            android:background="@color/snowmanColorAccent"
             android:gravity="center"
             android:text="@string/txt_add_screen_heading"
             android:textAlignment="center"
@@ -63,7 +62,6 @@
             android:layout_marginRight="@dimen/super_wide_margin"
             android:layout_marginTop="@dimen/narrow_margin"
             android:alpha="0.4"
-            android:background="@color/snowmanColorAccent"
             android:contentDescription="@string/txt_choose_image" />
 
         <!-- Text View: Choose event image -->

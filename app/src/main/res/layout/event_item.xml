@@ -23,7 +23,6 @@
             android:layout_marginTop="@dimen/wide_margin"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/snowmanColorFont"
             android:textSize="@dimen/font_medium" />
 
         <!-- TextView: to display event name -->
@@ -38,7 +37,6 @@
             android:layout_marginTop="0dp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/snowmanColorFont"
             android:textSize="@dimen/font_large" />
 
         <!-- ImageView: to display event image -->
@@ -55,7 +53,6 @@
             android:layout_margin="@dimen/wide_margin"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/snowmanColorFont"
             android:textSize="@dimen/font_small" />
 
     </LinearLayout>

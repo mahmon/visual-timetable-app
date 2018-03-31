@@ -2,12 +2,14 @@
 <resources>
 
     <!-- Colors used for Snowman theme -->
-    <color name="snowmanColorPrimary">#212121</color>
-    <color name="snowmanColorPrimaryDark">#000000</color>
-    <color name="snowmanColorAccent">#787878</color>
+    <color name="snowmanColorPrimary">#FF0000</color>
+    <color name="snowmanColorPrimaryDark">#00FF00</color>
+    <color name="snowmanColorAccent">#0000FF</color>
+
+
     <color name="snowmanColorBackground">#BCBCBC</color>
     <color name="snowmanColorPicTint">#585858</color>
-    <color name="snowmanColorFont">#CDCDCD</color>
+    <color name="snowmanColorFont">#FF0000</color>
 
     <!-- Colors used for Dark Knight theme -->
     <color name="bumbleBeeColorBackground">#FFCC00</color>

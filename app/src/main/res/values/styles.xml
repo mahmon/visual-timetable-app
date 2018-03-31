@@ -2,10 +2,17 @@
 
     <!-- Theme: Snowman -->
     <style name="AppThemeSnowman" parent="Theme.AppCompat.NoActionBar">
+        <!-- colorPrimary: Used for ??? -->
         <item name="colorPrimary">@color/snowmanColorPrimary</item>
+        <!-- colorPrimaryDark: Used for status bar -->
         <item name="colorPrimaryDark">@color/snowmanColorPrimaryDark</item>
+        <!-- colorPrimaryDark: Used for ??? -->
         <item name="colorAccent">@color/snowmanColorAccent</item>
+
+
         <item name="android:background">@color/snowmanColorBackground</item>
+
+
 
     </style>
 
