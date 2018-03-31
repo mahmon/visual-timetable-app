@@ -39,8 +39,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/narrow_margin"
             android:background="?attr/colorPrimary"
-            android:padding="@dimen/narrow_margin"
-            android:text="@string/btn_edit_date" />
+            android:padding="@dimen/wide_margin"
+            android:text="@string/btn_edit_date"
+            android:textColor="?attr/colorControlNormal" />
 
         <!-- Edit Text: To receive new event heading -->
         <EditText

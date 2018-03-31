@@ -36,8 +36,10 @@
     <!-- snowmanCardBackground: Used to set background of cards -->
     <color name="snowmanCardBackground">#FFFFFF</color>
 
-    <!-- snowmanColorPicTint: Used to overlay add/edit images -->
-    <color name="snowmanColorPicTint">@color/snowmanTextColor</color>
+
+
+
+
 
 
 

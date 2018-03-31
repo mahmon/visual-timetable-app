@@ -37,7 +37,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/narrow_margin"
             android:background="?attr/colorPrimary"
-            android:text="@string/btn_pick_date" />
+            android:padding="@dimen/wide_margin"
+            android:text="@string/btn_pick_date"
+            android:textColor="?attr/colorControlNormal" />
 
         <!-- Edit Text: To receive event heading  -->
         <EditText
@@ -64,7 +66,8 @@
             android:layout_marginLeft="@dimen/super_wide_margin"
             android:layout_marginRight="@dimen/super_wide_margin"
             android:layout_marginTop="@dimen/narrow_margin"
-            android:alpha="0.4"
+            android:alpha="0.5"
+            android:background="?attr/colorPrimary"
             android:contentDescription="@string/txt_choose_image" />
 
         <!-- Text View: Choose event image -->
