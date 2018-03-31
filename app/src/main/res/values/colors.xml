@@ -30,11 +30,16 @@
     <!-- textColorPrimary: Used to set color of all other text -->
     <color name="snowmanTextColor">#424242</color>
 
+    <!-- textColorHint: Used to set color of all other text -->
+    <color name="snowmanTextColorHint">#424242</color>
+
     <!-- snowmanCardBackground: Used to set background of cards -->
     <color name="snowmanCardBackground">#FFFFFF</color>
 
     <!-- snowmanColorPicTint: Used to overlay add/edit images -->
     <color name="snowmanColorPicTint">@color/snowmanTextColor</color>
+
+
 
 
 

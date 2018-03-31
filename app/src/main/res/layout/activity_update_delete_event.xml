@@ -75,6 +75,7 @@
             android:layout_below="@id/edit_txt_enter_event_heading"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80dp"
+            android:background="#00000000"
             android:text="@string/txt_change_image_prompt"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 

@@ -31,12 +31,12 @@
         <!-- Button: To open date picker -->
         <Button
             android:id="@+id/btn_pick_date"
-            android:background="?attr/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_add_screen_heading"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/narrow_margin"
+            android:background="?attr/colorPrimary"
             android:text="@string/btn_pick_date" />
 
         <!-- Edit Text: To receive event heading  -->
@@ -52,6 +52,7 @@
             android:inputType="text"
             android:paddingTop="@dimen/narrow_margin"
             android:textAlignment="center"
+            android:textColor="?android:attr/textColorHint"
             android:textSize="@dimen/font_large" />
 
         <!-- Image View: Display selected image -->
@@ -73,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/edit_text_file_name"
             android:layout_marginTop="80dp"
+            android:background="#00000000"
             android:gravity="center"
             android:text="@string/btn_choose_image"
             android:textAlignment="center"
@@ -103,6 +105,7 @@
             android:inputType="textMultiLine"
             android:paddingTop="@dimen/wide_margin"
             android:textAlignment="center"
+            android:textColor="?android:attr/textColorHint"
             android:textSize="@dimen/font_small" />
 
     </RelativeLayout>

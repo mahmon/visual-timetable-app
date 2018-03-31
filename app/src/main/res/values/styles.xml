@@ -28,6 +28,8 @@
         <item name="android:textColor">@color/snowmanTextColor</item>
         <item name="android:color">@color/snowmanCardBackground</item>
 
+        <item name="android:textColorHint">@color/snowmanTextColorHint</item>
+
     </style>
 
 
