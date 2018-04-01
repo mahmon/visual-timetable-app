@@ -1,15 +1,12 @@
 package com.mahmon.visual_timetable_app;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import static com.mahmon.visual_timetable_app.BaseActivity.PREFS_NAME;
 import static com.mahmon.visual_timetable_app.BaseActivity.SELECTED_THEME;
@@ -54,6 +51,15 @@ public class ThemeToggleActivity extends AppCompatActivity {
         mToolBarBottom.getMenu().removeItem(R.id.btn_add_event);
         mToolBarBottom.getMenu().removeItem(R.id.btn_save_event);
         mToolBarBottom.getMenu().removeItem(R.id.btn_delete_event);
+        // Set listener for remaining icon
+        mToolBarBottom.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // finish this activity without changing theme
+                finish();
+                return false;
+            }
+        });
         // Animation override:
         overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Create editor for saved preferences
