@@ -33,7 +33,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ThemeToggleActivity"
-            />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

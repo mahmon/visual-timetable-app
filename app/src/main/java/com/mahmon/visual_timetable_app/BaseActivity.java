@@ -23,8 +23,8 @@ public class BaseActivity extends AppCompatActivity {
     // Constant used for database node
     public static final String VISUAL_EVENTS = "visualEvents";
     // Declare Toolbar objects
-    private Toolbar mToolBarTop;
-    private Toolbar mToolBarBottom;
+    private android.support.v7.widget.Toolbar mToolBarTop;
+    private android.support.v7.widget.Toolbar mToolBarBottom;
 
     // Getter method for passing bottom toolbar
     public Toolbar getToolBarBottom() {

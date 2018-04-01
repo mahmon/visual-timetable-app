@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ThemeToggleActivity">
 
+    <!-- Include bottom Toolbar in this layout -->
+    <include layout="@layout/tool_bar_bottom" />
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/tool_bar_height"
         android:padding="@dimen/wide_margin">
 
         <Button
@@ -19,7 +23,8 @@
             android:layout_margin="@dimen/wide_margin"
             android:background="?attr/colorPrimary"
             android:padding="@dimen/narrow_margin"
-            android:text="@string/theme_snowman" />
+            android:text="@string/theme_snowman"
+            android:textColor="?attr/colorControlNormal" />
 
         <Button
             android:id="@+id/btn_dark_knight"
@@ -30,7 +35,8 @@
             android:layout_margin="@dimen/wide_margin"
             android:background="?attr/colorPrimary"
             android:padding="@dimen/narrow_margin"
-            android:text="@string/theme_dark_knight" />
+            android:text="@string/theme_dark_knight"
+            android:textColor="?attr/colorControlNormal" />
 
         <Button
             android:id="@+id/btn_bumble_bee"
@@ -41,7 +47,8 @@
             android:layout_margin="@dimen/wide_margin"
             android:background="?attr/colorPrimary"
             android:padding="@dimen/narrow_margin"
-            android:text="@string/theme_bumble_bee" />
+            android:text="@string/theme_bumble_bee"
+            android:textColor="?attr/colorControlNormal" />
 
         <Button
             android:id="@+id/btn_lady_bug"
@@ -52,7 +59,8 @@
             android:layout_margin="@dimen/wide_margin"
             android:background="?attr/colorPrimary"
             android:padding="@dimen/narrow_margin"
-            android:text="@string/theme_lady_bug" />
+            android:text="@string/theme_lady_bug"
+            android:textColor="?attr/colorControlNormal" />
 
     </RelativeLayout>
 

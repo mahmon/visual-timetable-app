@@ -1,11 +1,15 @@
 package com.mahmon.visual_timetable_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toolbar;
 
 import static com.mahmon.visual_timetable_app.BaseActivity.PREFS_NAME;
 import static com.mahmon.visual_timetable_app.BaseActivity.SELECTED_THEME;
@@ -22,6 +26,9 @@ public class ThemeToggleActivity extends AppCompatActivity {
     private Button mBtnDarkKnight;
     private Button mBtnBumbleBee;
     private Button mBtnLadyBug;
+    // Declare Bottom Toolbar
+    private android.support.v7.widget.Toolbar mToolBarBottom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,21 @@ public class ThemeToggleActivity extends AppCompatActivity {
         setThemeSelection(mThemeValue);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_toggle);
+        // Link bottomToolbar to XML tool_bar_bottom
+        mToolBarBottom = findViewById(R.id.tool_bar_bottom);
+        // Inflate XML menu_tool_bar_bottom to bottomToolbar
+        mToolBarBottom.inflateMenu(R.menu.menu_tool_bar_bottom);
+        // Set bottom menu icons for this context (remove unwanted)
+        mToolBarBottom.getMenu().removeItem(R.id.btn_enter_app);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_exit_app);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_return_login);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_zoom_out);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_zoom_in);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_add_event);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_save_event);
+        mToolBarBottom.getMenu().removeItem(R.id.btn_delete_event);
+        // Animation override:
+        overridePendingTransition(R.anim.slide_in, R.anim.shrink_out);
         // Create editor for saved preferences
         mEditor = mPrefs.edit();
         // Assign buttons to view
@@ -76,6 +98,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
         // Commit clicked value to preferences
         mEditor.putString(SELECTED_THEME, themeClicked);
         mEditor.commit();
+        // Finish this activity and return to previous
         finish();
     }
 

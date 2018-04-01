@@ -28,21 +28,8 @@
         <item name="android:textColorHint">@color/snowmanTextColorHint</item>
         <item name="android:color">@color/snowmanCardBackground</item>
 
-
-
-
     </style>
 
-
-
-    <style name="Widget.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
-        <item name="contentInsetStart">0dp</item>
-    </style>
-
-    <style name="MyActionButtonStyle" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:minWidth">32dp</item>
-        <item name="android:padding">10dp</item>
-    </style>
 
 
     <!-- Theme: Dark Knight -->
@@ -59,5 +46,6 @@
     <style name="AppThemeLadyBug" parent="Theme.AppCompat.NoActionBar">
         <item name="android:background">@color/ladyBugColorBackground</item>
     </style>
+
 
 </resources>

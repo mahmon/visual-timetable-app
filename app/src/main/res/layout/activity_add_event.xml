@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_add_screen_heading"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/narrow_margin"
+            android:layout_marginTop="@dimen/wide_margin"
             android:background="?attr/colorPrimary"
             android:padding="@dimen/wide_margin"
             android:text="@string/btn_pick_date"
