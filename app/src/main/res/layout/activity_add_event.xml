@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/tool_bar_height"
-        android:layout_marginTop="@dimen/tool_bar_height">
+        android:layout_marginTop="@dimen/tool_bar_height"
+        android:background="?android:attr/colorBackground">
 
         <!-- Text View: To display screen heading -->
         <TextView

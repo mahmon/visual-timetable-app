@@ -9,6 +9,9 @@
     <!-- colorPrimary: Used for top tool bar background and button backgrounds -->
     <color name="snowmanColorPrimary">#A2A2A2</color>
 
+    <!-- colorAccent: Used for progress bar and other highlights -->
+    <color name="snowmanColorAccent">#4DD0E1</color>
+
     <!-- colorScreenBar: Used for screen name bar background -->
     <color name="snowmanColorScreenBar">#E0E0E0</color>
 
@@ -16,7 +19,7 @@
     <color name="snowmanColorBackground">#FAFAFA</color>
 
     <!-- textColorPrimary: Used to set color of text in Top Toolbar -->
-    <color name="snowmanTextColorPrimary">#212121</color>
+    <color name="snowmanTextColorPrimary">@color/snowmanColorBackground</color>
 
     <!-- actionBarItemBackground: Background colour for icons -->
     <color name="snowmanIconBackground">@color/snowmanColorPrimary</color>
@@ -24,14 +27,11 @@
     <!-- actionBarItemIconColor: Icon color -->
     <color name="actionBarItemIconColor">@color/snowmanColorBackground</color>
 
-    <!-- colorAccent: Used for progress bar and other highlights -->
-    <color name="snowmanColorAccent">@color/snowmanColorPrimaryDark</color>
-
     <!-- textColorPrimary: Used to set color of all other text -->
     <color name="snowmanTextColor">#424242</color>
 
     <!-- textColorHint: Used to set color of all other text -->
-    <color name="snowmanTextColorHint">#424242</color>
+    <color name="snowmanTextColorHint">@color/snowmanTextColor</color>
 
     <!-- snowmanCardBackground: Used to set background of cards -->
     <color name="snowmanCardBackground">#FFFFFF</color>
