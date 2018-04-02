@@ -23,28 +23,64 @@
         <item name="android:colorBackground">@color/snowmanColorBackground</item>
         <item name="android:textColorPrimary">@color/snowmanTextColorPrimary</item>
         <item name="android:actionBarItemBackground">@color/snowmanIconBackground</item>
-        <item name="colorControlNormal">@color/actionBarItemIconColor</item>
+        <item name="colorControlNormal">@color/snowmanColorBackground</item>
         <item name="android:textColor">@color/snowmanTextColor</item>
         <item name="android:textColorHint">@color/snowmanTextColorHint</item>
         <item name="android:color">@color/snowmanCardBackground</item>
     </style>
 
-
-
     <!-- Theme: Dark Knight -->
     <style name="AppThemeDarkKnight" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/darkKnightColorBackground</item>
+        <!-- Make action bar items fill bar -->
+        <item name="actionButtonStyle">@style/AppTheme.Toolbar.ActionButton</item>
+        <!-- Theme Colors-->
+        <item name="colorPrimaryDark">@color/darkKnightColorPrimaryDark</item>
+        <item name="colorPrimary">@color/darkKnightColorPrimary</item>
+        <item name="colorAccent">@color/darkKnightColorAccent</item>
+        <item name="android:windowBackground">@color/darkKnightColorScreenBar</item>
+        <item name="android:colorBackground">@color/darkKnightColorBackground</item>
+        <item name="android:textColorPrimary">@color/darkKnightTextColorPrimary</item>
+        <item name="android:actionBarItemBackground">@color/darkKnightIconBackground</item>
+        <item name="colorControlNormal">@color/darkKnightTextColorPrimary</item>
+        <item name="android:textColor">@color/darkKnightTextColor</item>
+        <item name="android:textColorHint">@color/darkKnightTextColorHint</item>
+        <item name="android:color">@color/darkKnightCardBackground</item>
     </style>
 
     <!-- Theme: Bumble Bee -->
     <style name="AppThemeBumbleBee" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/bumbleBeeColorBackground</item>
+        <!-- Make action bar items fill bar -->
+        <item name="actionButtonStyle">@style/AppTheme.Toolbar.ActionButton</item>
+        <!-- Theme Colors-->
+        <item name="colorPrimaryDark">@color/bumbleBeeColorPrimaryDark</item>
+        <item name="colorPrimary">@color/bumbleBeeColorPrimary</item>
+        <item name="colorAccent">@color/bumbleBeeColorAccent</item>
+        <item name="android:windowBackground">@color/bumbleBeeColorScreenBar</item>
+        <item name="android:colorBackground">@color/bumbleBeeColorBackground</item>
+        <item name="android:textColorPrimary">@color/bumbleBeeTextColorPrimary</item>
+        <item name="android:actionBarItemBackground">@color/bumbleBeeIconBackground</item>
+        <item name="colorControlNormal">@color/bumbleBeeColorBackground</item>
+        <item name="android:textColor">@color/bumbleBeeTextColor</item>
+        <item name="android:textColorHint">@color/bumbleBeeTextColorHint</item>
+        <item name="android:color">@color/bumbleBeeCardBackground</item>
     </style>
 
     <!-- Theme: Lady Bug -->
     <style name="AppThemeLadyBug" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/ladyBugColorBackground</item>
+        <!-- Make action bar items fill bar -->
+        <item name="actionButtonStyle">@style/AppTheme.Toolbar.ActionButton</item>
+        <!-- Theme Colors-->
+        <item name="colorPrimaryDark">@color/ladyBugColorPrimaryDark</item>
+        <item name="colorPrimary">@color/ladyBugColorPrimary</item>
+        <item name="colorAccent">@color/ladyBugColorAccent</item>
+        <item name="android:windowBackground">@color/ladyBugColorScreenBar</item>
+        <item name="android:colorBackground">@color/ladyBugColorBackground</item>
+        <item name="android:textColorPrimary">@color/ladyBugTextColorPrimary</item>
+        <item name="android:actionBarItemBackground">@color/ladyBugIconBackground</item>
+        <item name="colorControlNormal">@color/ladyBugColorBackground</item>
+        <item name="android:textColor">@color/ladyBugTextColor</item>
+        <item name="android:textColorHint">@color/ladyBugTextColorHint</item>
+        <item name="android:color">@color/ladyBugCardBackground</item>
     </style>
-
 
 </resources>

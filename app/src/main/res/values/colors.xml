@@ -2,56 +2,91 @@
 <resources>
 
 <!-- Colors used for Snowman theme -->
-
     <!-- colorPrimaryDark: Used for status bar -->
     <color name="snowmanColorPrimaryDark">#303030</color>
-
     <!-- colorPrimary: Used for top tool bar background and button backgrounds -->
     <color name="snowmanColorPrimary">#A2A2A2</color>
-
     <!-- colorAccent: Used for progress bar and other highlights -->
     <color name="snowmanColorAccent">#4DD0E1</color>
-
     <!-- colorScreenBar: Used for screen name bar background -->
     <color name="snowmanColorScreenBar">#E0E0E0</color>
-
     <!-- background: Used for overall background color -->
     <color name="snowmanColorBackground">#FAFAFA</color>
-
     <!-- textColorPrimary: Used to set color of text in Top Toolbar -->
     <color name="snowmanTextColorPrimary">@color/snowmanColorBackground</color>
-
     <!-- actionBarItemBackground: Background colour for icons -->
     <color name="snowmanIconBackground">@color/snowmanColorPrimary</color>
-
-    <!-- actionBarItemIconColor: Icon color -->
-    <color name="actionBarItemIconColor">@color/snowmanColorBackground</color>
-
     <!-- textColorPrimary: Used to set color of all other text -->
     <color name="snowmanTextColor">#424242</color>
-
     <!-- textColorHint: Used to set color of all other text -->
     <color name="snowmanTextColorHint">@color/snowmanTextColor</color>
-
     <!-- snowmanCardBackground: Used to set background of cards -->
     <color name="snowmanCardBackground">#FFFFFF</color>
 
+<!-- Colors used for Dark Knight theme -->
+    <!-- colorPrimaryDark: Used for status bar -->
+    <color name="darkKnightColorPrimaryDark">#040404</color>
+    <!-- colorPrimary: Used for top tool bar background and button backgrounds -->
+    <color name="darkKnightColorPrimary">#424242</color>
+    <!-- colorAccent: Used for progress bar and other highlights -->
+    <color name="darkKnightColorAccent">#B22F1E</color>
+    <!-- colorScreenBar: Used for screen name bar background -->
+    <color name="darkKnightColorScreenBar">#212121</color>
+    <!-- background: Used for overall background color -->
+    <color name="darkKnightColorBackground">#1A1A1A</color>
+    <!-- textColorPrimary: Used to set color of text in Top Toolbar -->
+    <color name="darkKnightTextColorPrimary">@color/darkKnightTextColor</color>
+    <!-- actionBarItemBackground: Background colour for icons -->
+    <color name="darkKnightIconBackground">@color/darkKnightColorPrimary</color>
+    <!-- textColorPrimary: Used to set color of all other text -->
+    <color name="darkKnightTextColor">#A4A4A4</color>
+    <!-- textColorHint: Used to set color of all other text -->
+    <color name="darkKnightTextColorHint">@color/darkKnightTextColor</color>
+    <!-- snowmanCardBackground: Used to set background of cards -->
+    <color name="darkKnightCardBackground">#000000</color>
 
+<!-- Colors used for Bumble Bee theme -->
+    <!-- colorPrimaryDark: Used for status bar -->
+    <color name="bumbleBeeColorPrimaryDark">#040404</color>
+    <!-- colorPrimary: Used for top tool bar background and button backgrounds -->
+    <color name="bumbleBeeColorPrimary">#212121</color>
+    <!-- colorAccent: Used for progress bar and other highlights -->
+    <color name="bumbleBeeColorAccent">#FFFFFF</color>
+    <!-- colorScreenBar: Used for screen name bar background -->
+    <color name="bumbleBeeColorScreenBar">#FBC02D</color>
+    <!-- background: Used for overall background color and Icon colours -->
+    <color name="bumbleBeeColorBackground">#FDD835</color>
+    <!-- textColorPrimary: Used to set color of text in Top Toolbar -->
+    <color name="bumbleBeeTextColorPrimary">@color/bumbleBeeColorBackground</color>
+    <!-- actionBarItemBackground: Background colour for icons -->
+    <color name="bumbleBeeIconBackground">@color/bumbleBeeColorPrimary</color>
+    <!-- textColorPrimary: Used to set color of all other text -->
+    <color name="bumbleBeeTextColor">#000000</color>
+    <!-- textColorHint: Used to set color of all other text -->
+    <color name="bumbleBeeTextColorHint">@color/bumbleBeeTextColor</color>
+    <!-- snowmanCardBackground: Used to set background of cards -->
+    <color name="bumbleBeeCardBackground">#525252</color>
 
-
-
-
-
-
-
-
-    <!-- Colors used for Dark Knight theme -->
-    <color name="bumbleBeeColorBackground">#FFCC00</color>
-
-    <!-- Colors used for Bumble Bee theme -->
-    <color name="darkKnightColorBackground">#565656</color>
-
-    <!-- Colors used for Lady Bug theme -->
-    <color name="ladyBugColorBackground">#FF0000</color>
+<!-- Colors used for Lady Bug theme -->
+    <!-- colorPrimaryDark: Used for status bar -->
+    <color name="ladyBugColorPrimaryDark">#040404</color>
+    <!-- colorPrimary: Used for top tool bar background and button backgrounds -->
+    <color name="ladyBugColorPrimary">#212121</color>
+    <!-- colorAccent: Used for progress bar and other highlights -->
+    <color name="ladyBugColorAccent">#FFFFFF</color>
+    <!-- colorScreenBar: Used for screen name bar background -->
+    <color name="ladyBugColorScreenBar">#B80400</color>
+    <!-- background: Used for overall background color and Icon colours -->
+    <color name="ladyBugColorBackground">#D32F2F</color>
+    <!-- textColorPrimary: Used to set color of text in Top Toolbar -->
+    <color name="ladyBugTextColorPrimary">@color/ladyBugColorBackground</color>
+    <!-- actionBarItemBackground: Background colour for icons -->
+    <color name="ladyBugIconBackground">@color/ladyBugColorPrimary</color>
+    <!-- textColorPrimary: Used to set color of all other text -->
+    <color name="ladyBugTextColor">#FFFFFF</color>
+    <!-- textColorHint: Used to set color of all other text -->
+    <color name="ladyBugTextColorHint">@color/ladyBugTextColor</color>
+    <!-- snowmanCardBackground: Used to set background of cards -->
+    <color name="ladyBugCardBackground">#212121</color>
 
 </resources>
