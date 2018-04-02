@@ -60,7 +60,7 @@
             android:layout_margin="@dimen/wide_margin"
             android:background="?attr/colorPrimary"
             android:padding="@dimen/narrow_margin"
-            android:text="@string/theme_lady_bug"
+            android:text="@string/theme_lady_bird"
             android:textColor="?attr/colorControlNormal" />
 
     </RelativeLayout>

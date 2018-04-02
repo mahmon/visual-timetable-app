@@ -169,7 +169,7 @@ public class BaseActivity extends AppCompatActivity {
         } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
             // Set theme to selection
             setTheme(R.style.AppThemeBumbleBee);
-        } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
+        } else if (mThemeValue.equals(getString(R.string.theme_lady_bird))) {
             // Set theme to selection
             setTheme(R.style.AppThemeLadyBug);
         }

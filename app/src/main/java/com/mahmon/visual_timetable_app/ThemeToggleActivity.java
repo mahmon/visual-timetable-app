@@ -22,7 +22,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
     private Button mBtnSnowman;
     private Button mBtnDarkKnight;
     private Button mBtnBumbleBee;
-    private Button mBtnLadyBug;
+    private Button mBtnLadyBird;
     // Declare Bottom Toolbar
     private android.support.v7.widget.Toolbar mToolBarBottom;
 
@@ -68,7 +68,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
         mBtnSnowman = findViewById(R.id.btn_snowman);
         mBtnDarkKnight = findViewById(R.id.btn_dark_knight);
         mBtnBumbleBee = findViewById(R.id.btn_bumble_bee);
-        mBtnLadyBug = findViewById(R.id.btn_lady_bug);
+        mBtnLadyBird = findViewById(R.id.btn_lady_bug);
         // Assign listeners
         mBtnSnowman.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +91,11 @@ public class ThemeToggleActivity extends AppCompatActivity {
                 setSelectedTheme(getResources().getString(R.string.theme_bumble_bee));
             }
         });
-        mBtnLadyBug.setOnClickListener(new View.OnClickListener() {
+        mBtnLadyBird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Call setSelectedTheme method, pass String theme_snowman
-                setSelectedTheme(getResources().getString(R.string.theme_lady_bug));
+                setSelectedTheme(getResources().getString(R.string.theme_lady_bird));
             }
         });
     }
@@ -120,7 +120,7 @@ public class ThemeToggleActivity extends AppCompatActivity {
         } else if (mThemeValue.equals(getString(R.string.theme_bumble_bee))) {
             // Set theme to selection
             setTheme(R.style.AppThemeBumbleBee);
-        } else if (mThemeValue.equals(getString(R.string.theme_lady_bug))) {
+        } else if (mThemeValue.equals(getString(R.string.theme_lady_bird))) {
             // Set theme to selection
             setTheme(R.style.AppThemeLadyBug);
         }
