@@ -17,7 +17,7 @@ The app was written in Java / XML using Android Studio.
 
 Create | Read | Update | Toggle Theme
 --- | --- | --- | ---
-![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Read event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Read event") | ![Update event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Update event") | ![Toggle Theme](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/toggle.gif "Toggle themes")
+![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Read event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/read.gif "Read event") | ![Update event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/update.gif "Update event") | ![Toggle Theme](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/toggle.gif "Toggle themes")
 
 ### Research into SEND education
 In addition to this basic app, the project presented a significant amount of research and analysis into the problems that can arise when integrating children with special educational needs into mainstream school settings, with a particular focus on the challenges faced by children with profound sensory needs and complex communication issues.
