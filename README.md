@@ -14,7 +14,7 @@ This Android app was developed as part of my dissertation and final project for 
 
 Create | Read
 --- | ---
-![Create event][create] | ![Create event][create]
+![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Create event][create]
 
 Some text after the table
 
