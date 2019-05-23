@@ -1,8 +1,7 @@
 # VisualTimetable
 
-## A visual timetable application designed to help ASD children with transitions at school.</b>
+**A visual timetable application designed to help ASD children with transitions at school**
 
-*Student ID - mur17004251*
 
 This Android app was developed as part of my dissertation and final project for a BSc in Computing and Internet Technologies. The project aim was to develop a digital ‘visual timetable’ application, embracing the distinctive features offered by mobile apps, to alleviate transition anxieties experienced by ASD children.
 
@@ -13,5 +12,6 @@ This Android app was developed as part of my dissertation and final project for 
 - Events are stored in the cloud using google's Firebase realtime database
 - App also features a theme switcher to allow users to change the colour scheme
 
+![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event")
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+**Student ID - mur17004251**
