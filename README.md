@@ -14,10 +14,7 @@ This Android app was developed as part of my dissertation and final project for 
 
 Create | Read | Update | Toggle Theme
 --- | --- | --- | ---
-![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
-![Read event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
-![Update event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
-![Toggle Theme](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
+![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Read event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Update event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Toggle Theme](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event")
 
 Some text after the table
 
