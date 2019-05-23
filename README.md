@@ -19,5 +19,5 @@ Create | Read
 Some text after the table
 
 **Student ID - mur17004251**
-
-[create] https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event"
+![Create event][create]
+[create]: https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event"
