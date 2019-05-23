@@ -12,12 +12,13 @@ This Android app was developed as part of my dissertation and final project for 
 - Events are stored in the cloud using google's Firebase realtime database
 - App also features a theme switcher to allow users to change the colour scheme
 
-Create | Read
---- | ---
-![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") | ![Create event][create]
+Create | Read | Update | Toggle Theme
+--- | --- | --- | ---
+![Create event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
+![Read event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
+![Update event](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
+![Toggle Theme](https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event") |
 
 Some text after the table
 
 **Student ID - mur17004251**
-![Create event][create]
-[create]: https://github.com/mahmon/visual-timetable-app/blob/master/gifs/create.gif "Create event"
