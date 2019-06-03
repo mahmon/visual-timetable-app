@@ -1,6 +1,6 @@
-# Visual Timetable Android App
-
 [![Development Status](https://img.shields.io/badge/status-project_completed-green.svg)](https://github.com/mahmon/visual-timetable-app)
+
+# Visual Timetable Android App
 
 **A visual timetable mobile application designed to help ASD children with transitions at school**
 
