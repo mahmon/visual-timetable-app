@@ -1,8 +1,10 @@
-[![Development Status](https://img.shields.io/badge/status-project_completed-green.svg)](https://github.com/mahmon/visual-timetable-app)
 
 # Visual Timetable Android App
-
 **A visual timetable mobile application designed to help ASD children with transitions at school**
+
+[![Development Status](https://img.shields.io/badge/development_status-project_completed-green.svg)](https://github.com/mahmon/visual-timetable-app)
+
+---
 
 This Android app was developed as part of my dissertation and final project for a BSc in Computing and Internet Technologies. The project aim was to develop a digital ‘visual timetable’ application, embracing the distinctive features offered by mobile apps, to alleviate transition anxieties experienced by ASD children.
 
@@ -26,4 +28,4 @@ In addition to this basic app, the project presented a significant amount of res
 
 My dissertation received a mark of 75% leading to the award of a first class BSc with honours.
 
-**The Open University, Student ID - mur17004251**
+**__The Open University, Student ID - mur17004251__**
