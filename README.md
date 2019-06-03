@@ -28,4 +28,4 @@ In addition to this basic app, the project presented a significant amount of res
 
 My dissertation received a mark of 75% leading to the award of a first class BSc with honours.
 
-**__The Open University, Student ID - mur17004251__**
+**_The Open University, Student ID - mur17004251_**
